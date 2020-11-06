@@ -18,7 +18,7 @@ class Right_Arrow_Button extends StatelessWidget {
         icon: Icon(
           Icons.arrow_forward_ios,
           size: 50,
-          color: Colors.black, //white?
+          color: Colors.white, //white?
           semanticLabel: "Like Nothing Here? Check the Other Room!",
         ),
       ),

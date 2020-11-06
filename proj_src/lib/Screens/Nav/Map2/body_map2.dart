@@ -25,13 +25,6 @@ class Body extends StatelessWidget {
           Left_Arrow_Button(),
           Menu_Button(),
           Profile_Button(),
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              "2ND MAP",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
         ],
       ),
     );

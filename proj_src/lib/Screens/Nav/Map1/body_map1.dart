@@ -25,13 +25,6 @@ class Body extends StatelessWidget {
           Right_Arrow_Button(),
           Menu_Button(),
           Profile_Button(),
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              "1ST MAP",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
         ],
       ),
     );
