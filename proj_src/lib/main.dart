@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:proj_src/Screens/Nav/Map1/screen_map1.dart';
-import 'package:proj_src/Screens/Nav/Map2/screen_map2.dart';
 import 'package:proj_src/constants.dart';
 
 void main() {

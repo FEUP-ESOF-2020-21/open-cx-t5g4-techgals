@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proj_src/constants.dart';
 
-AppBar buildAppBar_Map() {
+AppBar buildAppBarMap() {
   return AppBar(
     elevation: 50,
     backgroundColor: kPrimaryColor,
