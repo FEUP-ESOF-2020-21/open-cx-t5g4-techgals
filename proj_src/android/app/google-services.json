@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "277141414856",
+    "firebase_url": "https://esof-techgals.firebaseio.com",
+    "project_id": "esof-techgals",
+    "storage_bucket": "esof-techgals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277141414856:android:299b1b027d38de3cd356fd",
+        "android_client_info": {
+          "package_name": "com.example.proj_src"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277141414856-qk4kg583tid6ugb2us9oip0n2b24slhp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcvfj0vZmkc38xaFJc4tUMyLy2F7Yun4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277141414856-qk4kg583tid6ugb2us9oip0n2b24slhp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

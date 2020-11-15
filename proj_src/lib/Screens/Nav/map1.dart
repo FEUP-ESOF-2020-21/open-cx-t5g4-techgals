@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:proj_src/Screens/Nav/Components/menu_button.dart';
-import 'package:proj_src/Screens/Nav/Components/profile_button.dart';
+import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
 
-class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+class Map1 extends StatefulWidget {
+  @override
+  _Map1State createState() => _Map1State();
+}
 
+class _Map1State extends State<Map1> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      height: double.infinity,
+    return Scaffold(
+      appBar: buildAppBar_Map(context),
+      body: Container(
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -23,11 +24,11 @@ class Body extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Right_Arrow_Button(),
-          Menu_Button(),
-          Profile_Button(),
+          //Menu_Button(),
+          //Profile_Button(),
         ],
       ),
+    ),
     );
   }
 }
-

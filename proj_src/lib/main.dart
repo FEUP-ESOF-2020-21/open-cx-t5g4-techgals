@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:proj_src/Screens/Nav/Map1/screen_map1.dart';
-import 'package:proj_src/Screens/Nav/Map2/screen_map2.dart';
 import 'package:proj_src/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'Screens/Initials/welcome.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -18,7 +21,9 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: Screen_Map1(),
+      home: Welcome(),
     );
   }
 }
+
+
