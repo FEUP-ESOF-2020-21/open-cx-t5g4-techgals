@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proj_src/Screens/Nav/Components/menu_button.dart';
 import 'package:proj_src/Screens/Nav/Components/profile_button.dart';
 import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
+import 'package:proj_src/Screens/Nav/Components/chatroom_button.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -25,6 +26,7 @@ class Body extends StatelessWidget {
           Right_Arrow_Button(),
           Menu_Button(),
           Profile_Button(),
+          Chatroom_Button(),
         ],
       ),
     );
