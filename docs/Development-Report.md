@@ -112,34 +112,38 @@ The application should give the user the opportunity to choose his interests so 
 
 
 1. * As a participant I want to login my interests and my contact information.
-**Value:**  
-**Effort:**  
-**Acceptance Tests:**  
-**User interface mockups:**  
+**Value:** TODO  
+**Effort:**  TODO  
+**Acceptance Tests:**  TODO  
+**User interface mockups:**  TODO  
 ![sign in](/docs/signin.png)
+
 2. * As a participant I want to access a chatroom where I can talk to other users.  
-* As a participant, i want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.  
-* As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.  
+   * As a participant, i want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.  
+   * As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.  
 **Value:** TODO  
 **Effort:**  TODO  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**  TODO  
 ![chatroom](/docs/chatroom.png)
+
 3. * As a participant, I want to create a new chatroom with a different theme.  
 **Value:**  TODO  
 **Effort:**  TODO  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**  TODO  
 ![new chatroom](/docs/newchat.png)
-* As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.  
+
+4. * As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.  
 **Value:**  TODO  
 **Effort:**  TODO  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**  TODO  
 ![save info](/docs/saveinfo.png)
-* As a participant, I want to navigate a homepage, so that I can choose which functionality to access.  
-* As a participant I want to access a chatroom where I can talk to other users.  
-* As a participant I want to decide which chatroom I want to enter.  
+
+5. * As a participant, I want to navigate a homepage, so that I can choose which functionality to access.  
+   * As a participant I want to access a chatroom where I can talk to other users.  
+   * As a participant I want to decide which chatroom I want to enter.  
 **Value:**  TODO  
 **Effort:**  TODO  
 **Acceptance Tests:**  TODO  
