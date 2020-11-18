@@ -111,7 +111,7 @@ The application should give the user the opportunity to choose his interests so 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
 
-1. - **As a participant I want to login my interests and my contact information.  
+1. - **As a participant I want to login my interests and my contact information.**  
 **Value:** Must-Have  
 **Effort:**  L  
  <dl>
@@ -124,7 +124,7 @@ The application should give the user the opportunity to choose his interests so 
 **User interface mockups:**    
 ![sign in](/docs/signin.png)
 
-2. - **As a participant I want to access a chatroom where I can talk to other users.  
+2. - **As a participant I want to access a chatroom where I can talk to other users.**  
 **Value:** Must-Have  
 **Effort:**  M  
 <dl>
@@ -132,7 +132,7 @@ The application should give the user the opportunity to choose his interests so 
   <dd>Given that I am an user and I want to talk to other users. When I choose the topic I want to discuss, then I should be directed to its chatroom.</dd>
 </dl>  
 
-3. - **As a participant, I want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.  
+3. - **As a participant, I want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.**  
 **Value:** Must-Have  
 **Effort:**  S  
 <dl>
@@ -141,7 +141,7 @@ The application should give the user the opportunity to choose his interests so 
   <dd>Given that I am an user and I want to talk about topics that interest me. When I leave a chatroom, then I must be able to join another chatroom.</dd>
 </dl>  
 
-4. - **As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.  
+4. - **As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.**  
 **Value:** Should-Have  
 **Effort:**  M  
 <dl>
@@ -153,7 +153,7 @@ The application should give the user the opportunity to choose his interests so 
 **User interface mockups:**    
 ![chatroom](/docs/chatroom.png)
 
-5. - **As a participant, I want to create a new chatroom with a different theme.  
+5. - **As a participant, I want to create a new chatroom with a different theme.**  
 **Value:**  Should-Have  
 **Effort:**  M  
 <dl>
@@ -165,7 +165,7 @@ The application should give the user the opportunity to choose his interests so 
 **User interface mockups:**    
 ![new chatroom](/docs/newchat.png)
 
-6. - **As a participant, I want to make friends / save someone's contact info, so that I can keep in touch with other like-minded users.  
+6. - **As a participant, I want to make friends / save someone's contact info, so that I can keep in touch with other like-minded users.**  
 **Value:**  Could-Have  
 **Effort:**  S  
 <dl>
@@ -177,7 +177,7 @@ The application should give the user the opportunity to choose his interests so 
 **User interface mockups:**    
 ![save info](/docs/saveinfo.png)
 
-7. - **As a participant, I want to navigate the homepage, so that I can choose which functionality to access.  
+7. - **As a participant, I want to navigate the homepage, so that I can choose which functionality to access.**  
 **Value:**  Must-Have  
 **Effort:**  M  
 <dl>
@@ -186,7 +186,7 @@ The application should give the user the opportunity to choose his interests so 
   <dd>Given that I am an user and I want to explore the app. When I navigate the homepage, then I should be able to see where the profile button and the menu button are.</dd>
 </dl>  
 
-8. - **As a participant I want to decide which chatroom I want to enter.  
+8. - **As a participant I want to decide which chatroom I want to enter.**  
 **Value:**  Must-Have  
 **Effort:**  M  
 <dl>
