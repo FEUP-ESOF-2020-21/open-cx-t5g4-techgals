@@ -113,42 +113,54 @@ The application should give the user the opportunity to choose his interests so 
 
 1. * As a participant I want to login my interests and my contact information.  
 **Value:** Must-Have  
-**Effort:**  M  
+**Effort:**  L  
 **Acceptance Tests:**  
-* Given that I am an user and I want to log in. When I input invalid data, then I should be warned with a message saying "Invalid Information".  
-* Given that I am an user and I am prompted to login in. When I already have my information and interests defined
+  * Given that I am an user and I want to log in. When I input invalid data, then I should be warned with a message saying "Invalid Information".  
+  * Given that I am an user and I am prompted to login in. When I already have my information and interests defined
  and press the "let's go!" button, then I should go to the home page.  
 **User interface mockups:**    
 ![sign in](/docs/signin.png)
 
 2. * As a participant I want to access a chatroom where I can talk to other users.  
-   * As a participant, i want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.  
-   * As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.  
 **Value:** Must-Have  
-**Effort:**  TODO  
+**Effort:**  M  
+**Acceptance Tests:**  TODO  
+3. * As a participant, i want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.  
+**Value:** Must-Have  
+**Effort:**  S  
+**Acceptance Tests:**  TODO  
+4. * As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.  
+**Value:** Must-Have  
+**Effort:**  M  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**    
 ![chatroom](/docs/chatroom.png)
 
-3. * As a participant, I want to create a new chatroom with a different theme.  
+5. * As a participant, I want to create a new chatroom with a different theme.  
 **Value:**  Should-Have  
 **Effort:**  TODO  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**    
 ![new chatroom](/docs/newchat.png)
 
-4. * As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.  
+6. * As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.  
 **Value:**  Could-Have  
 **Effort:**  TODO  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**    
 ![save info](/docs/saveinfo.png)
 
-5. * As a participant, I want to navigate a homepage, so that I can choose which functionality to access.  
-   * As a participant I want to access a chatroom where I can talk to other users.  
-   * As a participant I want to decide which chatroom I want to enter.  
+7. * As a participant, I want to navigate a homepage, so that I can choose which functionality to access.  
 **Value:**  Must-Have  
-**Effort:**  TODO  
+**Effort:**  M  
+**Acceptance Tests:**  TODO  
+8. * As a participant I want to access a chatroom where I can talk to other users.  
+**Value:**  Must-Have  
+**Effort:**  L  
+**Acceptance Tests:**  TODO  
+9. * As a participant I want to decide which chatroom I want to enter.  
+**Value:**  Must-Have  
+**Effort:**  M  
 **Acceptance Tests:**  TODO  
 **User interface mockups:**    
 ![map](/docs/map.png)
