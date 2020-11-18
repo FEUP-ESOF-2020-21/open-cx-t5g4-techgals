@@ -124,6 +124,11 @@ The application should give the user the opportunity to choose his interests so 
 * As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.  
 
 ![save info](/docs/saveinfo.png)
+* As a participant, I want to navigate a homepage, so that I can choose which functionality to access.  
+* As a participant I want to access a chatroom where I can talk to other users.  
+* As a participant I want to decide which chatroom I want to enter.  
+
+![map](/docs/map.png)
 
 **User interface mockups**.
 After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
