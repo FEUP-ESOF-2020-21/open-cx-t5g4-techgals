@@ -114,7 +114,7 @@ The application should give the user the opportunity to choose his interests so 
 1. * As a participant I want to login my interests and my contact information.  
 **Value:** Must-Have  
 **Effort:**  M  
-**Acceptance Tests:**    
+**Acceptance Tests:**  
 * Given that I am an user and I want to log in. When I input invalid data, then I should be warned with a message saying "Invalid Information".  
 * Given that I am an user and I am prompted to login in. When I already have my information and interests defined
  and press the "let's go!" button, then I should go to the home page.  
