@@ -110,13 +110,16 @@ The application should give the user the opportunity to choose his interests so 
 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
-As a participant i want to login my interrests and my contact information.
+> As a participant I want to login my interests and my contact information.
 ![sign in](/docs/signin.png)
-
-As a participant I want to access a chatroom where I can talk to other users.
-As a participant, i want to choose when to enter or leave a chatroom, so that i only participate in conversations that interest me.
-As a chatroom moderator, i want to manage the chatroom's participant, so that, if need be, people can me muted/banished.
+> As a participant I want to access a chatroom where I can talk to other users.
+> As a participant, i want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.
+> As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.
 ![chatroom](/docs/chatroom.png)
+> As a participant, I want to create a new chatroom with a different theme.
+![new chatroom](/docs/newchat.png)
+> As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.
+![save info](/docs/saveinfo.png)
 
 **User interface mockups**.
 After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
