@@ -110,34 +110,53 @@ The application should give the user the opportunity to choose his interests so 
 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
-* As a participant I want to login my interests and my contact information.
+Value: Must-Have
+Effort: M
+Acceptance Tests:
+
+Given that I am an user and I want to check the seat availability of a conference. When I select a specific conference, then I should be shown the layout of the conference room, showing all available and unavailable seats.
+User interface mockups:
+
+1. * As a participant I want to login my interests and my contact information.
+**Value:**  
+**Effort:**  
+**Acceptance Tests:**  
+**User interface mockups:**  
 
 ![sign in](/docs/signin.png)
-* As a participant I want to access a chatroom where I can talk to other users.  
+2. * As a participant I want to access a chatroom where I can talk to other users.  
 * As a participant, i want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.  
 * As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.  
+**Value:** TODO  
+**Effort:**  TODO  
+**Acceptance Tests:**  TODO  
+**User interface mockups:**  TODO  
 
 ![chatroom](/docs/chatroom.png)
-* As a participant, I want to create a new chatroom with a different theme.  
+3. * As a participant, I want to create a new chatroom with a different theme.  
+**Value:**  TODO  
+**Effort:**  TODO  
+**Acceptance Tests:**  TODO  
+**User interface mockups:**  TODO  
 
 ![new chatroom](/docs/newchat.png)
 * As a participant, I want to make friends / save someone's contact info, so that i can keep in touch with other like-minded users.  
+**Value:**  TODO  
+**Effort:**  TODO  
+**Acceptance Tests:**  TODO  
+**User interface mockups:**  TODO  
 
 ![save info](/docs/saveinfo.png)
 * As a participant, I want to navigate a homepage, so that I can choose which functionality to access.  
 * As a participant I want to access a chatroom where I can talk to other users.  
 * As a participant I want to decide which chatroom I want to enter.  
+**Value:**  TODO  
+**Effort:**  TODO  
+**Acceptance Tests:**  TODO  
+**User interface mockups:**  TODO  
 
 ![map](/docs/map.png)
 
-**User interface mockups**.
-After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
-
-**Acceptance tests**.
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-**Value and effort**.
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. [MoSCoW](https://en.wikipedia.org/wiki/MoSCoW_method) method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
 
 ### Domain model
 
