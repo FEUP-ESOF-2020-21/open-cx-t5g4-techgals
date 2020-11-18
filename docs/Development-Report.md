@@ -59,7 +59,7 @@ The application should give the user the opportunity to choose his interests so 
 
 ### Use case diagram 
 
-![Use case diagram](/docs/useCases.jpg)
+![Use case diagram](/docs/useCases.png)
 
 - **Attend an online conference**
 > **Actor**: Attendee
