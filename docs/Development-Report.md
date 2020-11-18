@@ -62,55 +62,60 @@ The application should give the user the opportunity to choose his interests so 
 ![Use case diagram](/docs/useCases.jpg)
 
 - **Attend an online conference**
-* **Actor**: Attendee
-* **Description**: At online conferences or during a break, the attendee signs in the application.
-* **Preconditions**: Attendee has internet turned on.
-* **Postconditions**: App will ask for information such as username, email and interests.
+> **Actor**: Attendee
+> **Description**: At online conferences or during a break, the attendee signs in the application.
+> **Preconditions**: Attendee has internet turned on.
+> **Postconditions**: App will ask for information such as username, email and interests.
 
-* **Normal Flow**:
+> **Normal Flow**:
   1. The attendee turns internet on.
   2. The attendee signs in the application.
   3. The application asks for personal information.
   4. The application will show a personalized homepage, according to the interests chosen by the attendee.
 
-* **Alternative Flows and Exceptions**: The user already has an account -> The application must lead instantly to the personalized homepage. The chosen interests don't fit the already created chatroom themes -> The app asks the user if he wants to create a new topic that, if shared with other participants, can create a new chatroom. 
+> **Alternative Flows and Exceptions**: The user already has an account -> The application must lead instantly to the personalized homepage. The chosen interests don't fit the already created chatroom themes -> The app asks the user if he wants to create a new topic that, if shared with other participants, can create a new chatroom. 
 
 
 - **View Map**
-* **Actor**: Attendee
-* **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.
-* **Preconditions**: Attendee has internet turned on and has set his interests and personal information with success.
-* **Postconditions**: Attendee can chose the chatrooms, represented on the map, he wants to join.
+> **Actor**: Attendee
+> **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.
+> **Preconditions**: Attendee has internet turned on and has set his interests and personal information with success.
+> **Postconditions**: Attendee can chose the chatrooms, represented on the map, he wants to join.
 
-* **Normal Flow**:
+> **Normal Flow**:
   1. The attendee has internet on.
   2. The attendee has set his interests and personal information with success.
   3. The application shows a personalized map, showing discussion topics of interest.
   4. The attendee is able to choose any of the themes that lead to their respective chatroom.
 
-* **Alternative Flows and Exceptions**: The user doesn't find any themes interesting -> The user can refresh the map. The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom. 
+> **Alternative Flows and Exceptions**: The user doesn't find any themes interesting -> The user can refresh the map. The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom. 
 
 
 - **Chatroom**
-* **Actor**: Attendee
-* **Description**: The attendee is directed to a chatroom.
-* **Preconditions**: Attendee has internet turned on and has chosen the topic he wants to discuss.
-* **Postconditions**: Attende can text the other chatroom participants. Attendee can leave the chatroom whenever he wants. Attendee can save information about other user. 
+> **Actor**: Attendee
+> **Description**: The attendee is directed to a chatroom.
+> **Preconditions**: Attendee has internet turned on and has chosen the topic he wants to discuss.
+> **Postconditions**: Attende can text the other chatroom participants. Attendee can leave the chatroom whenever he wants. Attendee can save information about other user. 
 
-* **Normal Flow**:
+> **Normal Flow**:
   1. The attendee has internet on.
   2. The attendee has chosen the discussion topic he wants to join.
   3. The attendee is directed to the chosen chatroom.
   4. The attendee is able to text, leave the chatroom, save someones contact.
 
-* **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban or mute other participants, in need. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.
+> **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban or mute other participants, in need. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.
 
 
 ### User stories
 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
-Chatroom view of a normal user and a chatroom moderator, respectively.
+As a participant i want to login my interrests and my contact information.
+![sign in](/docs/signin.png)
+
+As a participant I want to access a chatroom where I can talk to other users.
+As a participant, i want to choose when to enter or leave a chatroom, so that i only participate in conversations that interest me.
+As a chatroom moderator, i want to manage the chatroom's participant, so that, if need be, people can me muted/banished.
 ![chatroom](/docs/chatroom.png)
 
 **User interface mockups**.
