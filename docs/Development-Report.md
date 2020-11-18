@@ -61,7 +61,7 @@ The application should give the user the opportunity to choose his interests so 
 
 ![Use case diagram](/docs/useCases.jpg)
 
-* Attend an online conference
+- **Attend an online conference**
 * **Actor**: Attendee
 * **Description**: At online conferences or during a break, the attendee signs in the application.
 * **Preconditions**: Attendee has internet turned on.
@@ -75,7 +75,8 @@ The application should give the user the opportunity to choose his interests so 
 
 * **Alternative Flows and Exceptions**: The user already has an account -> The application must lead instantly to the personalized homepage. The chosen interests don't fit the already created chatroom themes -> The app asks the user if he wants to create a new topic that, if shared with other participants, can create a new chatroom. 
 
-* View map
+
+- **View Map**
 * **Actor**: Attendee
 * **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.
 * **Preconditions**: Attendee has internet turned on and has set his interests and personal information with success.
@@ -89,7 +90,8 @@ The application should give the user the opportunity to choose his interests so 
 
 * **Alternative Flows and Exceptions**: The user doesn't find any themes interesting -> The user can refresh the map. The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom. 
 
-* Chatroom
+
+- **Chatroom**
 * **Actor**: Attendee
 * **Description**: The attendee is directed to a chatroom.
 * **Preconditions**: Attendee has internet turned on and has chosen the topic he wants to discuss.
