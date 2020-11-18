@@ -37,53 +37,76 @@ Thank you!
 
 ## Product Vision
 
-At online conferences, meaningful connections and direct conversations are lost. Thus, to enhance net-working, we built a virtual space in form of a map, allowing users to walk in and out of conversations as naturally as in real life - where interactions are solemnly based on one's interest.
+At online conferences, meaningful connections and direct conversations 
+are lost. Thus, to enhance net-working, we built a virtual space in form 
+of a map, allowing users to walk in and out of conversations as naturally 
+as in real life - where interactions are solemnly based on one's interest.
 
-Making the breaks between sessions more fun and opening up possibilities for new connections.
+Making the breaks between sessions more fun and opening up possibilities 
+for new connections.
 
----
+
 ## Elevator Pitch
-Draft a small text to help you quickly introduce and describe your product in a short time and a few words (~800 characters), a technique usually known as elevator pitch.
 
-Take a look at the following links to learn some techniques:
-* [Crafting an Elevator Pitch](https://www.mindtools.com/pages/article/elevator-pitch.htm)
-* [The Best Elevator Pitch Examples, Templates, and Tactics - A Guide to Writing an Unforgettable Elevator Speech, by strategypeak.com](https://strategypeak.com/elevator-pitch-examples/)
-* [Top 7 Killer Elevator Pitch Examples, by toggl.com](https://blog.toggl.com/elevator-pitch-examples/)
+*your product name* is a mobile app that allows online conference attendees
+to interact with each other through chatrooms. This gives them a better 
+experience, keeping direct interactions alive.
 
----
+
 ## Requirements
 
-In this section, you should describe all kinds of requirements for your module: functional and non-functional requirements.
-
-Start by contextualizing your module, describing the main concepts, terms, roles, scope and boundaries of the application domain addressed by the project.
+The application should give the user the opportunity to choose his interests so that the map shows appealing topics. Hence the exhibited topics should lead to chatrooms where the users can communicate. It should be possible to leave the chatrooms. A user can create a new topic, giving him responsability for its chatroom management.
 
 ### Use case diagram 
 
-Create a use-case diagram in UML with all high-level use cases possibly addressed by your module.
+![Use case diagram](/docs/useCases.jpg)
 
-Give each use case a concise, results-oriented name. Use cases should reflect the tasks the user needs to be able to accomplish using the system. Include an action verb and a noun. 
+* Attend an online conference
+* **Actor**: Attendee
+* **Description**: At online conferences or during a break, the attendee signs in the application.
+* **Preconditions**: Attendee has internet turned on.
+* **Postconditions**: App will ask for information such as username, email and interests.
 
-Briefly describe each use case mentioning the following:
+* **Normal Flow**:
+  1. The attendee turns internet on.
+  2. The attendee signs in the application.
+  3. The application asks for personal information.
+  4. The application will show a personalized homepage, according to the interests chosen by the attendee.
 
-* **Actor**. Name only the actor that will be initiating this use case, i.e. a person or other entity external to the software system being specified who interacts with the system and performs use cases to accomplish tasks. 
-* **Description**. Provide a brief description of the reason for and outcome of this use case, or a high-level description of the sequence of actions and the outcome of executing the use case. 
-* **Preconditions and Postconditions**. Include any activities that must take place, or any conditions that must be true, before the use case can be started (preconditions). Describe also the state of the system at the conclusion of the use case execution (postconditions). 
+* **Alternative Flows and Exceptions**: The user already has an account -> The application must lead instantly to the personalized homepage. The chosen interests don't fit the already created chatroom themes -> The app asks the user if he wants to create a new topic that, if shared with other participants, can create a new chatroom. 
 
-* **Normal Flow**. Provide a detailed description of the user actions and system responses that will take place during execution of the use case under normal, expected conditions. This dialog sequence will ultimately lead to accomplishing the goal stated in the use case name and description. This is best done as a numbered list of actions performed by the actor, alternating with responses provided by the system. 
-* **Alternative Flows and Exceptions**. Document other, legitimate usage scenarios that can take place within this use case, stating any differences in the sequence of steps that take place. In addition, describe any anticipated error conditions that could occur during execution of the use case, and define how the system is to respond to those conditions. 
+* View map
+* **Actor**: Attendee
+* **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.
+* **Preconditions**: Attendee has internet turned on and has set his interests and personal information with success.
+* **Postconditions**: Attendee can chose the chatrooms, represented on the map, he wants to join.
+
+* **Normal Flow**:
+  1. The attendee has internet on.
+  2. The attendee has set his interests and personal information with success.
+  3. The application shows a personalized map, showing discussion topics of interest.
+  4. The attendee is able to choose any of the themes that lead to their respective chatroom.
+
+* **Alternative Flows and Exceptions**: The user doesn't find any themes interesting -> The user can refresh the map. The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom. 
+
+* Chatroom
+* **Actor**: Attendee
+* **Description**: The attendee is directed to a chatroom.
+* **Preconditions**: Attendee has internet turned on and has chosen the topic he wants to discuss.
+* **Postconditions**: Attende can text the other chatroom participants. Attendee can leave the chatroom whenever he wants. Attendee can save information about other user. 
+
+* **Normal Flow**:
+  1. The attendee has internet on.
+  2. The attendee has chosen the discussion topic he wants to join.
+  3. The attendee is directed to the chosen chatroom.
+  4. The attendee is able to text, leave the chatroom, save someones contact.
+
+* **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban or mute other participants, in need. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.
+
 
 ### User stories
-This section will contain the requirements of the product described as **user stories**, organized in a global **[user story map](https://plan.io/blog/user-story-mapping/)** with **user roles** or **themes**.
 
-For each theme, or role, you may add a small description. User stories should be detailed in the tool you decided to use for project management (e.g. trello or github projects).
-
-A user story is a description of desired functionality told from the perspective of the user or customer. A starting template for the description of a user story is 
-
-*As a < user role >, I want < goal > so that < reason >.*
-
-
-**INVEST in good user stories**. 
-You may add more details after, but the shorter and complete, the better. In order to decide if the user story is good, please follow the [INVEST guidelines](https://xp123.com/articles/invest-in-good-stories-and-smart-tasks/).
+**[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
 **User interface mockups**.
 After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
