@@ -110,6 +110,9 @@ The application should give the user the opportunity to choose his interests so 
 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
+Chatroom view of a normal user and a chatroom moderator, respectively.
+![chatroom](/docs/chatroom.png)
+
 **User interface mockups**.
 After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
 
