@@ -3,6 +3,7 @@ import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
+import 'package:proj_src/BackEnd/database.dart';
 
 class SignUp extends StatefulWidget {
 
@@ -18,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   AuthMethods authMethods = new AuthMethods();
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   final formKey = GlobalKey<FormState>();
   TextEditingController usernameControl = new TextEditingController();
@@ -31,6 +33,13 @@ class _SignUpState extends State<SignUp> {
       });
       authMethods.signUp(emailControl.text, passwordControl.text).then((val){
         //print("HERE");
+
+        Map<String, String> userInfoMap = {
+          "name" : usernameControl.text,
+          "email" : emailControl.text
+        };
+
+        databaseMethods.uploadUserInfo(userInfoMap);
         Navigator.pushReplacement
           (context, MaterialPageRoute(builder: (context) {
             return Map1();

@@ -51,8 +51,8 @@ class Welcome extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [
-                        kPrimaryLightColor,
                         kPrimaryColor,
+                        kPrimaryLightColor,
                       ]
                   ),
                   borderRadius: BorderRadius.circular(25),
