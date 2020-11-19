@@ -62,10 +62,10 @@ The application should give the user the opportunity to choose his interests so 
 ![Use case diagram](/docs/useCases.png)
 
 - **Attend an online conference**
-> **Actor**: Attendee
-> **Description**: At online conferences or during a break, the attendee signs in the application.
-> **Preconditions**: Attendee has internet turned on.
-> **Postconditions**: App will ask for information such as username, email and interests.
+> **Actor**: Attendee  
+> **Description**: At online conferences or during a break, the attendee signs in the application.  
+> **Preconditions**: Attendee has internet turned on.  
+> **Postconditions**: App will ask for information such as username, email and interests.  
 
 > **Normal Flow**:
   1. The attendee turns internet on.
@@ -77,10 +77,10 @@ The application should give the user the opportunity to choose his interests so 
 
 
 - **View Map**
-> **Actor**: Attendee
-> **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.
-> **Preconditions**: Attendee has internet turned on and has set his interests and personal information with success.
-> **Postconditions**: Attendee can chose the chatrooms, represented on the map, he wants to join.
+> **Actor**: Attendee  
+> **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.  
+> **Preconditions**: Attendee has internet turned on and has set his interests and personal information with success.  
+> **Postconditions**: Attendee can chose the chatrooms, represented on the map, he wants to join.  
 
 > **Normal Flow**:
   1. The attendee has internet on.
@@ -92,10 +92,10 @@ The application should give the user the opportunity to choose his interests so 
 
 
 - **Chatroom**
-> **Actor**: Attendee
-> **Description**: The attendee is directed to a chatroom.
-> **Preconditions**: Attendee has internet turned on and has chosen the topic he wants to discuss.
-> **Postconditions**: Attende can text the other chatroom participants. Attendee can leave the chatroom whenever he wants. Attendee can save information about other user. 
+> **Actor**: Attendee  
+> **Description**: The attendee is directed to a chatroom.  
+> **Preconditions**: Attendee has internet turned on and has chosen the topic he wants to discuss.  
+> **Postconditions**: Attende can text the other chatroom participants. Attendee can leave the chatroom whenever he wants. Attendee can save information about other user.  
 
 > **Normal Flow**:
   1. The attendee has internet on.
