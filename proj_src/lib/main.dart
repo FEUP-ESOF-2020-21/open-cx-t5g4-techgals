@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: ChatPage(groupId: "chat1", userName: "user1", groupName: "chat1",),
+      home: Welcome(),
+      //home: ChatPage(groupId: "chat1", userName: "user1", groupName: "chat1",),
     );
   }
 }
