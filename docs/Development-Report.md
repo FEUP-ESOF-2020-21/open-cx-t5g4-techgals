@@ -111,7 +111,7 @@ The application should give the user the opportunity to choose his interests so 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
 
-1. - **As a participant I want to login my interests and my contact information.**  
+1. - **As a participant I want to login my interests and my contact information, so that I can have a personalized experience.**  
 **Value:** Must-Have  
 **Effort:**  L  
  <dl>
@@ -124,7 +124,7 @@ The application should give the user the opportunity to choose his interests so 
 **User interface mockups:**    
 ![sign in](/docs/signin.png)
 
-2. - **As a participant I want to access a chatroom where I can talk to other users.**  
+2. - **As a participant I want to access a chatroom where I can talk to other users, so that I can discuss topics that interest me.**  
 **Value:** Must-Have  
 **Effort:**  M  
 <dl>
@@ -153,7 +153,7 @@ The application should give the user the opportunity to choose his interests so 
 **User interface mockups:**    
 ![chatroom](/docs/chatroom.png)
 
-5. - **As a participant, I want to create a new chatroom with a different theme.**  
+5. - **As a participant, I want to create a new chatroom with a different theme, so that I can discuss any topic I want even if it doesn't already exists.**  
 **Value:**  Should-Have  
 **Effort:**  M  
 <dl>
@@ -186,7 +186,7 @@ The application should give the user the opportunity to choose his interests so 
   <dd>Given that I am an user and I want to explore the app. When I navigate the homepage, then I should be able to see where the profile button and the menu button are.</dd>
 </dl>  
 
-8. - **As a participant I want to decide which chatroom I want to enter.**  
+8. - **As a participant I want to decide which chatroom I want to enter, so that I can discuss more than 1 theme if I want to.**  
 **Value:**  Must-Have  
 **Effort:**  M  
 <dl>
