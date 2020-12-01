@@ -35,7 +35,6 @@ class _LogInState extends State<LogIn> {
       await authMethods.logIn(emailControl.text, passwordControl.text).then((val) async{
 
         if(val != null) {
-          print("Entrou aqui");
           QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
 
           print("USERSNAP: $userInfoSnapshot");

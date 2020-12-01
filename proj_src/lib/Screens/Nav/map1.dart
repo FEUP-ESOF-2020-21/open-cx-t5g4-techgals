@@ -56,6 +56,7 @@ class _Map1State extends State<Map1> {
             itemCount: snapshot.data.documents.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
+              print(_userName);
               return ChatTile(
                   userName: _userName,
                   groupId: snapshot.data.documents[index].id,

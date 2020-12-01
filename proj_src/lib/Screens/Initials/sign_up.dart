@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
@@ -18,34 +20,70 @@ class _SignUpState extends State<SignUp> {
 
   bool isLoading = false;
 
-  AuthMethods authMethods = new AuthMethods();
+  AuthMethods _authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
 
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   TextEditingController usernameControl = new TextEditingController();
   TextEditingController emailControl = new TextEditingController();
   TextEditingController passwordControl = new TextEditingController();
 
-  signUpLoad() {
-    if(formKey.currentState.validate()) {
+  _signUpLoad() async{
+    if(_formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
       });
-      authMethods.signUp(emailControl.text, passwordControl.text).then((val){
-        //print("HERE");
+      await _authMethods.signUp(usernameControl.text, emailControl.text, passwordControl.text).then((val) async{
 
-        Map<String, String> userInfoMap = {
+        var email = emailControl.text;
+        var username = usernameControl.text;
+        var pass = passwordControl.text;
+
+        print("email: $email");
+        print("un: $username");
+        print("pass: $pass");
+
+        print('HERE');
+        print(val);
+        /*Map<String, String> userInfoMap = {
           "name" : usernameControl.text,
           "email" : emailControl.text
         };
+        List<String> interest = [];*/
+        //databaseMethods.uploadUserInfo(userInfoMap);
+        //databaseMethods.uploadUserInfo(usernameControl.text, emailControl.text, []);
 
-        databaseMethods.uploadUserInfo(userInfoMap);
-        Navigator.pushReplacement
-          (context, MaterialPageRoute(builder: (context) {
-            return Map1();
-            },
-          ),
-        );
+        if(val != null) {
+          QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
+
+          print("USERSNAP: $userInfoSnapshot");
+
+          await HelperFunctions.saveUserLoggedInSharedPreference(true);
+          await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
+            print("Logged in: $value");
+          });
+
+          await HelperFunctions.saveUserEmailSharedPreference(
+              emailControl.text);
+          await HelperFunctions.getUserEmailSharedPreference().then((value) {
+            print("Email: $value");
+          });
+
+          await HelperFunctions.saveUserNameSharedPreference(
+              userInfoSnapshot.docs[0].data()['username']);
+          await HelperFunctions.getUserNameSharedPreference().then((value) {
+            print("Username: $value");
+          });
+
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+        }
+        else{
+          setState(() {
+            //ERROR
+            print("ERROR SIGNING UP");
+            isLoading = false;
+          });
+        }
       });
     }
   }
@@ -62,7 +100,7 @@ class _SignUpState extends State<SignUp> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Form(
-              key: formKey,
+              key: _formKey,
               child: Column(
                 children: [
                   TextFormField(
@@ -100,7 +138,7 @@ class _SignUpState extends State<SignUp> {
             SizedBox(height: 30,),
             GestureDetector(
               onTap: (){
-                signUpLoad();
+                _signUpLoad();
               },
               child: Container(
                 alignment: Alignment.center,

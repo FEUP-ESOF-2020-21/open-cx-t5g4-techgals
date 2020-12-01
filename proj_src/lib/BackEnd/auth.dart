@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proj_src/BackEnd/UserClass.dart';
+import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 
 class AuthMethods {
@@ -19,13 +20,21 @@ class AuthMethods {
     }
   }
 
-  Future signUp(String email, String password) async {
+  Future signUp(String username, String email, String password) async {
     try{
+      print("HERE2");
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      print("result: $result");
       User firebaseUser = result.user;
+      print("firebaseUser: $firebaseUser");
+
+      // create a new document for the user with uid
+      await DatabaseMethods(uid: firebaseUser.uid).updateUserData(username, email, []);
+
       return _userFromFirebase(firebaseUser);
     } catch(e) {
       print(e.toString());
+      return null;
     }
   }
 

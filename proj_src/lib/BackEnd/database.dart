@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class DatabaseMethods{
 
@@ -13,14 +12,14 @@ class DatabaseMethods{
   final CollectionReference chatCollection = FirebaseFirestore.instance.collection('chats');
 
   // update userdata
-  Future updateUserData(String username, String email, String password) async {
+  Future updateUserData(String username, String email, List<String> interests/*, String password*/) async {
     return await userCollection.doc(uid).set({
       'username': username,
       'email': email,
-      'password': password,
-      'groups' : [],
-      'interests': [],
-      'profilePic': ''
+      //'password': password,
+      //'groups' : [],
+      'interests': interests,
+      //'profilePic': ''
     });
   }
 
@@ -107,31 +106,15 @@ class DatabaseMethods{
     return FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').orderBy('time').snapshots();
   }
 
-  getChatsNames() async {
-    List<String> result = [];
-    await FirebaseFirestore.instance.collection('chats').get()
-        .then((snapshot) {
-      snapshot.docs.forEach((element) {
-        result.add(element.get('name'));
-      });
-    });
-    return result;
-  }
-
+  // returns every chat room
   getActiveChats() async {
     return FirebaseFirestore.instance.collection('chats').snapshots();
-  }
-
-  getNumberOfChats() async {
-    await chatCollection.get().then((snap) {
-      return snap.size; // will return the collection size
-    });
   }
 
 /*-----------------------------------------------------------------------------------------------*/
 
   getUserByUsername(String username) async {
-    return await FirebaseFirestore.instance.collection("users").where("name", isEqualTo: username ).get();
+    return await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: username ).get();
   }
 
   getChatByName(String name) async{
@@ -143,8 +126,14 @@ class DatabaseMethods{
     return FirebaseFirestore.instance.collection("chats");
   }
 
-  uploadUserInfo(userMap){
-    FirebaseFirestore.instance.collection("users").add(userMap);
+  uploadUserInfo(String name, String email, List<String> interest){
+
+    FirebaseFirestore.instance.collection("users").add({
+      'username': name,
+      'email': email,
+      'interests': interest
+    });
+
   }
 
   createChat(String chatID, chatMap){
