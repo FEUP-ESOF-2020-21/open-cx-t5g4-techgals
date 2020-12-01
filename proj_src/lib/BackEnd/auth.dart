@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proj_src/BackEnd/UserClass.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 
 class AuthMethods {
 
@@ -37,10 +38,26 @@ class AuthMethods {
   }
 
   Future signOut() async {
-    try{
-      return await _auth.signOut();
+    try {
+      await HelperFunctions.saveUserLoggedInSharedPreference(false);
+      await HelperFunctions.saveUserEmailSharedPreference('');
+      await HelperFunctions.saveUserNameSharedPreference('');
+
+      return await _auth.signOut().whenComplete(() async {
+        print("Logged out");
+        await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
+          print("Logged in: $value");
+        });
+        await HelperFunctions.getUserEmailSharedPreference().then((value) {
+          print("Email: $value");
+        });
+        await HelperFunctions.getUserNameSharedPreference().then((value) {
+          print("Username: $value");
+        });
+      });
     } catch(e) {
       print(e.toString());
+      return null;
     }
   }
 

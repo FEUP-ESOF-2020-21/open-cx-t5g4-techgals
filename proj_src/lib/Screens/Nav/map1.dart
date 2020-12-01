@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
 import 'package:proj_src/constants.dart';
@@ -16,52 +18,57 @@ class _Map1State extends State<Map1> {
   
   DatabaseMethods databaseMethods = new DatabaseMethods();
   QuerySnapshot searchSnapshot;
-  Stream _groups;
+  Stream<QuerySnapshot> _groups;
+  User _user = FirebaseAuth.instance.currentUser;
+  String _userName = '';
+  String _email= '';
 
-  initiateSearch(){
-    //fixed for now
-    databaseMethods.getUserByUsername("user_name").then((val){
+  @override
+  void initState() {
+    super.initState();
+    _getInfo();
+    //initiateSearch();
+  }
+
+  _getInfo() async {
+    await HelperFunctions.getUserNameSharedPreference().then((value) {
       setState(() {
-        searchSnapshot = val;
+        _userName = value;
+      });
+    });
+    await DatabaseMethods().getActiveChats().then((val) {
+      setState(() {
+        _groups = val;
+      });
+    });
+    await HelperFunctions.getUserEmailSharedPreference().then((value) {
+      setState(() {
+        _email = value;
       });
     });
   }
 
-  Widget listChats() {
+  Widget _listChats() {
     return StreamBuilder(
-      stream: _groups,
+        stream: _groups,
         builder: (context, snapshot) {
-          if(snapshot.hasData) {
-            if(snapshot.data["chats"] != null) {
-              if(snapshot.data["chats"].length != 0) {
-                return ListView.builder(
-                    itemCount: snapshot.data["chat"].length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                    int reqIndex = snapshot.data["chats"].length - index -1;
-                    return ChatTile(userName: "user", groupId: "VXj0WwAPa4i7ArixDCxi", groupName: "chatroom");
-                    }
-                );
-              }
-              else{
-                return Container();
-              }
-            }
-            else {
-              return Container();
-            }
+          return snapshot.hasData ? ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ChatTile(
+                  userName: _userName,
+                  groupId: snapshot.data.documents[index].id,
+                  groupName: snapshot.data.documents[index]['name']
+              );
+              },
+            scrollDirection: Axis.vertical,
+            )
+              :
+          Container();
           }
-          else {
-            return ChatTile(userName: "user", groupId: "VXj0WwAPa4i7ArixDCxi", groupName: "chatroom");
-
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        }
     );
   }
-
 
   Widget searchList(){
     return searchSnapshot != null ? ListView.builder(
@@ -74,14 +81,8 @@ class _Map1State extends State<Map1> {
   }
 
   @override
-  void initState() {
-    initiateSearch();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar_Map(context),
       body: Container(
@@ -113,7 +114,7 @@ class _Map1State extends State<Map1> {
             ),
           ),*/
           //searchList(),
-          listChats()
+          _listChats()
           //Menu_Button(),
           //Profile_Button(),
         ],

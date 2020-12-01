@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proj_src/constants.dart';
+
 
 class MessageTile extends StatelessWidget {
 
@@ -32,7 +34,7 @@ class MessageTile extends StatelessWidget {
               topRight: Radius.circular(23),
               bottomRight: Radius.circular(23)
           ),
-          color: sentByMe ? Colors.blueAccent : Colors.grey[700],
+          color: sentByMe ? kPrimaryColor : k2PrimaryColor,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

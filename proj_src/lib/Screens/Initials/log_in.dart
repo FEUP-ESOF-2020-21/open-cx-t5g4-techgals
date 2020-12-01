@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
+import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
@@ -24,14 +27,44 @@ class _LogInState extends State<LogIn> {
   TextEditingController emailControl = new TextEditingController();
   TextEditingController passwordControl = new TextEditingController();
 
-  logInLoad() {
+  logInLoad() async {
     if(formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
       });
-      authMethods.logIn(emailControl.text, passwordControl.text).then((val){
-        //print("HERE");
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+      await authMethods.logIn(emailControl.text, passwordControl.text).then((val) async{
+
+        if(val != null) {
+          print("Entrou aqui");
+          QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
+
+          print("USERSNAP: $userInfoSnapshot");
+
+          await HelperFunctions.saveUserLoggedInSharedPreference(true);
+          await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
+            print("Logged in: $value");
+          });
+
+          await HelperFunctions.saveUserEmailSharedPreference(emailControl.text);
+          await HelperFunctions.getUserEmailSharedPreference().then((value) {
+            print("Email: $value");
+          });
+
+          await HelperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].data()['name']);
+          await HelperFunctions.getUserNameSharedPreference().then((value) {
+            print("Username: $value");
+          });
+
+          print("Signed In");
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+      }
+        else{
+          setState(() {
+           //ERROR
+            print("ERROR LOGGING IN");
+            isLoading = false;
+          });
+        }
       });
     }
   }
