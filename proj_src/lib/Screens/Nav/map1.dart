@@ -71,16 +71,6 @@ class _Map1State extends State<Map1> {
     );
   }
 
-  Widget searchList(){
-    return searchSnapshot != null ? ListView.builder(
-        itemCount: searchSnapshot.docs.length,
-        itemBuilder: (context, index) {
-          return SearchItem(
-              searchSnapshot.docs[index]["name"]
-          );
-        }) : Container();
-  }
-
   @override
   Widget build(BuildContext context) {
     //Size size = MediaQuery.of(context).size;
@@ -97,31 +87,21 @@ class _Map1State extends State<Map1> {
       child: Stack(
         children: <Widget>[
           Right_Arrow_Button(),
-          /*GestureDetector(
-            onTap: (){
-              initiateSearch();
-            },
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Colors.black
-              ),
-              child: Icon(
-                  Icons.message,
-                  color: Colors.white,
-                  size: 35,
-              ),
-            ),
-          ),*/
-          //searchList(),
           _listChats()
-          //Menu_Button(),
-          //Profile_Button(),
         ],
       ),
     ),
     );
+  }
+
+  Widget searchList(){
+    return searchSnapshot != null ? ListView.builder(
+        itemCount: searchSnapshot.docs.length,
+        itemBuilder: (context, index) {
+          return SearchItem(
+              searchSnapshot.docs[index]["name"]
+          );
+        }) : Container();
   }
 }
 

@@ -22,11 +22,8 @@ class AuthMethods {
 
   Future signUp(String username, String email, String password) async {
     try{
-      print("HERE2");
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      print("result: $result");
       User firebaseUser = result.user;
-      print("firebaseUser: $firebaseUser");
 
       // create a new document for the user with uid
       await DatabaseMethods(uid: firebaseUser.uid).updateUserData(username, email, []);

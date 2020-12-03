@@ -56,7 +56,6 @@ class _ChatPageState extends State<ChatPage> {
       },
     );
   }
-
   _sendMessage() {
     if (messageEditingController.text.isNotEmpty) {
       Map<String, dynamic> chatMessageMap = {
@@ -81,6 +80,17 @@ class _ChatPageState extends State<ChatPage> {
         centerTitle: true,
         backgroundColor: Colors.black87,
         elevation: 0.0,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  DatabaseMethods().updateChatInfo(widget.groupId, widget.userName, false);
+                  Navigator.pop(context);
+                }
+            );
+          },
+        ),
       ),
       body: Container(
         child: Stack(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proj_src/constants.dart';
 
-
 class MessageTile extends StatelessWidget {
 
   final String message;

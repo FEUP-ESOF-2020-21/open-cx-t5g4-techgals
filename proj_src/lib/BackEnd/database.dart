@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class DatabaseMethods{
 
@@ -26,24 +27,38 @@ class DatabaseMethods{
   // create chat
   Future createChatRoom(String username, String chatName) async {
     DocumentReference chatDocRef = await chatCollection.add({
-      'chatName': chatName,
+      'name': chatName,
       'admin': username,
-      'members': [],
+      'participants': [],
       //'messages': ,
-      'chatId': '',
+      //'chatId': '',
       'recentMessage': '',
-      'recentMessageSender': ''
+      'recentMessageSender': '',
+      'recentMessageTime': ''
     });
 
     await chatDocRef.update({
-      'members': FieldValue.arrayUnion([uid + '_' + username]),
-      'chatId': chatDocRef.id
+      'participants': FieldValue.arrayUnion([username]),
+      //'chatId': chatDocRef.id
     });
-
+    /*
     DocumentReference userDocRef = userCollection.doc(uid);
     return await userDocRef.update({
       'groups': FieldValue.arrayUnion([chatDocRef.id + '_' + chatName])
-    });
+    }); */
+  }
+
+  // update chatRoom data
+  Future updateChatInfo(String chatID, String username, bool add) async {
+    return add ?
+        await chatCollection.doc(chatID).update({
+          'participants': FieldValue.arrayUnion([username])
+        })
+        :
+        await chatCollection.doc(chatID).update({
+          'participants': FieldValue.arrayRemove([username])
+        })
+    ;
   }
 
   // toggling the user group join
@@ -121,11 +136,6 @@ class DatabaseMethods{
     return await FirebaseFirestore.instance.collection("chats").where("name", isEqualTo: name ).get();
   }
 
-
-  getChatsCollection() {
-    return FirebaseFirestore.instance.collection("chats");
-  }
-
   uploadUserInfo(String name, String email, List<String> interest){
 
     FirebaseFirestore.instance.collection("users").add({
@@ -135,11 +145,5 @@ class DatabaseMethods{
     });
 
   }
-
-  createChat(String chatID, chatMap){
-    FirebaseFirestore.instance.collection("chats")
-        .doc(chatID).set(chatMap);
-  }
-
 
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Chatroom/chatroom.dart';
 import 'package:proj_src/constants.dart';
 
@@ -6,13 +8,18 @@ class ChatTile extends StatelessWidget {
   final String userName;
   final String groupId;
   final String groupName;
+  String _userName;
 
   ChatTile({this.userName, this.groupId, this.groupName});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async{
+        await HelperFunctions.getUserNameSharedPreference().then((value) {
+          _userName = value;
+        });
+        DatabaseMethods().updateChatInfo(groupId, _userName, true);
         Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(groupId: groupId, userName: userName, groupName: groupName,)));
       },
       child: Container(
