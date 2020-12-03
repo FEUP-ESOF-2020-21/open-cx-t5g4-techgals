@@ -277,7 +277,7 @@ The **user** must choose his interests, in order to have a personalized experien
 The structure of our project is based on the MVC model. In short, the MVC specifies that the application consists of a **Model** that directly manages the data, the **View** is the display of the information, and the **Controller** is where the inputs are accepted and converted into commands.  
 
 ### Physical architecture
-![physical architecture](/docs/physicalArch.png)
+![physical architecture](/docs/physical.png)
 
 We chose flutter as our framework to develop our project.  
 As it is easy to integrate with flutter, we chose Firebase for database management and backend server.  
