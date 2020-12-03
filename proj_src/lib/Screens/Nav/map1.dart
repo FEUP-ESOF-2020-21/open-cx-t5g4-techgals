@@ -22,6 +22,7 @@ class _Map1State extends State<Map1> {
   User _user = FirebaseAuth.instance.currentUser;
   String _userName = '';
   String _email= '';
+  String _groupName = "";
 
   @override
   void initState() {
@@ -47,7 +48,6 @@ class _Map1State extends State<Map1> {
       });
     });
   }
-
   Widget _listChats() {
     return StreamBuilder(
         stream: _groups,
@@ -87,12 +87,66 @@ class _Map1State extends State<Map1> {
       child: Stack(
         children: <Widget>[
           Right_Arrow_Button(),
-          _listChats()
+          _listChats(),
         ],
       ),
     ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _popupDialog(context);
+        },
+        child: Icon(Icons.add, color: Colors.white, size: 30.0,),
+        backgroundColor: kPrimaryColor,
+        elevation: 0.0,
+      ),
     );
   }
+
+  void _popupDialog(BuildContext context) {
+    Widget cancelButton = FlatButton(
+      child: Text("Cancel"),
+      onPressed:  () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget createButton = FlatButton(
+      child: Text("Create"),
+      onPressed:  () async {
+        if(_groupName != null) {
+          await HelperFunctions.getUserNameSharedPreference().then((val) {
+            DatabaseMethods(uid: _user.uid).createChatRoom(val, _groupName);
+          });
+          Navigator.of(context).pop();
+        }
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Create a group"),
+      content: TextField(
+          onChanged: (val) {
+            _groupName = val;
+          },
+          style: TextStyle(
+              fontSize: 15.0,
+              height: 2.0,
+              color: Colors.black
+          )
+      ),
+      actions: [
+        cancelButton,
+        createButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 
   Widget searchList(){
     return searchSnapshot != null ? ListView.builder(
