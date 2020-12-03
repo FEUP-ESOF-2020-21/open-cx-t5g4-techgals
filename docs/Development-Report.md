@@ -48,7 +48,7 @@ for new connections.
 
 ## Elevator Pitch
 
-This is a mobile app that allows online conference attendees
+This is a mobile app that allows online conferences attendees
 to interact with each other through chatrooms. This gives them a better
 experience, keeping direct interactions alive.
 
@@ -125,6 +125,8 @@ The application should give the user the opportunity to choose his interests so 
 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
+**User Story Overview**  
+![map](/docs/overview.png)
 
 1. **As a participant I want to login my interests and my contact information, so that I can have a personalized experience.**  
 **Value:** Must-Have  
@@ -259,28 +261,27 @@ The application should give the user the opportunity to choose his interests so 
 
 ### Domain model
 
-To better understand the context of the software system, it is very useful to have a simple UML class diagram with all the key concepts (names, attributes) and relationships involved of the problem domain addressed by your module.
+A **user** can create an account in the application, by setting up his username, email, password and other personal information which will appear in his profile.  
+The **user** must choose his interests, in order to have a personalized experience. Each **interest** may be common to many users, and it represents a theme for a **chatroom** that may already exist. If not, the **user**, as a **chatroom moderator**, can create a new theme for a **chatroom**. Once there are participants in a **chatroom**, there can exist an unlimited number of **messages**. Each **message** can be send by a single **user**, inside a single **chatroom**, and its date, time and text associated.  
+
+#### UML  
+![domain model](/docs/domain.png)
 
 ---
 
 ## Architecture and Design
-The architecture of a software system encompasses the set of key decisions about its overall organization.
-
-A well written architecture document is brief but reduces the amount of time it takes new programmers to a project to understand the code to feel able to make modifications and enhancements.
-
-To document the architecture requires describing the decomposition of the system in their parts (high-level components) and the key behaviors and collaborations between them.
-
-In this section you should start by briefly describing the overall components of the project and their interrelations. You should also describe how you solved typical problems you may have encountered, pointing to well-known architectural and design patterns, if applicable.
 
 ### Logical architecture
-The purpose of this subsection is to document the high-level logical structure of the code, using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
+![logical architecture](/docs/logicalArch.png)
 
-It can be beneficial to present the system both in a horizontal or vertical decomposition:
-* horizontal decomposition may define layers and implementation concepts, such as the user interface, business logic and concepts;
-* vertical decomposition can define a hierarchy of subsystems that cover all layers of implementation.
+The structure of our project is based on the MVC model. In short, the MVC specifies that the application consists of a **Model** that directly manages the data, the **View** is the display of the information, and the **Controller** is where the inputs are accepted and converted into commands.  
 
 ### Physical architecture
-![physical architecture](/docs/physical.png)
+![physical architecture](/docs/physicalArch.png)
+
+We chose flutter as our framework to develop our project.  
+As it is easy to integrate with flutter, we chose Firebase for database management and backend server.  
+Our physical architecture isn't complex. The users install the application on their smartphones and it communicates with the firebase server via https requests, which is where the database is stored.  
 
 
 ### Prototype
