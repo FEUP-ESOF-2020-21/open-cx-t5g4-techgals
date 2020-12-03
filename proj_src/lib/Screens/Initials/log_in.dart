@@ -27,7 +27,7 @@ class _LogInState extends State<LogIn> {
   TextEditingController emailControl = new TextEditingController();
   TextEditingController passwordControl = new TextEditingController();
 
-  logInLoad() async {
+  _logInLoad() async {
     if(formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
@@ -49,7 +49,7 @@ class _LogInState extends State<LogIn> {
             print("Email: $value");
           });
 
-          await HelperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].data()['name']);
+          await HelperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].data()['username']);
           await HelperFunctions.getUserNameSharedPreference().then((value) {
             print("Username: $value");
           });
@@ -126,7 +126,7 @@ class _LogInState extends State<LogIn> {
             SizedBox(height: 16,),
             GestureDetector(
               onTap: (){
-                logInLoad();
+                _logInLoad();
               },
               child: Container(
                 alignment: Alignment.center,

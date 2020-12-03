@@ -21,7 +21,6 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   AuthMethods _authMethods = new AuthMethods();
-  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController usernameControl = new TextEditingController();
@@ -40,18 +39,11 @@ class _SignUpState extends State<SignUp> {
         var pass = passwordControl.text;
 
         print("email: $email");
-        print("un: $username");
+        print("username: $username");
         print("pass: $pass");
 
         print('HERE');
         print(val);
-        /*Map<String, String> userInfoMap = {
-          "name" : usernameControl.text,
-          "email" : emailControl.text
-        };
-        List<String> interest = [];*/
-        //databaseMethods.uploadUserInfo(userInfoMap);
-        //databaseMethods.uploadUserInfo(usernameControl.text, emailControl.text, []);
 
         if(val != null) {
           QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
@@ -63,18 +55,17 @@ class _SignUpState extends State<SignUp> {
             print("Logged in: $value");
           });
 
-          await HelperFunctions.saveUserEmailSharedPreference(
-              emailControl.text);
+          await HelperFunctions.saveUserEmailSharedPreference(emailControl.text);
           await HelperFunctions.getUserEmailSharedPreference().then((value) {
             print("Email: $value");
           });
 
-          await HelperFunctions.saveUserNameSharedPreference(
-              userInfoSnapshot.docs[0].data()['username']);
+          await HelperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].data()['username']);
           await HelperFunctions.getUserNameSharedPreference().then((value) {
             print("Username: $value");
           });
 
+          print("Signed In");
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
         }
         else{
