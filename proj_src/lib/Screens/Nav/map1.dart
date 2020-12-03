@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
+import 'package:proj_src/Screens/Initials/initial_aux.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
 import 'package:proj_src/constants.dart';
@@ -15,14 +17,14 @@ class Map1 extends StatefulWidget {
 }
 
 class _Map1State extends State<Map1> {
-  
-  DatabaseMethods databaseMethods = new DatabaseMethods();
+
   QuerySnapshot searchSnapshot;
   Stream<QuerySnapshot> _groups;
   User _user = FirebaseAuth.instance.currentUser;
   String _userName = '';
   String _email= '';
-  String _groupName = "";
+  String _newChatName = "";
+  List<String> _auxChatNames = [];
 
   @override
   void initState() {
@@ -56,7 +58,9 @@ class _Map1State extends State<Map1> {
             itemCount: snapshot.data.documents.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              print(_userName);
+              //print(_userName);
+              _auxChatNames.add(snapshot.data.documents[index]['name']);
+              _auxChatNames = _auxChatNames.toSet().toList();
               return ChatTile(
                   userName: _userName,
                   groupId: snapshot.data.documents[index].id,
@@ -93,7 +97,7 @@ class _Map1State extends State<Map1> {
     ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _popupDialog(context);
+          _popupAdd(context);
         },
         child: Icon(Icons.add, color: Colors.white, size: 30.0,),
         backgroundColor: kPrimaryColor,
@@ -102,7 +106,7 @@ class _Map1State extends State<Map1> {
     );
   }
 
-  void _popupDialog(BuildContext context) {
+  void _popupAdd(BuildContext context) {
     Widget cancelButton = FlatButton(
       child: Text("Cancel"),
       onPressed:  () {
@@ -112,27 +116,32 @@ class _Map1State extends State<Map1> {
     Widget createButton = FlatButton(
       child: Text("Create"),
       onPressed:  () async {
-        if(_groupName != null) {
+        if(_auxChatNames.contains(_newChatName)) {
+          Navigator.of(context).pop();
+        }
+        else if (_newChatName != null){
           await HelperFunctions.getUserNameSharedPreference().then((val) {
-            DatabaseMethods(uid: _user.uid).createChatRoom(val, _groupName);
+            DatabaseMethods(uid: _user.uid).createChatRoom(val, _newChatName);
           });
           Navigator.of(context).pop();
         }
+
       },
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("Create a group"),
+      title: Text("Don't see the topic you want?\n     Create a new chatroom!"),
       content: TextField(
-          onChanged: (val) {
-            _groupName = val;
-          },
-          style: TextStyle(
-              fontSize: 15.0,
-              height: 2.0,
-              color: Colors.black
-          )
-      ),
+            decoration: inputDeco("new topic"),
+               onChanged: (val) {
+              _newChatName = val;
+            },
+            style: TextStyle(
+                fontSize: 15.0,
+                height: 2.0,
+                color: Colors.black
+            )
+        ),
       actions: [
         cancelButton,
         createButton,

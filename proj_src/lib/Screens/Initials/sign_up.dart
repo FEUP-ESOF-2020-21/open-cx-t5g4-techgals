@@ -130,6 +130,7 @@ class _SignUpState extends State<SignUp> {
             GestureDetector(
               onTap: (){
                 _signUpLoad();
+                _signUpLoad();
               },
               child: Container(
                 alignment: Alignment.center,
