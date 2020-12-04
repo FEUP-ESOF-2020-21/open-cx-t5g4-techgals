@@ -269,7 +269,7 @@ In the navigation map, we have access to the several chatrooms created. Every us
 
 ### Logical architecture
 
-![Logical Architecture diagram](logicalArchitecture.png)  
+![Logical Architecture diagram](logicalfinal.png)  
 
 The structure of our project is based on the MVC model. In short, the MVC specifies that the application consists of a **Model** that directly manages the data, the **View** is the display of the information, and the **Controller** is where the inputs are accepted and converted into commands.  
 
