@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proj_src/Screens/Nav/Map1/body_map1.dart';
 
 // ignore: camel_case_types
 class Information{

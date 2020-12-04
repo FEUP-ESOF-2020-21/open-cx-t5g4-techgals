@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/BackEnd/helper.dart';
+import 'package:proj_src/Screens/Initials/initial_aux.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
 import 'package:proj_src/constants.dart';
@@ -13,75 +17,67 @@ class Map1 extends StatefulWidget {
 }
 
 class _Map1State extends State<Map1> {
-  
-  DatabaseMethods databaseMethods = new DatabaseMethods();
+
   QuerySnapshot searchSnapshot;
-  Stream _groups;
-
-  initiateSearch(){
-    //fixed for now
-    databaseMethods.getUserByUsername("user_name").then((val){
-      setState(() {
-        searchSnapshot = val;
-      });
-    });
-  }
-
-  Widget listChats() {
-    return StreamBuilder(
-      stream: _groups,
-        builder: (context, snapshot) {
-          if(snapshot.hasData) {
-            if(snapshot.data["chats"] != null) {
-              if(snapshot.data["chats"].length != 0) {
-                return ListView.builder(
-                    itemCount: snapshot.data["chat"].length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                    int reqIndex = snapshot.data["chats"].length - index -1;
-                    return ChatTile(userName: "user", groupId: "VXj0WwAPa4i7ArixDCxi", groupName: "chatroom");
-                    }
-                );
-              }
-              else{
-                return Container();
-              }
-            }
-            else {
-              return Container();
-            }
-          }
-          else {
-            return ChatTile(userName: "user", groupId: "VXj0WwAPa4i7ArixDCxi", groupName: "chatroom");
-
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        }
-    );
-  }
-
-
-  Widget searchList(){
-    return searchSnapshot != null ? ListView.builder(
-        itemCount: searchSnapshot.docs.length,
-        itemBuilder: (context, index) {
-          return SearchItem(
-              searchSnapshot.docs[index]["name"]
-          );
-        }) : Container();
-  }
+  Stream<QuerySnapshot> _groups;
+  User _user = FirebaseAuth.instance.currentUser;
+  String _userName = '';
+  String _email= '';
+  String _newChatName = "";
+  List<String> _auxChatNames = [];
 
   @override
   void initState() {
-    initiateSearch();
     super.initState();
+    _getInfo();
+    //initiateSearch();
+  }
+
+  _getInfo() async {
+    await HelperFunctions.getUserNameSharedPreference().then((value) {
+      setState(() {
+        _userName = value;
+      });
+    });
+    await DatabaseMethods().getActiveChats().then((val) {
+      setState(() {
+        _groups = val;
+      });
+    });
+    await HelperFunctions.getUserEmailSharedPreference().then((value) {
+      setState(() {
+        _email = value;
+      });
+    });
+  }
+  Widget _listChats() {
+    return StreamBuilder(
+        stream: _groups,
+        builder: (context, snapshot) {
+          return snapshot.hasData ? ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              //print(_userName);
+              _auxChatNames.add(snapshot.data.documents[index]['name']);
+              _auxChatNames = _auxChatNames.toSet().toList();
+              return ChatTile(
+                  userName: _userName,
+                  groupId: snapshot.data.documents[index].id,
+                  groupName: snapshot.data.documents[index]['name']
+              );
+              },
+            scrollDirection: Axis.vertical,
+            )
+              :
+          Container();
+          }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar_Map(context),
       body: Container(
@@ -95,31 +91,80 @@ class _Map1State extends State<Map1> {
       child: Stack(
         children: <Widget>[
           Right_Arrow_Button(),
-          /*GestureDetector(
-            onTap: (){
-              initiateSearch();
-            },
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Colors.black
-              ),
-              child: Icon(
-                  Icons.message,
-                  color: Colors.white,
-                  size: 35,
-              ),
-            ),
-          ),*/
-          //searchList(),
-          listChats()
-          //Menu_Button(),
-          //Profile_Button(),
+          _listChats(),
         ],
       ),
     ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _popupAdd(context);
+        },
+        child: Icon(Icons.add, color: Colors.white, size: 30.0,),
+        backgroundColor: kPrimaryColor,
+        elevation: 0.0,
+      ),
     );
+  }
+
+  void _popupAdd(BuildContext context) {
+    Widget cancelButton = FlatButton(
+      child: Text("Cancel"),
+      onPressed:  () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget createButton = FlatButton(
+      child: Text("Create"),
+      onPressed:  () async {
+        if(_auxChatNames.contains(_newChatName)) {
+          Navigator.of(context).pop();
+        }
+        else if (_newChatName != null){
+          await HelperFunctions.getUserNameSharedPreference().then((val) {
+            DatabaseMethods(uid: _user.uid).createChatRoom(val, _newChatName);
+          });
+          Navigator.of(context).pop();
+        }
+
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Don't see the topic you want?\n     Create a new chatroom!"),
+      content: TextField(
+            decoration: inputDeco("new topic"),
+               onChanged: (val) {
+              _newChatName = val;
+            },
+            style: TextStyle(
+                fontSize: 15.0,
+                height: 2.0,
+                color: Colors.black
+            )
+        ),
+      actions: [
+        cancelButton,
+        createButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
+  Widget searchList(){
+    return searchSnapshot != null ? ListView.builder(
+        itemCount: searchSnapshot.docs.length,
+        itemBuilder: (context, index) {
+          return SearchItem(
+              searchSnapshot.docs[index]["name"]
+          );
+        }) : Container();
   }
 }
 

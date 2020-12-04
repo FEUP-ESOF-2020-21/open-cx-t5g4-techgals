@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Chatroom/chatroom.dart';
+import 'package:proj_src/constants.dart';
 
 class ChatTile extends StatelessWidget {
   final String userName;
   final String groupId;
   final String groupName;
+  String _userName;
 
   ChatTile({this.userName, this.groupId, this.groupName});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async{
+        await HelperFunctions.getUserNameSharedPreference().then((value) {
+          _userName = value;
+        });
+        DatabaseMethods().updateChatInfo(groupId, _userName, true);
         Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(groupId: groupId, userName: userName, groupName: groupName,)));
       },
       child: Container(
@@ -19,7 +27,7 @@ class ChatTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             radius: 30.0,
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: k2PrimaryColor,
             child: Text(groupName.substring(0, 1).toUpperCase(), textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
           ),
           title: Text(groupName, style: TextStyle(fontWeight: FontWeight.bold)),

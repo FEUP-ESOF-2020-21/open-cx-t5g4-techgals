@@ -1,40 +1,110 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class DatabaseMethods{
 
-  getUserByUsername(String username) async {
-    return await FirebaseFirestore.instance.collection("users").where("name", isEqualTo: username ).get();
+  final String uid;
+  DatabaseMethods({
+    this.uid
+  });
+
+  // Collection reference
+  final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
+  final CollectionReference chatCollection = FirebaseFirestore.instance.collection('chats');
+
+  // update userdata
+  Future updateUserData(String username, String email, List<String> interests/*, String password*/) async {
+    return await userCollection.doc(uid).set({
+      'username': username,
+      'email': email,
+      //'password': password,
+      //'groups' : [],
+      'interests': interests,
+      //'profilePic': ''
+    });
   }
 
-  getChatByName(String name) async{
-    return await FirebaseFirestore.instance.collection("chats").where("name", isEqualTo: name ).get();
+  // create chat
+  Future createChatRoom(String username, String chatName) async {
+    DocumentReference chatDocRef = await chatCollection.add({
+      'name': chatName,
+      'admin': username,
+      'participants': [],
+      //'messages': ,
+      //'chatId': '',
+      'recentMessage': '',
+      'recentMessageSender': '',
+      'recentMessageTime': ''
+    });
+
+    await chatDocRef.update({
+      'participants': FieldValue.arrayUnion([username]),
+      //'chatId': chatDocRef.id
+    });
+    /*
+    DocumentReference userDocRef = userCollection.doc(uid);
+    return await userDocRef.update({
+      'groups': FieldValue.arrayUnion([chatDocRef.id + '_' + chatName])
+    }); */
   }
 
-  getActiveChat() async {
-    var chatNames = <String>[];
-/*
-    var docs = await Firestore.instance
-        .collection('myCollection')
-        .snapshots()
-        .documents((snapshot);
-        docs.forEach((doc) => this.total += doc.data['amount']));
-*/
-
-    return chatNames;
+  // update chatRoom data
+  Future updateChatInfo(String chatID, String username, bool add) async {
+    return add ?
+        await chatCollection.doc(chatID).update({
+          'participants': FieldValue.arrayUnion([username])
+        })
+        :
+        await chatCollection.doc(chatID).update({
+          'participants': FieldValue.arrayRemove([username])
+        })
+    ;
   }
 
-  getChatsCollection() {
-    return FirebaseFirestore.instance.collection("chats");
+  // toggling the user group join
+  Future togglingGroupJoin(String groupId, String chatName, String userName) async {
+
+    DocumentReference userDocRef = userCollection.doc(uid);
+    DocumentSnapshot userDocSnapshot = await userDocRef.get();
+
+    DocumentReference groupDocRef = chatCollection.doc(groupId);
+
+    List<dynamic> groups = await userDocSnapshot.get('groups');
+    //List<dynamic> groups = await userDocSnapshot.data['groups'];
+
+    if(groups.contains(groupId + '_' + chatName)) {
+      //print('hey');
+      await userDocRef.update({
+        'groups': FieldValue.arrayRemove([groupId + '_' + chatName])
+      });
+
+      await groupDocRef.update({
+        'members': FieldValue.arrayRemove([uid + '_' + userName])
+      });
+    }
+    else {
+      //print('nay');
+      await userDocRef.update({
+        'groups': FieldValue.arrayUnion([groupId + '_' + chatName])
+      });
+
+      await groupDocRef.update({
+        'members': FieldValue.arrayUnion([uid + '_' + userName])
+      });
+    }
   }
 
-  uploadUserInfo(userMap){
-    FirebaseFirestore.instance.collection("users").add(userMap);
+  // get user data from username
+  Future getUserData(String email) async {
+    QuerySnapshot snapshot = await userCollection.where('email', isEqualTo: email).get();
+    //print(snapshot.docs[0].data);
+    return snapshot;
   }
 
-  createChat(String chatID, chatMap){
-    FirebaseFirestore.instance.collection("chats")
-        .doc(chatID).set(chatMap);
-  }
+/*  // get users
+  getUserGroups() async {
+    return FirebaseFirestore.instance.collection("users").doc(uid).snapshots();
+  }*/
 
   // send message
   sendMessage(String chatID, chatMessageData) {
@@ -50,8 +120,30 @@ class DatabaseMethods{
   getChats(String chatID) async {
     return FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').orderBy('time').snapshots();
   }
-  
-  getChatsMessages(String chatID, int index) {
-    return FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').orderBy('time').snapshots();
+
+  // returns every chat room
+  getActiveChats() async {
+    return FirebaseFirestore.instance.collection('chats').snapshots();
   }
+
+/*-----------------------------------------------------------------------------------------------*/
+
+  getUserByUsername(String username) async {
+    return await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: username ).get();
+  }
+
+  getChatByName(String name) async{
+    return await FirebaseFirestore.instance.collection("chats").where("name", isEqualTo: name ).get();
+  }
+
+  uploadUserInfo(String name, String email, List<String> interest){
+
+    FirebaseFirestore.instance.collection("users").add({
+      'username': name,
+      'email': email,
+      'interests': interest
+    });
+
+  }
+
 }

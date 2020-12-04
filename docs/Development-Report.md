@@ -27,8 +27,7 @@ Please contact us!
 Thank you!
 
 - Alexandra Ferreira
-- Bianca Mota
-- Marta Santos
+- Marta Santos 
 - Raquel Sepúlveda
 - Rita Silva
 
@@ -58,6 +57,27 @@ experience, keeping direct interactions alive.
 The application should give the user the opportunity to choose his interests so that the map shows appealing topics. Hence the exhibited topics should lead to chatrooms where the users can communicate. It should be possible to leave the chatrooms. A user can create a new topic, giving him responsability for its chatroom management.
 
 ### Use case diagram
+
+![Use case diagram](useCases.png)
+
+- **Navigate the Map**
+> **Actor**: Attendee  
+> **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.  
+> **Preconditions**: Attendee has logged in / signed up successfully.  
+> **Postconditions**: Attendee can choose whether he wants to join a chatroom (and which one) or whether he wants to access his personal space and exit the app.   
+
+> **Normal Flow**:
+  1. The application shows a map, containing different active chatrooms.
+  2. The attendee is able to choose which chatroom to join.
+  3. The App bar contains the person icon, through which the user can access his personal space.
+
+> **Alternative Flows and Exceptions**: The user doesn't find any themes interesting -> The user can refresh the map. The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom. 
+
+- **Chatroom**
+> **Actor**: Attendee  
+> **Description**: The attendee enters a chatroom.  
+> **Preconditions**: Attendee has chosen the topic he wants to discuss.  
+> **Postconditions**: Attende can text the other chatroom participants. Attendee can leave the chatroom whenever he wants. Attendee can save information about other user.  
 
 ![Use case diagram](/docs/use_cases.png)
 
@@ -103,25 +123,49 @@ The application should give the user the opportunity to choose his interests so 
 > **Description**: The attendee is directed to a chatroom.  
 > **Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. In the end, the attendee can text the other chatroom participants, leave the chatroom or save information about other users.  
 
-> **Normal Flow**:
-  1. The attendee has chosen the discussion topic he wants to join.
-  2. The attendee is directed to the chosen chatroom.
-  3. The attendee is able to text, leave the chatroom, save someone's contact.
-
-> **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban or mute other participants, in need. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
-
-- **Create Chatroom**
-> **Actor**: Attendee Chatroom Moderator  
-> **Description**: The attendee has the option to create a new discussion topic.   
-> **Preconditions and Postconditions**: In order to create a new chatroom, the attendee must click the 'create new topic' button and type its name. In the end, the user can text the other chatroom participants, leave the chatroom, save information about other users, mute/ban other participants, delete the chatroom.
-
-> **Normal Flow**:
-  1. The attendee clicks the button 'create new topic'.
-  2. The attendee types the chatroom's name.
-  3. The attendee is able to text, leave the chatroom, save someone's contact, ban/mute other participants, delete the chatroom.
-
 
 ### User stories
+
+**[Project Board with Progress on User Stories](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
+
+[Completed User Stories](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/issues?q=is%3Aissue+is%3Aclosed)
+
+1. - **As an attendee, I want my account to store my interests and my contact information, so that I can have a more personalized experience.**  
+**Value:** Should-Have  
+**Effort:**  7  
+ <dl>
+  <dt> Acceptance Tests: </dt>
+  <dd>Given that I'm an user logging in, if I don't have any interests associated to my account, then I should be asked if I want to add them.</dd>
+  <dd>Given that I'm an user with interests stored in my profile, when I'm looking for chatrooms, then the first ones to appear should be related to my interests.</dd>
+</dl>  
+
+2. - **As an attendee, I want to create a new chatroom with a new topic, so that I can discuss a topic that doesn't already exist.**  
+**Value:**  Should-Have  
+**Effort:**  M  
+<dl>
+  <dt> Acceptance Tests: </dt>
+  <dd>Given that I'm an user, when the topic I want to discuss does not have an associated chatroom,, then I should be able to create a new chatroom about this topic.</dd>
+</dl>
+
+3. - **As a chatroom moderator, I want to manage the chatroom's participants, so that, if need be, people can me muted/banished.**  
+**Value:** Could-Have  
+**Effort:**  9 
+<dl>
+  <dt> Acceptance Tests: </dt>
+  <dd>Given that I'm a user, when I create a new chatroom, then I should be assigned as the chatroom's moderator.</dd>
+  <dd>Given that I'm a chatroom moderator, when I feel that something or someone is being disrespected, then I should have the option to ban or mute participants.</dd>
+</dl> 
+ 
+4. - **As a participant, I want to make friends / save someone's contact info, so that I can keep in touch with other like-minded users.**  
+**Value:**  Could-Have  
+**Effort:**  9
+<dl>
+  <dt> Acceptance Tests: </dt>
+  <dd>Given that I'm an user, when I click on a participant name, then I should be able to see his information. </dd>
+</dl>  
+
+
+### Domain model
 
 **[User Stories Board Link](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
@@ -259,7 +303,11 @@ The application should give the user the opportunity to choose his interests so 
 ![map](/docs/map.png)
 
 
-### Domain model
+The main entities created for our app were the following:
+
+![Domain Model diagram](domainModel.png)
+
+In the navigation map, we have access to the several chatrooms created. Every user may choose to enter one chatroom at a time. Messages sent to a chatroom are stored for everyone who might come to enter said chatroom to see, and are always associated to the user who sent them.
 
 A **user** can create an account in the application, by setting up his username, email, password and other personal information which will appear in his profile.  
 The **user** must choose his interests, in order to have a personalized experience. Each **interest** may be common to many users, and it represents a theme for a **chatroom** that may already exist. If not, the **user**, as a **chatroom moderator**, can create a new theme for a **chatroom**. Once there are participants in a **chatroom**, there can exist an unlimited number of **messages**. Each **message** can be send by a single **user**, inside a single **chatroom**, and its date, time and text associated.  
@@ -267,11 +315,17 @@ The **user** must choose his interests, in order to have a personalized experien
 #### UML  
 ![domain model](/docs/domain.png)
 
----
 
 ## Architecture and Design
 
 ### Logical architecture
+
+![Logical Architecture diagram](logicalArchitecture.png)
+
+### Physical architecture
+
+![physical architecture](physicalArch.png)
+
 ![logical architecture](/docs/logicalArch.png)
 
 The structure of our project is based on the MVC model. In short, the MVC specifies that the application consists of a **Model** that directly manages the data, the **View** is the display of the information, and the **Controller** is where the inputs are accepted and converted into commands.  
@@ -282,7 +336,6 @@ The structure of our project is based on the MVC model. In short, the MVC specif
 We chose flutter as our framework to develop our project.  
 As it is easy to integrate with flutter, we chose Firebase for database management and backend server.  
 Our physical architecture isn't complex. The users install the application on their smartphones and it communicates with the firebase server via https requests, which is where the database is stored.  
-
 
 ### Prototype
 To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
@@ -321,17 +374,7 @@ For the purpose of ESOF, we will use a very simple approach, just to manage feat
 
 ## Project management
 
-Software project management is an art and science of planning and leading software projects, in which software projects are planned, implemented, monitored and controlled.
-
-In the context of ESOF, we expect that each team adopts a project management tool capable of registering tasks, assign tasks to people, add estimations to tasks, monitor tasks progress, and therefore being able to track their projects.
-
-Example of tools to do this are:
-  * [Trello.com](https://trello.com)
-  * [Github Projects](https://github.com/features/project-management/com)
-  * [Pivotal Tracker](https://www.pivotaltracker.com)
-  * [Jira](https://www.atlassian.com/software/jira)
-
-We recommend to use the simplest tool that can possibly work for the team.
+To manage the progress of this project, we are using [Github Projects](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1).
 
 
 ---

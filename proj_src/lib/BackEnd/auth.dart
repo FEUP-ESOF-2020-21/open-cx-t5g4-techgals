@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proj_src/BackEnd/UserClass.dart';
+import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/BackEnd/helper.dart';
 
 class AuthMethods {
 
@@ -18,13 +20,18 @@ class AuthMethods {
     }
   }
 
-  Future signUp(String email, String password) async {
+  Future signUp(String username, String email, String password) async {
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User firebaseUser = result.user;
+
+      // create a new document for the user with uid
+      await DatabaseMethods(uid: firebaseUser.uid).updateUserData(username, email, []);
+
       return _userFromFirebase(firebaseUser);
     } catch(e) {
       print(e.toString());
+      return null;
     }
   }
 
@@ -37,10 +44,26 @@ class AuthMethods {
   }
 
   Future signOut() async {
-    try{
-      return await _auth.signOut();
+    try {
+      await HelperFunctions.saveUserLoggedInSharedPreference(false);
+      await HelperFunctions.saveUserEmailSharedPreference('');
+      await HelperFunctions.saveUserNameSharedPreference('');
+
+      return await _auth.signOut().whenComplete(() async {
+        print("Logged out");
+        await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
+          print("Logged in: $value");
+        });
+        await HelperFunctions.getUserEmailSharedPreference().then((value) {
+          print("Email: $value");
+        });
+        await HelperFunctions.getUserNameSharedPreference().then((value) {
+          print("Username: $value");
+        });
+      });
     } catch(e) {
       print(e.toString());
+      return null;
     }
   }
 
