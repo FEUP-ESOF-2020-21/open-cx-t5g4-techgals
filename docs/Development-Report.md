@@ -37,7 +37,7 @@ Thank you!
 ## Product Vision
 
 At online conferences, meaningful connections and direct conversations
-are lost. Thus, to enhance net-working, we present a virtual space in form
+are lost. Thus, to enhance net-working, TE**CHat** is a virtual space in form
 of a map, allowing users to walk in and out of conversations as naturally
 as in real life - where interactions are solemnly based on one's interest.
 
@@ -47,9 +47,8 @@ for new connections.
 
 ## Elevator Pitch
 
-TeChat is a mobile app that allows online conferences attendees
-to interact with each other through chatrooms. This gives them a better
-experience, keeping direct interactions alive.
+With the rising of technology in our lifes, texting has become the number one way of communicating. TE**CHat** is a mobile application that lets you chat with other people during online conference's 'virtual coffee breaks'. We combine chatrooms with a 2D map, letting you walk around and choose which theme you want to discuss. Our creation tools also let you create your own themed chatroom! Sharing knowledge, learning new things and interact online have never been so fun!  
+TE**CHat** unlocks the constrains of being behind a screen and creates the possibility of making new connections, just as naturally as if you were there in person! 
 
 
 ## Requirements
