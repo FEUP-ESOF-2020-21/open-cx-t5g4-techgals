@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class DatabaseMethods{
 
@@ -101,15 +100,10 @@ class DatabaseMethods{
     return snapshot;
   }
 
-/*  // get users
-  getUserGroups() async {
-    return FirebaseFirestore.instance.collection("users").doc(uid).snapshots();
-  }*/
-
   // send message
   sendMessage(String chatID, chatMessageData) {
-    FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').add(chatMessageData);
-    FirebaseFirestore.instance.collection('chats').doc(chatID).update({
+    chatCollection.doc(chatID).collection('messages').add(chatMessageData);
+    chatCollection.doc(chatID).update({
       'recentMessage': chatMessageData['message'],
       'recentMessageSender': chatMessageData['sender'],
       'recentMessageTime': chatMessageData['time'].toString(),
@@ -118,19 +112,23 @@ class DatabaseMethods{
 
   // get chats of a particular group
   getChats(String chatID) async {
-    return FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').orderBy('time').snapshots();
+    return chatCollection.doc(chatID).collection('messages').orderBy('time').snapshots();
   }
 
   // returns every chat room
   getActiveChats() async {
-    return FirebaseFirestore.instance.collection('chats').snapshots();
+    return chatCollection.snapshots();
   }
 
+  getUsers() async {
+    return userCollection.snapshots();
+  }
+
+  getUser(String username) async{
+    QuerySnapshot snapshot = await userCollection.where("username", isEqualTo: username).get();
+    return snapshot;
+  }
 /*-----------------------------------------------------------------------------------------------*/
-
-  getUserByUsername(String username) async {
-    return await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: username ).get();
-  }
 
   getChatByName(String name) async{
     return await FirebaseFirestore.instance.collection("chats").where("name", isEqualTo: name ).get();
