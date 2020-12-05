@@ -83,12 +83,16 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: isLoading ? Container(
+        child: Center(child: CircularProgressIndicator()),
+      ) : Container(
         alignment: Alignment.bottomCenter,
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Image.asset("assets/images/logoWhite.PNG", height: 85, width: 350,),
+            SizedBox(height: 50,),
             Form(
               key: formKey,
               child: Column(

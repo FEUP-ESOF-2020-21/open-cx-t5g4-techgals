@@ -90,6 +90,8 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Image.asset("assets/images/logoWhite.PNG", height: 85, width: 350,),
+            SizedBox(height: 50,),
             Form(
               key: _formKey,
               child: Column(
