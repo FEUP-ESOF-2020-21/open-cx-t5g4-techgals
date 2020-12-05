@@ -44,7 +44,8 @@ class _ProfileState extends State<Profile> {
         _users = val;
       });
     });
-    _parseStream(_users);
+    DatabaseMethods().usernameTaken("nosuchuserhehe");
+    //_parseStream(_users);
   }
 
   void _parseStream(Stream<QuerySnapshot> stream) async {

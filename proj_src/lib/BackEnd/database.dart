@@ -120,6 +120,12 @@ class DatabaseMethods{
     return chatCollection.snapshots();
   }
 
+  usernameTaken(String username) async {
+    QuerySnapshot querySnapshot = await userCollection.where('username', isEqualTo: username).get();
+    print(querySnapshot.size);
+    return null;
+  }
+
   getUsers() async {
     return userCollection.snapshots();
   }
