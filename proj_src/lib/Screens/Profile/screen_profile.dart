@@ -17,10 +17,9 @@ class _ProfileState extends State<Profile> {
   AuthMethods _authMethods = new AuthMethods();
   String userName;
   String email;
-  //List<String> interest = [];
-  String interest = "interest list";
-  Stream<QuerySnapshot> _users;
-  List<AuxUser> _auxUsers = [];
+  List<String> interests = [];
+  String interestsString = '';
+  QuerySnapshot _userQS;
 
   @override
   void initState() {
@@ -39,12 +38,33 @@ class _ProfileState extends State<Profile> {
         email = value;
       });
     });
-    await DatabaseMethods().getUsers().then((val) {
+    await DatabaseMethods().getUser(userName).then((value) {
+      setState(() {
+        _userQS = value;
+      });
+    });
+    for(var i = 0; i<= _userQS.size; i++) {
+    /*  if(i == _userQS.size) interestsString+= _userQS.docs[0].get('interests')[i];
+      else{
+        interestsString+= _userQS.docs[0].get('interests')[i];
+        interestsString+= ", ";
+      }*/
+      interests.add(_userQS.docs[0].get('interests')[i]);
+    }
+    //interests.add('c++');
+    //interests.add('flutter');
+    //interests.add('what else');
+    interestsString = interests.join(" / ");
+    
+
+    /* await DatabaseMethods().getUsers().then((val) {
       setState(() {
         _users = val;
       });
-    });
-    DatabaseMethods().usernameTaken("nosuchuserhehe");
+    });*/
+    //DatabaseMethods().usernameTaken("nosuchuserhehe");
+    //DatabaseMethods().emailTaken("admin@email.com");
+
     //_parseStream(_users);
   }
 
@@ -56,9 +76,9 @@ class _ProfileState extends State<Profile> {
               _auxUserNames.add(snapshot.data.documents[index]['username']);
               _auxEmails = _auxEmails.toSet().toList();*/
     }
-    _auxUsers = _auxUsers.toSet().toList();
+    //_auxUsers = _auxUsers.toSet().toList();
   }
-
+/*
   Widget _loadInfo() {
     return StreamBuilder(
         stream: _users,
@@ -83,7 +103,7 @@ class _ProfileState extends State<Profile> {
         }
     );
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,11 +133,16 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
                 Divider(height: 20.0),
+               //_listInterests(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Interests', style: TextStyle(fontSize: 17.0)),
-                    Text(interest, style: TextStyle(fontSize: 17.0)),
+                    Text('Interests', style: TextStyle(fontSize: 17.0),),
+                    interests.isEmpty ?
+                    Text('-', style: TextStyle(fontSize: 17.0),)
+                        : Text(interestsString, style: TextStyle(fontSize: 17.0),)
+                    //_listInterests(),
+
                   ],
                 ),
                 //Divider(height: 20.0,),
@@ -127,7 +152,27 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
+  Widget _listInterests(){
+    return ListView.builder(
+      itemCount: interests.length,
+      itemBuilder: (context, index){
+   /*     return Container(
+            padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(23),
+              color: k2PrimaryColor,
+            ),
+            child: Text(interests[index], textAlign: TextAlign.start, style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black, letterSpacing: -0.5)),
+        );*/
+        return Text(interests[index], style: TextStyle(fontSize: 17.0),);
+      },
+      scrollDirection: Axis.horizontal,
+    );
+  }
 }
+
+
 
 /*
 class Screen_Profile extends StatelessWidget {

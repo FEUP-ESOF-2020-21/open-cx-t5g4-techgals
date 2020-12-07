@@ -26,8 +26,6 @@ AppBar buildAppBar_Map(context) {
         ),
       ),
     ),
-
-
     actions: <Widget>[
       GestureDetector(
         onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) { return Profile();},),);},

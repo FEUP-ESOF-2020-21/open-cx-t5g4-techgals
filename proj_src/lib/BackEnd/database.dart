@@ -126,14 +126,21 @@ class DatabaseMethods{
     return null;
   }
 
+  emailTaken(String email) async {
+    QuerySnapshot querySnapshot = await userCollection.where('email', isEqualTo: email).get();
+    print(querySnapshot.size);
+    return null;
+  }
+
   getUsers() async {
     return userCollection.snapshots();
   }
 
   getUser(String username) async{
-    QuerySnapshot snapshot = await userCollection.where("username", isEqualTo: username).get();
+    QuerySnapshot snapshot = await userCollection.where('username', isEqualTo: username).get();
     return snapshot;
   }
+
 /*-----------------------------------------------------------------------------------------------*/
 
   getChatByName(String name) async{
