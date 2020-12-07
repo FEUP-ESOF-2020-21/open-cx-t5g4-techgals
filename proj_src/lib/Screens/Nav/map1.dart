@@ -50,6 +50,7 @@ class _Map1State extends State<Map1> {
       });
     });
   }
+
   Widget _listChats() {
     return StreamBuilder(
         stream: _groups,
@@ -97,7 +98,7 @@ class _Map1State extends State<Map1> {
     ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _popupAdd(context);
+          _popup(context);
         },
         child: Icon(Icons.add, color: Colors.white, size: 30.0,),
         backgroundColor: kPrimaryColor,
@@ -106,7 +107,7 @@ class _Map1State extends State<Map1> {
     );
   }
 
-  void _popupAdd(BuildContext context) {
+  void _popup(BuildContext context) {
     Widget cancelButton = FlatButton(
       child: Text("Cancel"),
       onPressed:  () {

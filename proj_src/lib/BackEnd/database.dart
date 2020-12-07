@@ -47,6 +47,13 @@ class DatabaseMethods{
     }); */
   }
 
+  // add interest
+  Future addInterest(String interest) async {
+    return await userCollection.doc(uid).update({
+      'interests': FieldValue.arrayUnion([interest]),
+    });
+  }
+
   // update chatRoom data
   Future updateChatInfo(String chatID, String username, bool add) async {
     return add ?
