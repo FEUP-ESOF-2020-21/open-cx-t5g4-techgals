@@ -11,6 +11,8 @@ class DatabaseMethods{
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
   final CollectionReference chatCollection = FirebaseFirestore.instance.collection('chats');
 
+
+
   // update userdata
   Future updateUserData(String username, String email, List<String> interests/*, String password*/) async {
     return await userCollection.doc(uid).set({
@@ -54,6 +56,13 @@ class DatabaseMethods{
     });
   }
 
+  // remove interest
+  Future removeInterest(String interest) async {
+    return await userCollection.doc(uid).update({
+      'interests': FieldValue.arrayRemove([interest])
+    });
+  }
+
   // update chatRoom data
   Future updateChatInfo(String chatID, String username, bool add) async {
     return add ?
@@ -67,38 +76,7 @@ class DatabaseMethods{
     ;
   }
 
-  // toggling the user group join
-  Future togglingGroupJoin(String groupId, String chatName, String userName) async {
 
-    DocumentReference userDocRef = userCollection.doc(uid);
-    DocumentSnapshot userDocSnapshot = await userDocRef.get();
-
-    DocumentReference groupDocRef = chatCollection.doc(groupId);
-
-    List<dynamic> groups = await userDocSnapshot.get('groups');
-    //List<dynamic> groups = await userDocSnapshot.data['groups'];
-
-    if(groups.contains(groupId + '_' + chatName)) {
-      //print('hey');
-      await userDocRef.update({
-        'groups': FieldValue.arrayRemove([groupId + '_' + chatName])
-      });
-
-      await groupDocRef.update({
-        'members': FieldValue.arrayRemove([uid + '_' + userName])
-      });
-    }
-    else {
-      //print('nay');
-      await userDocRef.update({
-        'groups': FieldValue.arrayUnion([groupId + '_' + chatName])
-      });
-
-      await groupDocRef.update({
-        'members': FieldValue.arrayUnion([uid + '_' + userName])
-      });
-    }
-  }
 
   // get user data from username
   Future getUserData(String email) async {
@@ -120,6 +98,10 @@ class DatabaseMethods{
   // get chats of a particular group
   getChats(String chatID) async {
     return chatCollection.doc(chatID).collection('messages').orderBy('time').snapshots();
+  }
+
+  getUserInterests(String userID) async {
+    return userCollection.doc(userID).snapshots();
   }
 
   // returns every chat room

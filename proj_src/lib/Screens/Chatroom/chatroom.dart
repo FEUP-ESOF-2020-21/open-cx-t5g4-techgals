@@ -50,7 +50,6 @@ class _ChatPageState extends State<ChatPage> {
             },
           scrollDirection: Axis.vertical,
         )
-
             :
         Container();
       },

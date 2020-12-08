@@ -9,6 +9,8 @@ import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/constants.dart';
 import 'package:proj_src/BackEnd/AuxUser.dart';
 
+import 'interest_tile.dart';
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -24,6 +26,7 @@ class _ProfileState extends State<Profile> {
   String _interestsString = '';
   QuerySnapshot _userQS;
   String _newInterest = "";
+  Stream<DocumentSnapshot> _stream;
 
   @override
   void initState() {
@@ -54,6 +57,31 @@ class _ProfileState extends State<Profile> {
     _interests.forEach((element) {element.toLowerCase();});
     _interestsString = _interests.join(" / ");
 
+    DatabaseMethods().getUserInterests(_user.uid).then((val) {
+      setState(() {
+        _stream = val;
+      });
+    });
+  }
+
+  Widget _listeInterets(){
+    return StreamBuilder(
+      stream: _stream,
+      builder: (context, snapshot){
+        return snapshot.hasData ?  ListView.builder(
+          itemCount: _interests.length,//snapshot.data.documents.length,
+          itemBuilder: (context, index){
+            print(_interests[index]);
+            return InterestTile(
+              message: _interests[index],//snapshot.data.documents[index]['message'],
+            );
+          },
+          scrollDirection: Axis.vertical,
+        )
+            :
+        Container();
+      },
+    );
   }
 
   @override
@@ -61,12 +89,31 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: buildAppBar_Profile(context, _authMethods),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 170.0),
-          child: Container(
-            child: Column(
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+          child: Stack(
+            children: <Widget> [
+              _test(),
+              //addTile("add a new interest!"),
+              //_listeInterets(),
+              /*Container(
+                alignment: Alignment.topCenter,
+                child: TextField(
+                  decoration: inputDeco("add new interest"),
+                  onChanged: (val) async {
+                    _newInterest = val;
+                    print(_newInterest);
+                  },
+                ),
+              )*/
+            ],
+          )
+        /*Container(
+            child:
+            Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                // _loadInfo(),
+
                 Icon(Icons.account_circle, size: 200.0, color: Colors.grey[700]),
                 SizedBox(height: 15.0),
                 Row(
@@ -101,10 +148,64 @@ class _ProfileState extends State<Profile> {
                 //Divider(height: 20.0,),
               ],
             ),
-          )
+          )*/
       ),
     );
   }
+
+  Widget _test() {
+    return ListView.builder(
+      itemCount: (_interests.length + 4),//snapshot.data.documents.length,
+      itemBuilder: (context, index){
+        if(index == 0) {
+          return Text(
+            'Interests',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          );
+        }
+        else if(index == 1) {
+          return
+            Divider(height: 30,);
+        }
+        else if(index == 2) {
+          return
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'add a new interest!',
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.add_circle_outline_sharp, color: k2PrimaryColor, size: 25,),
+                  padding: EdgeInsets.only(right: 5),
+                  onPressed: () async {
+                    if(!_interests.contains(_newInterest.toLowerCase()) && _newInterest != null) {
+                      await HelperFunctions.getUserNameSharedPreference().then((val) {
+                        DatabaseMethods(uid: _user.uid).addInterest(_newInterest);
+                      });
+                    }
+                  },
+                ),
+                border: OutlineInputBorder( borderRadius: BorderRadius.all( Radius.circular(5.0),),),
+              ),
+              onChanged: (val) async {
+                _newInterest = val;
+              },
+            );
+        }
+        else if(index == 3) {
+          return
+            Divider(height: 30,);
+        }
+        else {
+          return InterestTile(
+            message: _interests[index-4],
+          );
+        }
+      },
+      scrollDirection: Axis.vertical,
+    );
+  }
+
+
 
   void _seeInterests(BuildContext context) {
     Widget cancelButton = FlatButton(
@@ -123,7 +224,7 @@ class _ProfileState extends State<Profile> {
           await HelperFunctions.getUserNameSharedPreference().then((val) {
             DatabaseMethods(uid: _user.uid).addInterest(_newInterest);
           });
-          _getInfo();
+          //_getInfo();
           Navigator.of(context).pop();
         }
       },
@@ -164,8 +265,37 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+  Widget addTile(String message) {
+    return Container(
+      //padding: EdgeInsets.all(5),
+      //alignment: Alignment.bottomCenter,
+      child:
+        Row(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                hintText: message,
+              ),
+            ),
+          /*  TextField(
+              //decoration: inputDeco(message),
+              onChanged: (val) async {
+                _newInterest = val;
+              },
+              style: TextStyle(
+                  fontSize: 17.0,
+                  color: Colors.white)
+            ),
+            GestureDetector(
+              onTap: () async {
 
-
+              },
+              child: Icon(Icons.add_circle_outline_sharp, color: Colors.white, size: 25,),
+            )*/
+          ],
+        ),
+    );
+  }
 
   Widget _listInterests(){
     return ListView.builder(
