@@ -57,7 +57,8 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 
 ![Use case diagram](use_cases.png)
 
-#### Sign In    
++ **Sign In**    
+
 **Actor**: Attendee  
 **Description**: This use case exists so that, at online conferences or during a break, the attendee can enter the application.  
 **Preconditions and Postconditions**: In order to sign in, the attendee must have an account. If not, he must create one. In the end, the user must have full access to the application functionalities.  
@@ -71,12 +72,14 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   2. The application asks for personal information such as the email and password.  
   3. The application will ask for user's interests.  
  
-  **Alternative Flows and Exceptions**:  
+ **Alternative Flows and Exceptions**:  
   1. The user types his personal information.
   2. The application doesn't recognize the email/password.  
   3. The application emits error message.   
 
-#### Choose interests  
+
++ **Choose interests**
+
 **Actor**: Attendee  
 **Description**: The application asks the user to set his interests.  
 **Preconditions and Postconditions**: In order to choose his interests, the user must first register and sign in. In the end, the user must be able to see a personalized map.  
@@ -85,7 +88,9 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   1. The application asks the user to set his interests.  
   2. The application validates the interests entered by the attendee.  
 
-#### Navigate the Map  
+
++ **Navigate the Map**
+
 **Actor**: Attendee    
 **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.  
 **Preconditions and Postconditions**: In order to view the map, the attendee must have set his interests and personal information with success. In the end, the attendee can chose the chatrooms, represented on the map, he wants to join.  
@@ -99,7 +104,9 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   1. The user doesn't find a topic he really wanted to discuss.  
   2. He can create a new chatroom.  
 
-#### Enter Chatroom  
+
++ **Enter Chatroom**
+
 **Actor**: Attendee   
 **Description**: The attendee is directed to a chatroom.  
 **Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. In the end, the attendee can text the other chatroom participants, leave the chatroom or save information about other users.  
@@ -116,7 +123,9 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   1. The user is the chatroom creator. 
   2. As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
 
-#### Create Chatroom**
+
++ **Create Chatroom**
+
 **Actor**: Attendee Chatroom Moderator  
 **Description**: The attendee has the option to create a new discussion topic.   
 **Preconditions and Postconditions**: In order to create a new chatroom, the attendee must click the 'create new topic' button and type its name. In the end, the user can text the other chatroom participants, leave the chatroom, save information about other users, mute/ban other participants, delete the chatroom.  
@@ -135,7 +144,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 **User Story Overview**  
 ![map](/docs/overview.png)
 
-1. **As a attendee I want to login my interests and my contact information, so that I can have a personalized experience.**  
+1. **As an attendee I want to login my interests and my contact information, so that I can have a personalized experience.**  
 **Value:** Must-Have  
 **Effort:**  L  
 **Acceptance Tests:**  
@@ -156,7 +165,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 **User interface mockups:**
 ![sign in](/docs/signin.png)
 
-2. **As a attendee I want to access a chatroom where I can talk to other users, so that I can discuss topics that interest me.**  
+2. **As an attendee I want to access a chatroom where I can talk to other users, so that I can discuss topics that interest me.**  
 **Value:** Must-Have  
 **Effort:**  M  
 **Acceptance Tests:**  
@@ -168,7 +177,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 
 ```
 
-3. **As a attendee, I want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.**  
+3. **As an attendee, I want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.**  
 **Value:** Must-Have  
 **Effort:**  S  
 **Acceptance Tests:**  
@@ -196,7 +205,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 **User interface mockups:**
 ![chatroom](/docs/chatroom.png)
 
-5. **As a attendee, I want to create a new chatroom with a different theme, so that I can discuss any topic I want even if it doesn't already exists.**
+5. **As an attendee, I want to create a new chatroom with a different theme, so that I can discuss any topic I want even if it doesn't already exists.**
 **Value:**  Should-Have  
 **Effort:**  M  
 **Acceptance Tests:**  
@@ -216,7 +225,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 **User interface mockups:**
 ![new chatroom](/docs/newchat.png)
 
-6. **As a attendee, I want to make friends / save someone's contact info, so that I can keep in touch with other like-minded users.**  
+6. **As an attendee, I want to make friends / save someone's contact info, so that I can keep in touch with other like-minded users.**  
 **Value:**  Could-Have  
 **Effort:**  S  
 **Acceptance Tests:**  
@@ -232,7 +241,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 **User interface mockups:**
 ![save info](/docs/saveinfo.png)
 
-7. **As a attendee, I want to navigate the homepage, so that I can choose which functionality to access.**  
+7. **As an attendee, I want to navigate the homepage, so that I can choose which functionality to access.**  
 **Value:**  Must-Have  
 **Effort:**  M  
 **Acceptance Tests:**  
@@ -249,7 +258,7 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
    
 ```
 
-8. **As a attendee I want to decide which chatroom I want to enter, so that I can discuss more than 1 theme if I want to.**  
+8. **As an attendee I want to decide which chatroom I want to enter, so that I can discuss more than 1 theme if I want to.**  
 **Value:**  Must-Have  
 **Effort:**  M  
 **Acceptance Tests:**  
