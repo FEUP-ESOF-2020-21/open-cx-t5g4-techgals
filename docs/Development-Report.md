@@ -1,6 +1,6 @@
 # openCX-*your module name* Development Report
 
-Welcome to the documentation pages of the *your (sub)product name* of **openCX**!
+Welcome to the documentation pages of the *TECHat* of **openCX**!
 
 You can find here detailed about the (sub)product, hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report (see [template](https://github.com/softeng-feup/open-cx/blob/master/docs/templates/Development-Report.md)), organized by discipline (as of RUP):
 
@@ -57,12 +57,12 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 
 ![Use case diagram](use_cases.png)
 
-- **Sign In**
-> **Actor**: Attendee  
-> **Description**: This use case exists so that, at online conferences or during a break, the attendee can enter the application.  
-> **Preconditions and Postconditions**: In order to sign in, the attendee must have an account. If not, he can create one. In the end, the user must have full access to the application   functionalities.   
+#### Sign In    
+**Actor**: Attendee  
+**Description**: This use case exists so that, at online conferences or during a break, the attendee can enter the application.  
+**Preconditions and Postconditions**: In order to sign in, the attendee must have an account. If not, he must create one. In the end, the user must have full access to the application functionalities.  
 
-> **Normal Flow**:    
+**Normal Flow**:    
   1. The attendee signs in.  
   2. The application validates email/password.  
   3. The application will ask for user's interests.   
@@ -70,47 +70,58 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   1. The attendee creates an account.  
   2. The application asks for personal information such as the email and password.  
   3. The application will ask for user's interests.  
+ 
+  **Alternative Flows and Exceptions**:  
+  1. The user types his personal information.
+  2. The application doesn't recognize the email/password.  
+  3. The application emits error message.   
 
-> **Alternative Flows and Exceptions**: The user types his personal information -> the application doesn't recognize the email/password -> the application emits error message.   
-- **Choose interests**  
-> **Actor**: Attendee  
-> **Description**: The application asks the user to set his interests.  
-> **Preconditions and Postconditions**: In order to choose his interests, the user must first register and sign in. In the end, the user must be able to see a personalized map.  
+#### Choose interests  
+**Actor**: Attendee  
+**Description**: The application asks the user to set his interests.  
+**Preconditions and Postconditions**: In order to choose his interests, the user must first register and sign in. In the end, the user must be able to see a personalized map.  
 
-> **Normal Flow**:
+**Normal Flow**:
   1. The application asks the user to set his interests.  
   2. The application validates the interests entered by the attendee.  
 
-- **Navigate the Map**
-> **Actor**: Attendee  
-> **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.  
-> **Preconditions and Postconditions**: In order to view the map, the attendee must have set his interests and personal information with success. In the end, the attendee can chose the chatrooms, represented on the map, he wants to join.  
+#### Navigate the Map  
+**Actor**: Attendee    
+**Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.  
+**Preconditions and Postconditions**: In order to view the map, the attendee must have set his interests and personal information with success. In the end, the attendee can chose the chatrooms, represented on the map, he wants to join.  
 
-> **Normal Flow**:
+**Normal Flow**:
   1. The attendee has set his interests and personal information with success.
   2. The application shows a personalized map, showing discussion topics of interest.
-  3. The attendee is able to choose any of the themes that lead to their respective chatroom.
+  3. The attendee is able to choose any of the themes that lead to their respective chatroom.  
+  
+**Alternative Flows and Exceptions**: 
+  1. The user doesn't find a topic he really wanted to discuss.  
+  2. He can create a new chatroom.  
 
-> **Alternative Flows and Exceptions**: The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom.  
+#### Enter Chatroom  
+**Actor**: Attendee   
+**Description**: The attendee is directed to a chatroom.  
+**Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. In the end, the attendee can text the other chatroom participants, leave the chatroom or save information about other users.  
 
-- **Enter Chatroom**
-> **Actor**: Attendee   
-> **Description**: The attendee is directed to a chatroom.  
-> **Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. In the end, the attendee can text the other chatroom participants, leave the chatroom or save information about other users.  
-
-> **Normal Flow**:
+**Normal Flow**:
   1. The attendee has chosen the discussion topic he wants to join.
   2. The attendee is directed to the chosen chatroom.
-  3. The attendee is able to text, leave the chatroom, save someone's contact.
+  3. The attendee is able to text, leave the chatroom, save someone's contact.  
+  
+**Alternative Flows and Exceptions**: 
+  1. The user is the chatroom creator.
+  2. The user can ban or mute other participants, in need. 
+  or
+  1. The user is the chatroom creator. 
+  2. As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
 
-> **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban or mute other participants, in need. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
+#### Create Chatroom**
+**Actor**: Attendee Chatroom Moderator  
+**Description**: The attendee has the option to create a new discussion topic.   
+**Preconditions and Postconditions**: In order to create a new chatroom, the attendee must click the 'create new topic' button and type its name. In the end, the user can text the other chatroom participants, leave the chatroom, save information about other users, mute/ban other participants, delete the chatroom.  
 
-- **Create Chatroom**
-> **Actor**: Attendee Chatroom Moderator  
-> **Description**: The attendee has the option to create a new discussion topic.   
-> **Preconditions and Postconditions**: In order to create a new chatroom, the attendee must click the 'create new topic' button and type its name. In the end, the user can text the other chatroom participants, leave the chatroom, save information about other users, mute/ban other participants, delete the chatroom.
-
-> **Normal Flow**:
+**Normal Flow**:  
   1. The attendee clicks the button 'create new topic'.
   2. The attendee types the chatroom's name.
   3. The attendee is able to text, leave the chatroom, save someone's contact, ban/mute other participants, delete the chatroom.
