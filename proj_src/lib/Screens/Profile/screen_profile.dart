@@ -4,12 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
-import 'package:proj_src/Screens/Initials/initial_aux.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/constants.dart';
-import 'package:proj_src/BackEnd/AuxUser.dart';
-
-import 'interest_tile.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -69,62 +65,8 @@ class _ProfileState extends State<Profile> {
           child: Stack(
             children: <Widget> [
               _interestsList(),
-              //addTile("add a new interest!"),
-              //_listeInterets(),
-              /*Container(
-                alignment: Alignment.topCenter,
-                child: TextField(
-                  decoration: inputDeco("add new interest"),
-                  onChanged: (val) async {
-                    _newInterest = val;
-                    print(_newInterest);
-                  },
-                ),
-              )*/
             ],
           )
-        /*Container(
-            child:
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-               // _loadInfo(),
-
-                Icon(Icons.account_circle, size: 200.0, color: Colors.grey[700]),
-                SizedBox(height: 15.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Username', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                    Text(_userName, style: TextStyle(fontSize: 17.0)),
-                  ],
-                ),
-                Divider(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Email', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                    Text(_email, style: TextStyle(fontSize: 17.0)),
-                  ],
-                ),
-                Divider(height: 20.0),
-               //_listInterests(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Interests', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),),
-                    GestureDetector(
-                      onTap: (){
-                        _seeInterests(context);
-                      },
-                      child: Text('see interests', style: TextStyle(fontSize: 17.0, decoration: TextDecoration.underline,),),
-                    )
-                  ],
-                ),
-                //Divider(height: 20.0,),
-              ],
-            ),
-          )*/
       ),
     );
   }
