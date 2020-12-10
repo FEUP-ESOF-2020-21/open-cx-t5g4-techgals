@@ -5,8 +5,7 @@ import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
-
-import '../../constants.dart';
+import 'package:proj_src/constants.dart';
 
 class Interests extends StatefulWidget {
 
