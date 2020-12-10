@@ -22,7 +22,7 @@ class _Map1State extends State<Map1> {
   Stream<QuerySnapshot> _groups;
   User _user = FirebaseAuth.instance.currentUser;
   String _userName = '';
-  String _email= '';
+  String _email = '';
   String _newChatName = "";
   List<String> _auxChatNames = [];
 
@@ -30,7 +30,6 @@ class _Map1State extends State<Map1> {
   void initState() {
     super.initState();
     _getInfo();
-    //initiateSearch();
   }
 
   _getInfo() async {
@@ -59,7 +58,6 @@ class _Map1State extends State<Map1> {
             itemCount: snapshot.data.documents.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              //print(_userName);
               _auxChatNames.add(snapshot.data.documents[index]['name']);
               _auxChatNames = _auxChatNames.toSet().toList();
               return ChatTile(
@@ -67,12 +65,12 @@ class _Map1State extends State<Map1> {
                   groupId: snapshot.data.documents[index].id,
                   groupName: snapshot.data.documents[index]['name']
               );
-              },
+            },
             scrollDirection: Axis.vertical,
-            )
+          )
               :
           Container();
-          }
+        }
     );
   }
 
@@ -82,20 +80,20 @@ class _Map1State extends State<Map1> {
     return Scaffold(
       appBar: buildAppBar_Map(context),
       body: Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/map1.jpg"),
-          fit: BoxFit.cover,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/map1.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Right_Arrow_Button(),
+            _listChats(),
+          ],
         ),
       ),
-      child: Stack(
-        children: <Widget>[
-          Right_Arrow_Button(),
-          _listChats(),
-        ],
-      ),
-    ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _popup(context);
@@ -110,39 +108,38 @@ class _Map1State extends State<Map1> {
   void _popup(BuildContext context) {
     Widget cancelButton = FlatButton(
       child: Text("Cancel"),
-      onPressed:  () {
+      onPressed: () {
         Navigator.of(context).pop();
       },
     );
     Widget createButton = FlatButton(
       child: Text("Create"),
-      onPressed:  () async {
-        if(_auxChatNames.contains(_newChatName)) {
+      onPressed: () async {
+        if (_auxChatNames.contains(_newChatName)) {
           Navigator.of(context).pop();
         }
-        else if (_newChatName != null){
+        else if (_newChatName != null) {
           await HelperFunctions.getUserNameSharedPreference().then((val) {
             DatabaseMethods(uid: _user.uid).createChatRoom(val, _newChatName);
           });
           Navigator.of(context).pop();
         }
-
       },
     );
 
     AlertDialog alert = AlertDialog(
       title: Text("Don't see the topic you want?\n     Create a new chatroom!"),
       content: TextField(
-            decoration: inputDeco("new topic"),
-               onChanged: (val) {
-              _newChatName = val;
-            },
-            style: TextStyle(
-                fontSize: 15.0,
-                height: 2.0,
-                color: Colors.black
-            )
-        ),
+          decoration: inputDeco("new topic"),
+          onChanged: (val) {
+            _newChatName = val;
+          },
+          style: TextStyle(
+              fontSize: 15.0,
+              height: 2.0,
+              color: Colors.black
+          )
+      ),
       actions: [
         cancelButton,
         createButton,
@@ -154,50 +151,6 @@ class _Map1State extends State<Map1> {
       builder: (BuildContext context) {
         return alert;
       },
-    );
-  }
-
-
-  Widget searchList(){
-    return searchSnapshot != null ? ListView.builder(
-        itemCount: searchSnapshot.docs.length,
-        itemBuilder: (context, index) {
-          return SearchItem(
-              searchSnapshot.docs[index]["name"]
-          );
-        }) : Container();
-  }
-}
-
-class SearchItem extends StatelessWidget {
-
-  final String username;
-  SearchItem(this.username);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(this.username),
-          GestureDetector(
-            onTap: (){
-
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: kPrimaryLightColor,
-                borderRadius: BorderRadius.circular(30)
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text("Message"),
-            ),
-          )
-        ],
-      ),
     );
   }
 }

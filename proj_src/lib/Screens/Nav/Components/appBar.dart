@@ -59,3 +59,4 @@ AppBar buildAppBar_Profile(context, authMethods) {
     ],
   );
 }
+

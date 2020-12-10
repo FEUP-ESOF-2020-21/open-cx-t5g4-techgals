@@ -4,49 +4,35 @@ import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
-import 'package:proj_src/Screens/Initials/welcome.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
-import 'package:proj_src/Screens/Nav/map1.dart';
-import 'package:proj_src/Screens/Profile/interests.dart';
-import 'package:proj_src/constants.dart';
 
-class Profile extends StatefulWidget {
+import '../../constants.dart';
+
+class Interests extends StatefulWidget {
+
+  final String userName;
+  Interests({this.userName});
+
   @override
-  _ProfileState createState() => _ProfileState();
+  _InterestsState createState() => _InterestsState();
 }
 
-class _ProfileState extends State<Profile> {
+class _InterestsState extends State<Interests> {
 
   final AuthMethods _authMethods = new AuthMethods();
   User _user = FirebaseAuth.instance.currentUser;
-  String userName = '';
-  String _email = '';
-  List<String> _interests = [];
-  String _interestsString = '';
   QuerySnapshot _userQS;
+  List<String> _interests = [];
   String _newInterest = "";
 
   @override
   void initState() {
     super.initState();
-    _getInfo();
     _getInterests();
   }
 
-  _getInfo() async {
-    await HelperFunctions.getUserNameSharedPreference().then((value) {
-      setState(() {
-        userName = value;
-      });
-    });
-    await HelperFunctions.getUserEmailSharedPreference().then((value) {
-      setState(() {
-        _email = value;
-      });
-    });
-  }
   _getInterests() async {
-    await DatabaseMethods().getUser(userName).then((value) {
+    await DatabaseMethods().getUser(widget.userName).then((value) {
       setState(() {
         _userQS = value;
       });
@@ -56,7 +42,6 @@ class _ProfileState extends State<Profile> {
       _interests.add(_userQS.docs[0].get('interests')[i]);
     }
     _interests.forEach((element) {element.toLowerCase();});
-    _interestsString = _interests.join(" / ");
   }
 
   @override
@@ -64,58 +49,13 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: buildAppBar_Profile(context, _authMethods),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 170.0),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Icon(Icons.account_circle, size: 200.0, color: Colors.grey[700]),
-                SizedBox(height: 15.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Username', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                    Text(userName, style: TextStyle(fontSize: 17.0)),
-                  ],
-                ),
-
-                Divider(height: 20.0),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Email', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                    Text(_email, style: TextStyle(fontSize: 17.0)),
-                  ],
-                ),
-
-                Divider(height: 20.0),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Interest', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) { return Interests(userName: userName,);},),);
-                      },
-                      child: Text('see more', style: TextStyle(decoration: TextDecoration.underline,),),
-                    ),
-                    //Text(_email, style: TextStyle(fontSize: 17.0)),
-                  ],
-                ),
-              ],
-            ),
-          )
-      ),
-      /*body: Container(
           padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
           child: Stack(
             children: <Widget> [
-              //_interestsList(),
+              _interestsList(),
             ],
           )
-      ),*/
+      ),
     );
   }
 
