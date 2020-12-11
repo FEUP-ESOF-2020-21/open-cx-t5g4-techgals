@@ -31,7 +31,6 @@ class _Map1State extends State<Map1> {
     super.initState();
     _getInfo();
   }
-
   _getInfo() async {
     await HelperFunctions.getUserNameSharedPreference().then((value) {
       setState(() {

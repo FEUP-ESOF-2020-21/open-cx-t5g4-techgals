@@ -130,6 +130,11 @@ class DatabaseMethods{
     return snapshot;
   }
 
+  getChat(String chatname) async {
+    QuerySnapshot snapshot = await chatCollection.where('name', isEqualTo: chatname).get();
+    return snapshot;
+  }
+
 /*-----------------------------------------------------------------------------------------------*/
 
   getChatByName(String name) async{

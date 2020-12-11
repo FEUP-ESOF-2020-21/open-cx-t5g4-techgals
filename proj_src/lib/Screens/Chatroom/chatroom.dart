@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/Screens/Chatroom/manageChat.dart';
 import 'package:proj_src/Screens/Chatroom/message_tile.dart';
 
 class ChatPage extends StatefulWidget {
@@ -24,6 +25,8 @@ class _ChatPageState extends State<ChatPage> {
 
   Stream<QuerySnapshot> _chats;
   TextEditingController messageEditingController = new TextEditingController();
+  bool isAdmin = false;
+  bool inChat = true;
 
   @override
   void initState() {
@@ -33,6 +36,36 @@ class _ChatPageState extends State<ChatPage> {
         _chats = val;
       });
     });
+    _checkAdmin();
+    _checkinChat();
+  }
+
+  _checkinChat() async {
+    QuerySnapshot _chatQS;
+    await DatabaseMethods().getChat(widget.groupName).then((value) {
+      setState(() {
+        _chatQS = value;
+      });
+    });
+    List<String> _participants;
+    _participants.clear();
+    for(var i = 0; i< _chatQS.docs[0].get('participants').length; i++) {
+      _participants.add(_chatQS.docs[0].get('participants')[i]);
+    }
+    _participants.forEach((element) {element.toLowerCase();});
+    if(_participants.contains(widget.userName)) inChat = true;
+    else inChat = false;
+  }
+
+  _checkAdmin() async {
+    QuerySnapshot _chatQS;
+    await DatabaseMethods().getChat(widget.groupName).then((value) {
+      setState(() {
+        _chatQS = value;
+      });
+    });
+
+    if(_chatQS.docs[0].get('admin') == widget.userName) isAdmin = true;
   }
 
   Widget _chatMessages(){
@@ -47,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
               sender: snapshot.data.documents[index]['sender'],
               sentByMe: (widget.userName == snapshot.data.documents[index]['sender']),
             );
-            },
+          },
           scrollDirection: Axis.vertical,
         )
             :
@@ -90,6 +123,20 @@ class _ChatPageState extends State<ChatPage> {
             );
           },
         ),
+        actions: <Widget>[
+          isAdmin ?
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) { return ManageChat(chatName: widget.groupName, groupId: widget.groupId, userName: widget.userName,);},),);
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.account_circle),
+            ),
+          )
+              : Container()
+          ,
+        ],
       ),
       body: Container(
         child: Stack(
@@ -102,7 +149,8 @@ class _ChatPageState extends State<ChatPage> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 color: Colors.grey[700],
-                child: Row(
+                child:
+                Row(
                   children: <Widget>[
                     Expanded(
                       child: TextField(
@@ -124,7 +172,9 @@ class _ChatPageState extends State<ChatPage> {
                     SizedBox(width: 12.0),
                     GestureDetector(
                       onTap: () {
-                        _sendMessage();
+                        _checkinChat();
+                        if(inChat) _sendMessage();
+                        else _popup(context);
                       },
                       child: Container(
                         height: 50.0,
@@ -145,4 +195,30 @@ class _ChatPageState extends State<ChatPage> {
       ),
     );
   }
+
+  void _popup(BuildContext context) {
+    Widget exitButton = FlatButton(
+      child: Text("exit"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("You've been expelled from the chat!\n     You can no longer send messages..."),
+      content: Text("..."),
+      actions: [
+        exitButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
 }

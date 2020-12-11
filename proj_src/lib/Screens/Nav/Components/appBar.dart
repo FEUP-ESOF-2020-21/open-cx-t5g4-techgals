@@ -60,3 +60,10 @@ AppBar buildAppBar_Profile(context, authMethods) {
   );
 }
 
+AppBar buildAppBar_Simple(context) {
+  return AppBar(
+    elevation: 50,
+    backgroundColor: kPrimaryColor,
+    title: Image.asset("assets/images/logo.PNG", height: 35, width: 200,),
+  );
+}
