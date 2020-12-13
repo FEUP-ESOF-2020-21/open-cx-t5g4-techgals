@@ -25,6 +25,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Stream<QuerySnapshot> _chats;
   TextEditingController messageEditingController = new TextEditingController();
+  ScrollController _scrollController = new ScrollController();
   bool isAdmin = false;
   bool inChat = true;
   bool muted = false;
@@ -56,7 +57,6 @@ class _ChatPageState extends State<ChatPage> {
     if(_participants.contains(widget.userName)) inChat = true;
     else inChat = false;
   }
-
   _checkAdmin() async {
     QuerySnapshot _chatQS;
     await DatabaseMethods().getChat(widget.groupName).then((value) {
@@ -66,7 +66,6 @@ class _ChatPageState extends State<ChatPage> {
     });
     if(_chatQS.docs[0].get('admin') == widget.userName) isAdmin = true;
   }
-
   _checkMuted() async {
     QuerySnapshot _chatQS;
     await DatabaseMethods().getChat(widget.groupName).then((value) {
@@ -88,14 +87,19 @@ class _ChatPageState extends State<ChatPage> {
       stream: _chats,
       builder: (context, snapshot){
         return snapshot.hasData ?  ListView.builder(
-          itemCount: snapshot.data.documents.length,
+          itemCount: (snapshot.data.documents.length + 1),
           itemBuilder: (context, index){
-            return MessageTile(
-              message: snapshot.data.documents[index]['message'],
-              sender: snapshot.data.documents[index]['sender'],
-              sentByMe: (widget.userName == snapshot.data.documents[index]['sender']),
-            );
+            if(index < snapshot.data.documents.length ) {
+              return MessageTile(
+                message: snapshot.data.documents[index]['message'],
+                sender: snapshot.data.documents[index]['sender'],
+                sentByMe: (widget.userName == snapshot.data.documents[index]['sender']),
+              );
+            }
+            else return SizedBox(height: 80.0);
+
           },
+          controller: _scrollController,
           scrollDirection: Axis.vertical,
         )
             :
@@ -103,6 +107,7 @@ class _ChatPageState extends State<ChatPage> {
       },
     );
   }
+
   _sendMessage() {
     if (messageEditingController.text.isNotEmpty) {
       Map<String, dynamic> chatMessageMap = {
@@ -117,6 +122,13 @@ class _ChatPageState extends State<ChatPage> {
         messageEditingController.text = "";
       });
     }
+  }
+  _scrollBottom(){
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 20),
+    );
   }
 
   @override
@@ -188,7 +200,10 @@ class _ChatPageState extends State<ChatPage> {
                     GestureDetector(
                       onTap: () async {
                         await _checkinChat();
-                        if(inChat && !muted) _sendMessage();
+                        if(inChat && !muted) {
+                          _sendMessage();
+                          _scrollBottom();
+                        }
                         else _popup(context);
                       },
                       child: Container(
@@ -254,6 +269,7 @@ class _ChatPageState extends State<ChatPage> {
       },
     );
   }
+
 
 
 }
