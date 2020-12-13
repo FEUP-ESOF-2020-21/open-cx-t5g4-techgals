@@ -49,6 +49,10 @@ class DatabaseMethods{
     }); */
   }
 
+  Future deleteChatRoom(String docID) async{
+    return await chatCollection.doc(docID).delete();
+  }
+
   // add interest
   Future addInterest(String interest) async {
     return await userCollection.doc(uid).update({

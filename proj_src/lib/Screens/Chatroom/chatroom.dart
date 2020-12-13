@@ -37,7 +37,8 @@ class _ChatPageState extends State<ChatPage> {
       });
     });
     _checkAdmin();
-    _checkinChat();
+    print('is chat admin: $isAdmin');
+    print('in chat: $inChat');
   }
 
   _checkinChat() async {
@@ -48,11 +49,12 @@ class _ChatPageState extends State<ChatPage> {
       });
     });
     List<String> _participants;
-    _participants.clear();
     for(var i = 0; i< _chatQS.docs[0].get('participants').length; i++) {
       _participants.add(_chatQS.docs[0].get('participants')[i]);
     }
     _participants.forEach((element) {element.toLowerCase();});
+    print("CHECKING IN CHAT");
+    print(_participants.contains(widget.userName));
     if(_participants.contains(widget.userName)) inChat = true;
     else inChat = false;
   }
@@ -172,7 +174,9 @@ class _ChatPageState extends State<ChatPage> {
                     SizedBox(width: 12.0),
                     GestureDetector(
                       onTap: () {
+                        print("before check");
                         _checkinChat();
+                        print("after check");
                         if(inChat) _sendMessage();
                         else _popup(context);
                       },
