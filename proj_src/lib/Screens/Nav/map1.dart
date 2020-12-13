@@ -100,7 +100,8 @@ class _Map1State extends State<Map1> {
         child: Icon(Icons.add, color: Colors.white, size: 30.0,),
         backgroundColor: kPrimaryColor,
         elevation: 0.0,
-      ),
+      ), /**/
+      resizeToAvoidBottomInset: false,
     );
   }
 
