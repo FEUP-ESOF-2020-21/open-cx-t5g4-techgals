@@ -12,7 +12,6 @@ class DatabaseMethods{
   final CollectionReference chatCollection = FirebaseFirestore.instance.collection('chats');
 
 
-
   // update userdata
   Future updateUserData(String username, String email, List<String> interests/*, String password*/) async {
     return await userCollection.doc(uid).set({
@@ -22,6 +21,12 @@ class DatabaseMethods{
       //'groups' : [],
       'interests': interests,
       //'profilePic': ''
+    });
+  }
+
+  Future updateEmail(String email) async {
+    return await userCollection.doc(uid).update({
+      'email': email,
     });
   }
 
@@ -85,7 +90,6 @@ class DatabaseMethods{
   // get user data from username
   Future getUserData(String email) async {
     QuerySnapshot snapshot = await userCollection.where('email', isEqualTo: email).get();
-    //print(snapshot.docs[0].data);
     return snapshot;
   }
 
@@ -104,29 +108,14 @@ class DatabaseMethods{
     return chatCollection.doc(chatID).collection('messages').orderBy('time').snapshots();
   }
 
-  getUserInterests(String userID) async {
-    return userCollection.doc(userID).snapshots();
-  }
-
   // returns every chat room
   getActiveChats() async {
     return chatCollection.snapshots();
   }
 
-  usernameTaken(String username) async {
-    QuerySnapshot querySnapshot = await userCollection.where('username', isEqualTo: username).get();
-    print(querySnapshot.size);
-    return null;
-  }
-
   emailTaken(String email) async {
     QuerySnapshot querySnapshot = await userCollection.where('email', isEqualTo: email).get();
-    print(querySnapshot.size);
-    return null;
-  }
-
-  getUsers() async {
-    return userCollection.snapshots();
+    return querySnapshot;
   }
 
   getUser(String username) async{
@@ -137,22 +126,6 @@ class DatabaseMethods{
   getChat(String chatname) async {
     QuerySnapshot snapshot = await chatCollection.where('name', isEqualTo: chatname).get();
     return snapshot;
-  }
-
-/*-----------------------------------------------------------------------------------------------*/
-
-  getChatByName(String name) async{
-    return await FirebaseFirestore.instance.collection("chats").where("name", isEqualTo: name ).get();
-  }
-
-  uploadUserInfo(String name, String email, List<String> interest){
-
-    FirebaseFirestore.instance.collection("users").add({
-      'username': name,
-      'email': email,
-      'interests': interest
-    });
-
   }
 
 }
