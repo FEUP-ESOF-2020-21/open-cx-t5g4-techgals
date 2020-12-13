@@ -97,7 +97,6 @@ class _ChatPageState extends State<ChatPage> {
               );
             }
             else return SizedBox(height: 80.0);
-
           },
           controller: _scrollController,
           scrollDirection: Axis.vertical,
@@ -269,7 +268,5 @@ class _ChatPageState extends State<ChatPage> {
       },
     );
   }
-
-
 
 }
