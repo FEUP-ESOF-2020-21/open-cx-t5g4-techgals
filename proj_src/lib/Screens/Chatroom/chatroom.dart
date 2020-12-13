@@ -27,6 +27,7 @@ class _ChatPageState extends State<ChatPage> {
   TextEditingController messageEditingController = new TextEditingController();
   bool isAdmin = false;
   bool inChat = true;
+  bool muted = false;
 
   @override
   void initState() {
@@ -37,8 +38,7 @@ class _ChatPageState extends State<ChatPage> {
       });
     });
     _checkAdmin();
-    print('is chat admin: $isAdmin');
-    print('in chat: $inChat');
+    _checkMuted();
   }
 
   _checkinChat() async {
@@ -48,13 +48,11 @@ class _ChatPageState extends State<ChatPage> {
         _chatQS = value;
       });
     });
-    List<String> _participants;
+    List<String> _participants = [];
     for(var i = 0; i< _chatQS.docs[0].get('participants').length; i++) {
       _participants.add(_chatQS.docs[0].get('participants')[i]);
     }
     _participants.forEach((element) {element.toLowerCase();});
-    print("CHECKING IN CHAT");
-    print(_participants.contains(widget.userName));
     if(_participants.contains(widget.userName)) inChat = true;
     else inChat = false;
   }
@@ -66,8 +64,23 @@ class _ChatPageState extends State<ChatPage> {
         _chatQS = value;
       });
     });
-
     if(_chatQS.docs[0].get('admin') == widget.userName) isAdmin = true;
+  }
+
+  _checkMuted() async {
+    QuerySnapshot _chatQS;
+    await DatabaseMethods().getChat(widget.groupName).then((value) {
+      setState(() {
+        _chatQS = value;
+      });
+    });
+    List<String> _muted = [];
+    for(var i = 0; i< _chatQS.docs[0].get('muted').length; i++) {
+      _muted.add(_chatQS.docs[0].get('muted')[i]);
+    }
+    _muted.forEach((element) {element.toLowerCase();});
+    if(_muted.contains(widget.userName)) muted = true;
+    else muted = false;
   }
 
   Widget _chatMessages(){
@@ -133,7 +146,7 @@ class _ChatPageState extends State<ChatPage> {
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.account_circle),
+              child: Icon(Icons.menu_rounded),
             ),
           )
               : Container()
@@ -173,11 +186,9 @@ class _ChatPageState extends State<ChatPage> {
 
                     SizedBox(width: 12.0),
                     GestureDetector(
-                      onTap: () {
-                        print("before check");
-                        _checkinChat();
-                        print("after check");
-                        if(inChat) _sendMessage();
+                      onTap: () async {
+                        await _checkinChat();
+                        if(inChat && !muted) _sendMessage();
                         else _popup(context);
                       },
                       child: Container(
@@ -209,8 +220,28 @@ class _ChatPageState extends State<ChatPage> {
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("You've been expelled from the chat!\n     You can no longer send messages..."),
-      content: Text("..."),
+      title: Text('You\'ve been muted by this chat\'s administrator!', textAlign: TextAlign.center, style: TextStyle( color: Colors.red),),
+      content:
+      Text.rich(
+        TextSpan(
+          text: 'You can no longer send messages to ', // default text style
+          children: <TextSpan>[
+            TextSpan(
+                text: widget.groupName,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.double,
+                  decorationColor: Colors.red,
+                )
+            ),
+            TextSpan(
+                text: '.',
+            ),
+          ],
+          style: TextStyle( fontSize: 14,)
+        ), textAlign: TextAlign.center,
+      ),
       actions: [
         exitButton,
       ],

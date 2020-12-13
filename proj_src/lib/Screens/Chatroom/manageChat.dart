@@ -21,7 +21,6 @@ class ManageChat extends StatefulWidget {
 
 class _ManageChat extends State<ManageChat> {
 
-  final AuthMethods _authMethods = new AuthMethods();
   User _user = FirebaseAuth.instance.currentUser;
   List<String> _participants = [];
   String chatID = "";
@@ -115,6 +114,9 @@ class _ManageChat extends State<ManageChat> {
                   await HelperFunctions.getUserNameSharedPreference().then((val) {
                     DatabaseMethods(uid: _user.uid).updateChatInfo(widget.groupId, participant, false);
                     _getParticipants();
+                  });
+                  await HelperFunctions.getUserNameSharedPreference().then((val) {
+                    DatabaseMethods(uid: _user.uid).muteUser(widget.groupId, participant);
                   });
                 },
                 child: Icon(Icons.remove_circle_outline_rounded, color: Colors.white, size: 25,),
@@ -227,8 +229,6 @@ class _ManageChat extends State<ManageChat> {
                 ],
               ), textAlign: TextAlign.center,
           ),
-
-      //Text("Are you sure you want to delete this chat?\nThis action is irreversible!\nYou can only delete a chatroom when no other users are in it."),
       actions: [
         cancelButton,
         deleteButton,

@@ -31,8 +31,7 @@ class DatabaseMethods{
       'name': chatName,
       'admin': username,
       'participants': [],
-      //'messages': ,
-      //'chatId': '',
+      'muted': [],
       'recentMessage': '',
       'recentMessageSender': '',
       'recentMessageTime': ''
@@ -40,13 +39,7 @@ class DatabaseMethods{
 
     await chatDocRef.update({
       'participants': FieldValue.arrayUnion([username]),
-      //'chatId': chatDocRef.id
     });
-    /*
-    DocumentReference userDocRef = userCollection.doc(uid);
-    return await userDocRef.update({
-      'groups': FieldValue.arrayUnion([chatDocRef.id + '_' + chatName])
-    }); */
   }
 
   Future deleteChatRoom(String docID) async{
@@ -78,6 +71,13 @@ class DatabaseMethods{
           'participants': FieldValue.arrayRemove([username])
         })
     ;
+  }
+
+  // mute user
+  Future muteUser(String chatID, String username) async {
+    return await chatCollection.doc(chatID).update({
+      'muted': FieldValue.arrayUnion([username])
+      });
   }
 
 
