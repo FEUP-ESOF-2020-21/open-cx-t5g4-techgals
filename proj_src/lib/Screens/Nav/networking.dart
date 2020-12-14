@@ -100,41 +100,140 @@ class _NetworkingPageState extends State<NetworkingPage> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           );
         }
-        else if(index == 1) { return Divider(height: 30,); }
-        else return _userTile(_usersWithSimilarInterests[index-2]);
+        else if(index == 1) { return Container(height: 30,); }
+        else return _userTile(_usersWithSimilarInterests[index-2], true);
       },
       scrollDirection: Axis.vertical,
     );
   }
-  Widget _userTile(UserInt user) {
+  Widget _userTile(UserInt user, bool even) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 6),
-      alignment: Alignment.center,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.symmetric(vertical: 15),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-                k2PrimaryColor,
-                kPrimaryColor,
-              ]
+      //alignment: Alignment.center,
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              gradient: even ? LinearGradient(
+                  colors: [
+                    k2PrimaryColor,
+                    kPrimaryColor,
+                  ]
+              )
+              :
+              LinearGradient(
+                  colors: [
+                    kPrimaryColor,
+                    k2PrimaryColor,
+                  ]
+              )
+              ,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child:
+            Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(user.getUsername().toLowerCase(), style: TextStyle(fontSize: 17.0, color: Colors.white)),
+                  Text(user.getEmail().toLowerCase(), style: TextStyle(fontSize: 17, color: Colors.white),),
+                ],
+              ),
+            ),
           ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child:
-        Padding(
-          padding: EdgeInsets.only(left: 15, right: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(user.getUsername().toLowerCase(), style: TextStyle(fontSize: 17.0, color: Colors.white)),
-              Text(user.getEmail().toLowerCase(), style: TextStyle(fontSize: 17, color: Colors.white),),
-              //Text(user.getList().toString(),)
-            ],
+          Container(height: 8,),
+          Container(
+            alignment: Alignment.centerLeft,
+            child:
+              Padding(
+                padding: EdgeInsets.only(left: 15,right: 15),
+                child:
+                Text.rich(
+                  TextSpan(
+                    text: '~ ' + user.getUsername().toLowerCase(),
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ' also likes ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      TextSpan(
+                        text:user.getList().join(" / "),
+                        style: TextStyle(
+                          color: k2PrimaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                        )
+                      ),
+                      TextSpan(
+                        text:'.',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ]
+                  ),
+                  textAlign: TextAlign.left,
+                )
+                //Text(user.getList().join(" and "),),
+              ),
           ),
-        ),
+          Container(height: 10,),
+        ],
       ),
+    );
+
+
+      Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 6),
+          alignment: Alignment.center,
+          child: Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                    k2PrimaryColor,
+                    kPrimaryColor,
+                  ]
+              ),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child:
+            Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(user.getUsername().toLowerCase(), style: TextStyle(fontSize: 17.0, color: Colors.white)),
+                  Text(user.getEmail().toLowerCase(), style: TextStyle(fontSize: 17, color: Colors.white),),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 6),
+          alignment: Alignment.center,
+          child:
+          Padding(
+            padding: EdgeInsets.only(left: 15,right: 15),
+            child: Text(user.getList().join(" and "),),
+          ),
+        ),
+      ],
     );
   }
 
