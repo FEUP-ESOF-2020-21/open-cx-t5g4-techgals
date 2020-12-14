@@ -76,7 +76,6 @@ class _Map1State extends State<Map1> {
 
   @override
   Widget build(BuildContext context) {
-    //Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar_Map(context),
       body: Container(
@@ -98,7 +97,7 @@ class _Map1State extends State<Map1> {
                 child: FloatingActionButton(
                   heroTag: null,
                   onPressed: () {
-                    _popup(context);
+                    _addChat(context);
                   },
                   child: Icon(Icons.add, color: Colors.white, size: 30.0,),
                     backgroundColor: kPrimaryColor,
@@ -136,7 +135,7 @@ class _Map1State extends State<Map1> {
     );
   }
 
-  void _popup(BuildContext context) {
+  void _addChat(BuildContext context) {
     Widget cancelButton = FlatButton(
       child: Text("Cancel"),
       onPressed: () {
