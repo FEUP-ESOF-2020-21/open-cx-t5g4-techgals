@@ -8,6 +8,7 @@ import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Initials/initial_aux.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
+import 'package:proj_src/Screens/Nav/networking.dart';
 import 'package:proj_src/constants.dart';
 import 'package:proj_src/Screens/Nav/Components/chatTile.dart';
 
@@ -90,17 +91,47 @@ class _Map1State extends State<Map1> {
           children: <Widget>[
             Right_Arrow_Button(),
             _listChats(),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () {
+                    _popup(context);
+                  },
+                  child: Icon(Icons.add, color: Colors.white, size: 30.0,),
+                    backgroundColor: kPrimaryColor,
+                    elevation: 0.0,
+                  ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) { return NetworkingPage(userName: _userName,);},),);
+                  },
+                  child: Icon(Icons.person_add, color: Colors.white, size: 30.0,),
+                  backgroundColor: kPrimaryColor,
+                  elevation: 0.0,
+                ),
+              ),
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+    /* floatingActionButton: FloatingActionButton(
         onPressed: () {
           _popup(context);
         },
         child: Icon(Icons.add, color: Colors.white, size: 30.0,),
         backgroundColor: kPrimaryColor,
         elevation: 0.0,
-      ), /**/
+      ), */
       resizeToAvoidBottomInset: false,
     );
   }

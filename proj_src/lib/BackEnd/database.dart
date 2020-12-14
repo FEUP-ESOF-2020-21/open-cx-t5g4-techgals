@@ -128,4 +128,10 @@ class DatabaseMethods{
     return snapshot;
   }
 
+  usersWithInterests(List<String> interests) async {
+    QuerySnapshot querySnapshot = await userCollection.where('interests', arrayContainsAny: interests).get();
+    print("INTEREST: $interests");
+    print(querySnapshot.size);
+    return querySnapshot;
+  }
 }

@@ -67,3 +67,22 @@ AppBar buildAppBar_Simple(context) {
     title: Image.asset("assets/images/logo.PNG", height: 35, width: 200,),
   );
 }
+
+AppBar buildAppBar_Networking(context) {
+  return AppBar(
+    elevation: 50,
+    backgroundColor: kPrimaryColor,
+    title: Image.asset("assets/images/logo.PNG", height: 35, width: 200,),
+    actions: [
+      GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) { return Profile();},),);
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Icon(Icons.account_circle),
+        ),
+      ),
+    ],
+  );
+}
