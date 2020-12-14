@@ -69,7 +69,7 @@ class _InterestsState extends State<Interests> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           );
         }
-        else if(index == 1) { return Divider(height: 30,); }
+        else if(index == 1) { return Container(height: 30,); }
         else if(index == 2) {
           return
             TextField(
@@ -94,7 +94,7 @@ class _InterestsState extends State<Interests> {
               },
             );
         }
-        else if(index == 3) { return Divider(height: 30,); }
+        else if(index == 3) { return Container(height: 30,); }
         else {
           return _interestTile(_interests[index-4]);
         }

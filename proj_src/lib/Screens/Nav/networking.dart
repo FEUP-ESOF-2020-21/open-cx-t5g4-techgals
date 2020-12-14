@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
@@ -17,7 +18,6 @@ class NetworkingPage extends StatefulWidget {
 
 class _NetworkingPageState extends State<NetworkingPage> {
 
-  User _user = FirebaseAuth.instance.currentUser;
   List<String> _interests = [];
   List<UserInt> _usersWithSimilarInterests = [];
 
@@ -75,13 +75,36 @@ class _NetworkingPageState extends State<NetworkingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar_Networking(context),
+      appBar: buildAppBar_Simple(context),
       body: Container(
         child: Container(
             padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
             child: Stack(
               children: <Widget> [
-                _usersList(),
+                (_usersWithSimilarInterests.length > 0) ? _usersList()
+                    :
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget> [
+                          Image.asset("assets/images/sadFace.jpg", height: 125, width: 125,),
+                          Container(height: 10,),
+                          Text('We looked around and couldn\'t find anyone with common interests...',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Container(height: 7,),
+                          Text('Try adding more interests in your profile page!',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
               ],
             )
         ),
@@ -101,12 +124,12 @@ class _NetworkingPageState extends State<NetworkingPage> {
           );
         }
         else if(index == 1) { return Container(height: 30,); }
-        else return _userTile(_usersWithSimilarInterests[index-2], true);
+        else return _userTile(_usersWithSimilarInterests[index-2]);
       },
       scrollDirection: Axis.vertical,
     );
   }
-  Widget _userTile(UserInt user, bool even) {
+  Widget _userTile(UserInt user) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 6),
       //alignment: Alignment.center,
@@ -116,20 +139,12 @@ class _NetworkingPageState extends State<NetworkingPage> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(vertical: 15),
             decoration: BoxDecoration(
-              gradient: even ? LinearGradient(
+              gradient: LinearGradient(
                   colors: [
                     k2PrimaryColor,
                     kPrimaryColor,
                   ]
-              )
-              :
-              LinearGradient(
-                  colors: [
-                    kPrimaryColor,
-                    k2PrimaryColor,
-                  ]
-              )
-              ,
+              ),
               borderRadius: BorderRadius.circular(5),
             ),
             child:
@@ -184,56 +199,12 @@ class _NetworkingPageState extends State<NetworkingPage> {
                     ]
                   ),
                   textAlign: TextAlign.left,
-                )
-                //Text(user.getList().join(" and "),),
+                ),
               ),
           ),
           Container(height: 10,),
         ],
       ),
-    );
-
-
-      Column(
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 6),
-          alignment: Alignment.center,
-          child: Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(vertical: 15),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [
-                    k2PrimaryColor,
-                    kPrimaryColor,
-                  ]
-              ),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child:
-            Padding(
-              padding: EdgeInsets.only(left: 15, right: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(user.getUsername().toLowerCase(), style: TextStyle(fontSize: 17.0, color: Colors.white)),
-                  Text(user.getEmail().toLowerCase(), style: TextStyle(fontSize: 17, color: Colors.white),),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 6),
-          alignment: Alignment.center,
-          child:
-          Padding(
-            padding: EdgeInsets.only(left: 15,right: 15),
-            child: Text(user.getList().join(" and "),),
-          ),
-        ),
-      ],
     );
   }
 
