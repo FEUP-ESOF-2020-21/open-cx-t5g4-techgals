@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/helper.dart';
+import 'package:proj_src/Screens/Nav/navigation.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
@@ -66,7 +67,7 @@ class _SignUpState extends State<SignUp> {
           });
 
           print("Signed In");
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return NavigationMap();},),);
         }
         else{
           setState(() {

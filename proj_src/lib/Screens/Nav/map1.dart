@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Initials/initial_aux.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
-import 'package:proj_src/Screens/Nav/Components/right_arrow_button.dart';
 import 'package:proj_src/Screens/Nav/networking.dart';
 import 'package:proj_src/constants.dart';
 import 'package:proj_src/Screens/Nav/Components/chatTile.dart';
@@ -49,7 +47,7 @@ class _Map1State extends State<Map1> {
       });
     });
   }
-
+/*
   Widget _listChats() {
     return StreamBuilder(
         stream: _groups,
@@ -73,6 +71,32 @@ class _Map1State extends State<Map1> {
         }
     );
   }
+*/
+  Widget _listChats() {
+    return StreamBuilder(
+        stream: _groups,
+        builder: (context, snapshot) {
+          return snapshot.hasData ? GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemCount: (snapshot.data.documents.length <= 15) ? snapshot.data.documents.length : 15,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              _auxChatNames.add(snapshot.data.documents[index]['name']);
+              _auxChatNames = _auxChatNames.toSet().toList();
+              return ChatTile(
+                    userName: _userName,
+                    groupId: snapshot.data.documents[index].id,
+                    groupName: snapshot.data.documents[index]['name']
+              );
+            },
+            scrollDirection: Axis.vertical,
+          )
+              :
+          Container();
+        }
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +112,7 @@ class _Map1State extends State<Map1> {
         ),
         child: Stack(
           children: <Widget>[
-            Right_Arrow_Button(),
+            //Right_Arrow_Button(),
             _listChats(),
             Padding(
               padding: const EdgeInsets.all(12.0),
@@ -123,14 +147,6 @@ class _Map1State extends State<Map1> {
           ],
         ),
       ),
-    /* floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _popup(context);
-        },
-        child: Icon(Icons.add, color: Colors.white, size: 30.0,),
-        backgroundColor: kPrimaryColor,
-        elevation: 0.0,
-      ), */
       resizeToAvoidBottomInset: false,
     );
   }

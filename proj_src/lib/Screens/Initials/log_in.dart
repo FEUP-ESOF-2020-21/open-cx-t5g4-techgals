@@ -5,6 +5,7 @@ import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
+import 'package:proj_src/Screens/Nav/navigation.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
 
@@ -58,7 +59,7 @@ class _LogInState extends State<LogIn> {
           });
 
           print("Signed In");
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return NavigationMap();},),);
       }
         else{
           setState(() {

@@ -6,6 +6,7 @@ import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
+import 'package:proj_src/Screens/Nav/navigation.dart';
 import 'package:proj_src/constants.dart';
 
 class ManageChat extends StatefulWidget {
@@ -176,7 +177,7 @@ class _ManageChat extends State<ManageChat> {
           await HelperFunctions.getUserNameSharedPreference().then((val) {
             DatabaseMethods(uid: _user.uid).deleteChatRoom(chatID);
           });
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return NavigationMap();},),);
         }
       },
     );

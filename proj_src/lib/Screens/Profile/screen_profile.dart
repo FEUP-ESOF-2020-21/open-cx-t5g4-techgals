@@ -68,7 +68,7 @@ class _ProfileState extends State<Profile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text('Username', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                    Text(userName, style: TextStyle(fontSize: 17.0)),
+                    Text(userName, style: TextStyle(fontSize: 17.0), maxLines: 1),
                   ],
                 ),
 
@@ -80,7 +80,7 @@ class _ProfileState extends State<Profile> {
                     Text('Email', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
                     Row(
                       children: [
-                        Text(_email, style: TextStyle(fontSize: 17.0)),
+                        Text(_email, style: TextStyle(fontSize: 17.0), maxLines: 1),
                         SizedBox(width: 10.0),
                         GestureDetector(
                           onTap: () {

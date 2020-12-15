@@ -110,7 +110,11 @@ class DatabaseMethods{
 
   // returns every chat room
   getActiveChats() async {
-    return chatCollection.snapshots();
+    return chatCollection.orderBy('name').snapshots();
+  }
+  // returns every chat room 2
+  getActiveChats2() async {
+    return chatCollection.orderBy('name', descending: true).snapshots();
   }
 
   emailTaken(String email) async {

@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Chatroom/chatroom.dart';
-import 'package:proj_src/constants.dart';
 
 class ChatTile extends StatelessWidget {
   final String userName;
@@ -34,20 +35,19 @@ class ChatTile extends StatelessWidget {
           admin = _groupQS.docs[0].get('admin');
         }
         _chatInfo(context);
-        //DatabaseMethods().updateChatInfo(groupId, _userName, true);
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(groupId: groupId, userName: userName, groupName: groupName,)));
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 30.0,
-            backgroundColor: k2PrimaryColor,
-            child: Text(groupName.substring(0, 1).toUpperCase(), textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
-          ),
-          title: Text(groupName, style: TextStyle(fontWeight: FontWeight.bold)),
-          subtitle: Text("Join the conversation as $userName", style: TextStyle(fontSize: 13.0)),
-        ),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.location_pin, color: Colors.primaries[Random().nextInt(Colors.primaries.length)], size: 60,),
+            Text(" $groupName ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                backgroundColor: Colors.white70,
+              ),
+              maxLines: 1,),
+          ]
       ),
     );
   }
@@ -105,7 +105,8 @@ class ChatTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                    ),)
+                    ),
+                      maxLines: 1)
                 ],
               ),
             ],

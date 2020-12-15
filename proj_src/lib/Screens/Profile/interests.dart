@@ -124,7 +124,7 @@ class _InterestsState extends State<Interests> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(message, style: TextStyle(fontSize: 17.0, color: Colors.white)),
+              Text(message, style: TextStyle(fontSize: 17.0, color: Colors.white), maxLines: 1),
               GestureDetector(
                 onTap: () async {
                   await HelperFunctions.getUserNameSharedPreference().then((val) {
