@@ -1,8 +1,8 @@
-# openCX-*your module name* Development Report
+# openCX- TeChat Development Report
 
-Welcome to the documentation pages of the *your (sub)product name* of **openCX**!
+Welcome to the documentation pages of the TeChat of **openCX**!
 
-You can find here detailed about the (sub)product, hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report (see [template](https://github.com/softeng-feup/open-cx/blob/master/docs/templates/Development-Report.md)), organized by discipline (as of RUP):
+You can find here detailed about the TeChat product, hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report (see [template](https://github.com/softeng-feup/open-cx/blob/master/docs/templates/Development-Report.md)), organized by discipline (as of RUP):
 
 * Business modeling
   * [Product Vision](#Product-Vision)
@@ -57,203 +57,62 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 
 ![Use case diagram](use_cases.png)
 
-- **Sign In**
+- **Home Page Navigation**
 > **Actor**: Attendee  
-> **Description**: This use case exists so that, at online conferences or during a break, the attendee can enter the application.  
-> **Preconditions and Postconditions**: In order to sign in, the attendee must have an account. If not, he can create one. In the end, the user must have full access to the application   functionalities.   
+> **Description**: This use case exists so that, at online conferences or during a break, the attendee can use the application.  
+> **Preconditions and Postconditions**: In order to navigate the home page, the attendee must be logged in to his account. If he doesn't have an account yet, he can create one. Afterwards, the user will have full access to the application's functionalities.   
 
 > **Normal Flow**:    
-  1. The attendee signs in.  
-  2. The application validates email/password.  
-  3. The application will ask for user's interests.   
-  or  
-  1. The attendee creates an account.  
-  2. The application asks for personal information such as the email and password.  
-  3. The application will ask for user's interests.  
+  a. The attendee signs in.  
+  b. The application validates email/password.   
+  c. Reaches Home Page.
+  <br>OR<br/>
+  a. The attendee creates an account.  
+  b. The application asks for personal information such as the email and password.  
+  c. Reaches Home Page.
 
 > **Alternative Flows and Exceptions**: The user types his personal information -> the application doesn't recognize the email/password -> the application emits error message.   
-- **Choose interests**  
-> **Actor**: Attendee  
-> **Description**: The application asks the user to set his interests.  
-> **Preconditions and Postconditions**: In order to choose his interests, the user must first register and sign in. In the end, the user must be able to see a personalized map.  
-
-> **Normal Flow**:
-  1. The application asks the user to set his interests.  
-  2. The application validates the interests entered by the attendee.  
-
-- **Navigate the Map**
-> **Actor**: Attendee  
-> **Description**: The application directs the attendee to a personalized map view, showing points of interest in the form of discussion topics related to his interests.  
-> **Preconditions and Postconditions**: In order to view the map, the attendee must have set his interests and personal information with success. In the end, the attendee can chose the chatrooms, represented on the map, he wants to join.  
-
-> **Normal Flow**:
-  1. The attendee has set his interests and personal information with success.
-  2. The application shows a personalized map, showing discussion topics of interest.
-  3. The attendee is able to choose any of the themes that lead to their respective chatroom.
-
-> **Alternative Flows and Exceptions**: The user doesn't find a topic he really wanted to discuss -> He can create a new chatroom.  
 
 - **Enter Chatroom**
 > **Actor**: Attendee   
 > **Description**: The attendee is directed to a chatroom.  
-> **Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. In the end, the attendee can text the other chatroom participants, leave the chatroom or save information about other users.  
+> **Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. A pop-up message containing the chat's main information will appear - the user can then choose whether he wants to join the chat or continue on the home page. Once he joins a chatroom, he'll be able to text the other chatroom participants and leave the chatroom whenever he wants.  
 
-> **Normal Flow**:
-  1. The attendee has chosen the discussion topic he wants to join.
-  2. The attendee is directed to the chosen chatroom.
-  3. The attendee is able to text, leave the chatroom, save someone's contact.
+> **Normal Flow**:    
+  a. The attendee has chosen the discussion topic he wants to join.  
+  b. A pop up box appears, displaying the chat's information.   
+  c. The attendee decides to join in and is directed to the chosen chatroom.  
+  d. The attendee is able to text, leave the chatroom, save someone's contact.
+  <br>OR<br/>
+  a. The attendee has chosen the discussion topic he wants to join.  
+  b. A pop up box appears, displaying the chat's information.  
+  c. The attendee decides to not join and is directed to the home page.  
+  d. The attendee is able to text, leave the chatroom, save someone's contact.
+  
+> **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban and mute other participants, if need be. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
 
-> **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban or mute other participants, in need. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
+- **Networking**
+> **Actor**: Attendee  
+> **Description**: The attendee can get a list of users that share interests with him.   
+> **Preconditions and Postconditions**: If the attendee hasn't added any interests to his profile, no suggested similar users will be shown. Once the app has found at least one user sharing at least one interest with the attendee, this user's information and shared interest will be displayed on this page.
 
-- **Create Chatroom**
-> **Actor**: Attendee Chatroom Moderator  
-> **Description**: The attendee has the option to create a new discussion topic.   
-> **Preconditions and Postconditions**: In order to create a new chatroom, the attendee must click the 'create new topic' button and type its name. In the end, the user can text the other chatroom participants, leave the chatroom, save information about other users, mute/ban other participants, delete the chatroom.
+> **Normal Flow**:    
+  a. The attendee clicks on the 'networking' button.  
+  b. A list of users with similar interests is shown. 
+  <br>OR<br/>
+  a. The attendee clicks on the 'networking' button.  
+  b. The attendee doesn't have any matches [no one shares his interests or he has no interests saved].  
+  c. A message suggests he add more interests.
 
-> **Normal Flow**:
-  1. The attendee clicks the button 'create new topic'.
-  2. The attendee types the chatroom's name.
-  3. The attendee is able to text, leave the chatroom, save someone's contact, ban/mute other participants, delete the chatroom.
 
 ### User stories
 
 **[Project Board with Progress on User Stories](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1)**
 
-[Completed User Stories](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/issues?q=is%3Aissue+is%3Aclosed)
+[Completed User Stories](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/issues?q=is%3Aissue+is%3Aclosed+label%3A%22User+Story%22)
 
 **User Story Overview**  
-![map](/docs/overview.png)
-
-1. **As a attendee I want to login my interests and my contact information, so that I can have a personalized experience.**  
-**Value:** Must-Have  
-**Effort:**  L  
-**Acceptance Tests:**  
-
- ```gherkin
-
-    Given I want to access the app
-    When I input invalid data
-    Then I should be warned with an error message
-
-    Given I am prompted to login in
-    When I already have my information and interests defined
-    And press the "let's go!" button
-    Then I should be directed to the home page
-
-```
-
-**User interface mockups:**
-![sign in](/docs/signin.png)
-
-2. **As a attendee I want to access a chatroom where I can talk to other users, so that I can discuss topics that interest me.**  
-**Value:** Must-Have  
-**Effort:**  M  
-**Acceptance Tests:**  
-```gherkin
-
-   Given I want to talk to other users
-   When I choose the topic I want to discuss
-   Then I should be directed to its chatroom
-
-```
-
-3. **As a attendee, I want to choose when to enter or leave a chatroom, so that I only participate in conversations that interest me.**  
-**Value:** Must-Have  
-**Effort:**  S  
-**Acceptance Tests:**  
-```gherkin
-
-   Given I want to manage my experience
-   When the option to leave a chatroom is clicked
-   Then I must be directed to the map view and be able to join another chatroom
-
-``` 
-
-4. **As a chatroom moderator, I want to mute/banish people if need, so that the participants have a pleasant experience.**   
-**Value:** Should-Have  
-**Effort:**  M  
-**Acceptance Tests:**  
-
-```gherkin
-
-   Given I created a new chatroom topic
-   When I click the banish/mute button on a certain person
-   Then messages from that person must not appear
-
-``` 
-
-**User interface mockups:**
-![chatroom](/docs/chatroom.png)
-
-5. **As a attendee, I want to create a new chatroom with a different theme, so that I can discuss any topic I want even if it doesn't already exists.**
-**Value:**  Should-Have  
-**Effort:**  M  
-**Acceptance Tests:**  
-
-```gherkin
-
-   Given the topic I want to discuss does not exist
-   When I create a new topic,
-   Then I should be able to discuss it when new participants join the chatroom
-
-   Given the topic I want to discuss does not exist
-   When I create a new topic
-   Then I should be able to delete the chatroom only when it has no participants
-
-```
-
-**User interface mockups:**
-![new chatroom](/docs/newchat.png)
-
-6. **As a attendee, I want to make friends / save someone's contact info, so that I can keep in touch with other like-minded users.**  
-**Value:**  Could-Have  
-**Effort:**  S  
-**Acceptance Tests:**  
-
-```gherkin
-
-   Given I want to make new connections
-   When I click on a participant's name,
-   Then I should be able to see his information and copy it.
-
-```
-
-**User interface mockups:**
-![save info](/docs/saveinfo.png)
-
-7. **As a attendee, I want to navigate the homepage, so that I can choose which functionality to access.**  
-**Value:**  Must-Have  
-**Effort:**  M  
-**Acceptance Tests:**  
-
-```gherkin
-
-   Given I want to explore the app
-   When I navigate the homepage,
-   Then I should be able to choose which functionality to access.
-
-   Given I want to explore the app
-   When I navigate the homepage,
-   Then I should be able to see where the profile button and the menu button are.
-   
-```
-
-8. **As a attendee I want to decide which chatroom I want to enter, so that I can discuss more than 1 theme if I want to.**  
-**Value:**  Must-Have  
-**Effort:**  M  
-**Acceptance Tests:**  
-
-```gherkin
-
-   Given I want to explore the app
-   When I click in a chatroom,
-   Then I should be able to view information about the topic and the number of people participating in the conversation. 
-   
-```
-
-**User interface mockups:**
-![map](/docs/map.png) 
-
+![map](overview.png)
 
 ### Domain model
 
@@ -274,7 +133,7 @@ The structure of our project is based on the MVC model. In short, the MVC specif
 
 
 ### Physical architecture
-![physical architecture](/docs/physical.png)
+![physical architecture](physical.png)
 
 We chose flutter as our framework to develop our project.  
 As it is easy to integrate with flutter, we chose Firebase for database management and backend server.  
