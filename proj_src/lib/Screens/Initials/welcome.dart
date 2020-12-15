@@ -13,8 +13,6 @@ class Welcome extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            /*Text("WELCOME"),
-            SizedBox(height: 50,),*/
             Image.asset("assets/images/logoWhite.PNG", height: 85, width: 350,),
             SizedBox(height: 250,),
             GestureDetector(

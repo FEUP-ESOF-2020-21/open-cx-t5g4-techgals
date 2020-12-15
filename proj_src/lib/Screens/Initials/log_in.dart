@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
-import 'package:proj_src/Screens/Nav/map1.dart';
 import 'package:proj_src/Screens/Nav/navigation.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
@@ -35,13 +34,8 @@ class _LogInState extends State<LogIn> {
       });
       await authMethods.logIn(emailControl.text, passwordControl.text).then((val) async{
 
-        print(emailControl.text);
-        print(passwordControl.text);
-        print(val);
         if(val != null) {
           QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
-
-          print("USERSNAP: $userInfoSnapshot");
 
           await HelperFunctions.saveUserLoggedInSharedPreference(true);
           await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
@@ -63,7 +57,6 @@ class _LogInState extends State<LogIn> {
       }
         else{
           setState(() {
-           //ERROR
             print("ERROR LOGGING IN");
             isLoading = false;
           });
@@ -121,7 +114,8 @@ class _LogInState extends State<LogIn> {
               ),
             ),
             SizedBox(height: 8,),
-            GestureDetector(
+            SizedBox(height: 15,),
+          /*  GestureDetector(
               onTap: (){
                 resetPassLoad();
               },
@@ -130,7 +124,7 @@ class _LogInState extends State<LogIn> {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Text("Forgot Password?"),
               ),
-            ),
+            ),*/
             SizedBox(height: 16,),
             GestureDetector(
               onTap: (){

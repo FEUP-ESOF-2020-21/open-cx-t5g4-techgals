@@ -47,6 +47,7 @@ class _Map1State extends State<Map1> {
       });
     });
   }
+
 /*
   Widget _listChats() {
     return StreamBuilder(
@@ -112,7 +113,6 @@ class _Map1State extends State<Map1> {
         ),
         child: Stack(
           children: <Widget>[
-            //Right_Arrow_Button(),
             _listChats(),
             Padding(
               padding: const EdgeInsets.all(12.0),
@@ -161,7 +161,7 @@ class _Map1State extends State<Map1> {
     Widget createButton = FlatButton(
       child: Text("Create"),
       onPressed: () async {
-        if (_auxChatNames.contains(_newChatName)) {
+        if (_auxChatNames.contains(_newChatName) || _auxChatNames.length >= 30) {
           Navigator.of(context).pop();
         }
         else if (_newChatName != null) {

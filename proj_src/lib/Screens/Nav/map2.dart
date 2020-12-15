@@ -5,9 +5,9 @@ import 'package:proj_src/BackEnd/database.dart';
 import 'package:proj_src/BackEnd/helper.dart';
 import 'package:proj_src/Screens/Initials/initial_aux.dart';
 import 'package:proj_src/Screens/Nav/Components/appBar.dart';
-import '../../constants.dart';
-import 'Components/chatTile.dart';
-import 'networking.dart';
+import 'package:proj_src/constants.dart';
+import 'package:proj_src/Screens/Nav/Components/chatTile.dart';
+import 'package:proj_src/Screens/Nav/networking.dart';
 
 class Map2 extends StatefulWidget {
   @override
@@ -46,6 +46,7 @@ class _Map2State extends State<Map2> {
       });
     });
   }
+
   Widget _listChats() {
     return StreamBuilder(
         stream: _groups,
@@ -80,7 +81,7 @@ class _Map2State extends State<Map2> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/map22.jpg"),
+            image: AssetImage("assets/images/map2.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -135,7 +136,7 @@ class _Map2State extends State<Map2> {
     Widget createButton = FlatButton(
       child: Text("Create"),
       onPressed: () async {
-        if (_auxChatNames.contains(_newChatName)) {
+        if (_auxChatNames.contains(_newChatName) || _auxChatNames.length >= 30 ) {
           Navigator.of(context).pop();
         }
         else if (_newChatName != null) {

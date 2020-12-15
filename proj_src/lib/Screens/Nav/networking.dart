@@ -39,7 +39,6 @@ class _NetworkingPageState extends State<NetworkingPage> {
       _interests.add(_userQS.docs[0].get('interests')[i]);
     }
     _interests.forEach((element) {element.toLowerCase();});
-    print(_interests);
     _getUsersWithSimilarInterests();
   }
   _getUsersWithSimilarInterests() async{
@@ -69,7 +68,6 @@ class _NetworkingPageState extends State<NetworkingPage> {
         ));
       }
     }
-    print(_usersWithSimilarInterests);
   }
 
   @override

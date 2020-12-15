@@ -35,17 +35,6 @@ class _SignUpState extends State<SignUp> {
       });
       await _authMethods.signUp(usernameControl.text, emailControl.text, passwordControl.text).then((val) async{
 
-        var email = emailControl.text;
-        var username = usernameControl.text;
-        var pass = passwordControl.text;
-
-        print("email: $email");
-        print("username: $username");
-        print("pass: $pass");
-
-        print('HERE');
-        print(val);
-
         if(val != null) {
           QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
 
@@ -123,12 +112,6 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
             ),
-          /*SizedBox(height: 8,),
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text("Forgot Password?"),
-            ),*/
             SizedBox(height: 30,),
             GestureDetector(
               onTap: (){
