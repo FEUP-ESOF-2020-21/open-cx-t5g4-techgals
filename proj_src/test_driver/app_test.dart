@@ -33,7 +33,7 @@ Future<void> main() {
 }*/
 
   final config = FlutterTestConfiguration()
-    ..features = [Glob(r"test_driver/features/.feature")]
+    ..features = [Glob(r"test_driver/features/**.feature")]
     ..stepDefinitions = [
       TapEmail(),
       TapPassword(),
