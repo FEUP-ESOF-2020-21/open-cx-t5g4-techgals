@@ -15,8 +15,8 @@ class ExpectToSignup extends GivenWithWorld<FlutterWorld> {
   RegExp get pattern => RegExp(r"I tapped the signup button in the homepage");
 }
 
-class TapUsername extends When1WithWorld<String, FlutterWorld> {
-  TapUsername()
+class TypeUsername extends When1WithWorld<String, FlutterWorld> {
+  TypeUsername()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
@@ -32,8 +32,8 @@ class TapUsername extends When1WithWorld<String, FlutterWorld> {
   RegExp get pattern => RegExp(r"User types {string}");
 }
 
-class TapNewEmail extends And1WithWorld<String, FlutterWorld> {
-  TapNewEmail()
+class TypeNewEmail extends And1WithWorld<String, FlutterWorld> {
+  TypeNewEmail()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
@@ -49,8 +49,8 @@ class TapNewEmail extends And1WithWorld<String, FlutterWorld> {
   RegExp get pattern => RegExp(r"User types {string}");
 }
 
-class TapNewPassword extends And1WithWorld<String, FlutterWorld> {
-  TapNewPassword()
+class TypeNewPassword extends And1WithWorld<String, FlutterWorld> {
+  TypeNewPassword()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
@@ -81,4 +81,18 @@ class TapSignupButton extends And1WithWorld<String, FlutterWorld> {
 
   @override
   RegExp get pattern => RegExp(r"User taps {string}");
+}
+
+class GoToNavigationPageFromSignup extends ThenWithWorld<FlutterWorld> {
+  GoToNavigationPageFromSignup()
+      : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
+
+  @override
+  Future<void> executeStep() async {
+    await FlutterDriverUtils.waitForFlutter(world.driver);
+    return null;
+  }
+
+  @override
+  RegExp get pattern => RegExp(r"User should be successfully logged");
 }

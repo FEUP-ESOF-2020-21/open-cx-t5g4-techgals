@@ -15,8 +15,8 @@ class ExpectToLogin extends GivenWithWorld<FlutterWorld> {
   RegExp get pattern => RegExp(r"I tapped the login button in the homepage");
 }
 
-class TapEmail extends When1WithWorld<String, FlutterWorld> {
-  TapEmail()
+class TypeEmail extends When1WithWorld<String, FlutterWorld> {
+  TypeEmail()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
@@ -32,8 +32,8 @@ class TapEmail extends When1WithWorld<String, FlutterWorld> {
   RegExp get pattern => RegExp(r"User types {string}");
 }
 
-class TapPassword extends And1WithWorld<String, FlutterWorld> {
-  TapPassword()
+class TypePassword extends And1WithWorld<String, FlutterWorld> {
+  TypePassword()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
@@ -64,4 +64,18 @@ class TapLoginButton extends And1WithWorld<String, FlutterWorld> {
 
   @override
   RegExp get pattern => RegExp(r"User taps {string}");
+}
+
+class GoToNavigationPageFromLogin extends ThenWithWorld<FlutterWorld> {
+  GoToNavigationPageFromLogin()
+      : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
+
+  @override
+  Future<void> executeStep() async {
+    await FlutterDriverUtils.waitForFlutter(world.driver);
+    return null;
+  }
+
+  @override
+  RegExp get pattern => RegExp(r"User should be successfully logged");
 }
