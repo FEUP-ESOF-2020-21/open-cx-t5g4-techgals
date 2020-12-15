@@ -15,53 +15,58 @@ class ExpectToLogin extends GivenWithWorld<FlutterWorld> {
   RegExp get pattern => RegExp(r"A user wants to Log into the app");
 }
 
-class InsertEmail extends WhenWithWorld<FlutterWorld> {
+class InsertEmail extends When1WithWorld<String, FlutterWorld> {
   InsertEmail()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
-  Future<void> executeStep() async {
-    String input = "email";
-    await FlutterDriverUtils.enterText(
-        world.driver, find.byValueKey("Email"), input);
-    return null;
+  Future<void> executeStep(String email) async {
+    final emailfinder = find.byValueKey(email);
+    var emailFinderExists =
+        await FlutterDriverUtils.isPresent(world.driver, emailfinder);
+    expectMatch(true, emailFinderExists);
+    await FlutterDriverUtils.tap(world.driver, emailfinder);
   }
 
   @override
-  RegExp get pattern => RegExp(r"User types email");
+  RegExp get pattern => RegExp(r"User types {string}");
 }
 
-class InsertPassword extends AndWithWorld<FlutterWorld> {
+class InsertPassword extends And1WithWorld<String, FlutterWorld> {
   InsertPassword()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
-  Future<void> executeStep() async {
-    String input = "1234";
-    await FlutterDriverUtils.enterText(
-        world.driver, find.byValueKey("Password"), input);
-    return null;
+  Future<void> executeStep(String password) async {
+    final passwordfinder = find.byValueKey(password);
+    var passwordFinderExists =
+        await FlutterDriverUtils.isPresent(world.driver, passwordfinder);
+    expectMatch(true, passwordFinderExists);
+    await FlutterDriverUtils.tap(world.driver, passwordfinder);
   }
 
   @override
-  RegExp get pattern => RegExp(r"User types password");
+  RegExp get pattern => RegExp(r"User types {string}");
 }
 
-class TapLoginButton extends AndWithWorld<FlutterWorld> {
+class TapLoginButton extends And1WithWorld<String, FlutterWorld> {
   TapLoginButton()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
-  Future<void> executeStep() async {
-    await FlutterDriverUtils.tap(world.driver, find.byValueKey("LoginButton"));
-    return null;
+  Future<void> executeStep(String loginbtn) async {
+    final loginbtnfinder = find.byValueKey(loginbtn);
+    var loginbtnFinderExists =
+        await FlutterDriverUtils.isPresent(world.driver, loginbtnfinder);
+    expectMatch(true, loginbtnFinderExists);
+    await FlutterDriverUtils.tap(world.driver, loginbtnfinder);
   }
 
   @override
-  RegExp get pattern => RegExp(r"User taps login button");
+  RegExp get pattern => RegExp(r"User taps {string}");
 }
 
-class SeeHomePage extends AndWithWorld<FlutterWorld> {
+class SeeHomePage extends ThenWithWorld<FlutterWorld> {
   SeeHomePage()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
