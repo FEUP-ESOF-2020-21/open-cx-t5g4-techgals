@@ -11,12 +11,18 @@ class AuthMethods {
   }
 
   Future logIn(String email, String password) async {
+    print(0);
     try{
+      print(1);
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      print(2);
       User firebaseUser = result.user;
+      print('RESULT: $result');
+      print('USER: $firebaseUser');
+      print(_userFromFirebase(firebaseUser));
       return _userFromFirebase(firebaseUser);
-    } catch(e) {
-      print(e.toString());
+    } catch(error) {
+        print(error.toString());
     }
   }
 

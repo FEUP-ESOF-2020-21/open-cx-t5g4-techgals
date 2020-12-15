@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:proj_src/BackEnd/auth.dart';
 import 'package:proj_src/BackEnd/helper.dart';
+import 'package:proj_src/Screens/Nav/navigation.dart';
 import 'package:proj_src/constants.dart';
 import 'initial_aux.dart';
 import 'package:proj_src/Screens/Nav/map1.dart';
@@ -34,17 +35,6 @@ class _SignUpState extends State<SignUp> {
       });
       await _authMethods.signUp(usernameControl.text, emailControl.text, passwordControl.text).then((val) async{
 
-        var email = emailControl.text;
-        var username = usernameControl.text;
-        var pass = passwordControl.text;
-
-        print("email: $email");
-        print("username: $username");
-        print("pass: $pass");
-
-        print('HERE');
-        print(val);
-
         if(val != null) {
           QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserData(emailControl.text);
 
@@ -66,7 +56,7 @@ class _SignUpState extends State<SignUp> {
           });
 
           print("Signed In");
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return Map1();},),);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {return NavigationMap();},),);
         }
         else{
           setState(() {
@@ -90,6 +80,8 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Image.asset("assets/images/logoWhite.PNG", height: 85, width: 350,),
+            SizedBox(height: 50,),
             Form(
               key: _formKey,
               child: Column(
@@ -120,12 +112,6 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
             ),
-          /*SizedBox(height: 8,),
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text("Forgot Password?"),
-            ),*/
             SizedBox(height: 30,),
             GestureDetector(
               onTap: (){
