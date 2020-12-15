@@ -20,12 +20,12 @@ class TypeUsername extends When1WithWorld<String, FlutterWorld> {
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
-  Future<void> executeStep(String email) async {
-    final emailfinder = find.byValueKey(email);
-    var emailFinderExists =
-        await FlutterDriverUtils.isPresent(world.driver, emailfinder);
-    expectMatch(true, emailFinderExists);
-    await FlutterDriverUtils.tap(world.driver, emailfinder);
+  Future<void> executeStep(String username) async {
+    final usernamefinder = find.byValueKey(username);
+    var usernameFinderExists =
+        await FlutterDriverUtils.isPresent(world.driver, usernamefinder);
+    expectMatch(true, usernameFinderExists);
+    await FlutterDriverUtils.tap(world.driver, usernamefinder);
   }
 
   @override
