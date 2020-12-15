@@ -4,7 +4,6 @@ import 'package:gherkin/gherkin.dart';
 import 'package:glob/glob.dart';
 import 'steps/log_in_steps.dart';
 import 'steps/sign_up_steps.dart';
-import 'steps/common_steps.dart';
 
 Future<void> main() {
   /* final config = FlutterTestConfiguration()
@@ -35,14 +34,17 @@ Future<void> main() {
   final config = FlutterTestConfiguration()
     ..features = [Glob(r"test_driver/features/**.feature")]
     ..stepDefinitions = [
-      TapEmail(),
-      TapPassword(),
+      ExpectToLogin(),
+      TypeEmail(),
+      TypePassword(),
       TapLoginButton(),
-      GoToNavigationPage(),
+      GoToNavigationPageFromLogin(),
+      ExpectToSignup(),
+      TypeUsername(),
+      TypeNewEmail(),
+      TypeNewPassword(),
       TapSignupButton(),
-      InsertNewEmail(),
-      TapUsername(),
-      ExpectToSignup()
+      GoToNavigationPageFromSignup()
     ]
     ..reporters = [ProgressReporter(), TestRunSummaryReporter()]
     ..restartAppBetweenScenarios = true
