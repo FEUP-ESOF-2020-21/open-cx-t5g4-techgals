@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:proj_src/Screens/Profile/screen_profile.dart';
 
 import 'package:proj_src/main.dart';
 import 'package:proj_src/Screens/Chatroom/chatroom.dart';
@@ -16,7 +17,7 @@ import 'package:proj_src/Screens/Menu/screen_menu.dart';
 import 'package:proj_src/Screens/Chatroom/chatroom.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  /*testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
@@ -31,12 +32,22 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });*/
+  testWidgets('Menu Page', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: Screen_Menu()));
+    final menu = find.text("MENU PAGE");
+    expect(menu, findsOneWidget);
+    //expect(find.byType(Scaffold), findsNWidgets(1)); //chatMessages
+    //expect(find.byType(Stack), findsOneWidget); //Next
+    // expect(find.byType(MaterialButton), findsOneWidget); //Date
+    //expect(find.byType(DropDownFormField),
+    //findsNWidgets(2)); //District and Category
   });
-  testWidgets('Pressing a Chatroom', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: ChatPage()));
-    final enterChat = find.text("Enter Chatroom");
-    expect(enterChat, findsOneWidget);
-    expect(find.byType(StreamBuilder), findsNWidgets(1)); //chatMessages
+
+  testWidgets('Profile Page', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: Profile()));
+    expect(find.byType(Widget), findsNWidgets(3));
+    //expect(find.byType(Scaffold), findsNWidgets(1)); //chatMessages
     //expect(find.byType(Stack), findsOneWidget); //Next
     // expect(find.byType(MaterialButton), findsOneWidget); //Date
     //expect(find.byType(DropDownFormField),
