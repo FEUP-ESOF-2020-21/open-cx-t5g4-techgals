@@ -48,7 +48,7 @@ for new connections.
 ## Elevator Pitch
 
 With the rising of technology in our lifes, texting has become the number one way of communicating. TE**CHat** is a mobile application that lets you chat with other people during online conference's 'virtual coffee breaks'. We combine chatrooms with a 2D map, letting you walk around and choose which theme you want to discuss. Our creation tools also let you create your own themed chatroom! Sharing knowledge, learning new things and interact online have never been so fun!  
-TE**CHat** unlocks the constrains of being behind a screen and creates the possibility of making new connections, just as naturally as if you were there in person! 
+TE**CHat** unlocks the constrains of being behind a screen and creates the possibility of making new connections, just as naturally as if you were there in person. 
 
 
 ## Requirements
@@ -57,12 +57,13 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
 
 ![Use case diagram](use_cases.png)
 
-- **Home Page Navigation**
-> **Actor**: Attendee  
-> **Description**: This use case exists so that, at online conferences or during a break, the attendee can use the application.  
-> **Preconditions and Postconditions**: In order to navigate the home page, the attendee must be logged in to his account. If he doesn't have an account yet, he can create one. Afterwards, the user will have full access to the application's functionalities.   
++ **Home Page Navigation**  
 
-> **Normal Flow**:    
+**Actor**: Attendee  
+**Description**: This use case exists so that, at online conferences or during a break, the attendee can use the application.  
+**Preconditions and Postconditions**: In order to navigate the home page, the attendee must be logged in to his account. If he doesn't have an account yet, he can create one. Afterwards, the user will have full access to the application's functionalities.   
+
+**Normal Flow**:    
   a. The attendee signs in.  
   b. The application validates email/password.   
   c. Reaches Home Page.
@@ -71,14 +72,18 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   b. The application asks for personal information such as the email and password.  
   c. Reaches Home Page.
 
-> **Alternative Flows and Exceptions**: The user types his personal information -> the application doesn't recognize the email/password -> the application emits error message.   
+**Alternative Flows and Exceptions**:  
+  a. The user types his personal information.
+  b. The application doesn't recognize the email/password.  
+  c. The application emits error message.   
 
-- **Enter Chatroom**
-> **Actor**: Attendee   
-> **Description**: The attendee is directed to a chatroom.  
-> **Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. A pop-up message containing the chat's main information will appear - the user can then choose whether he wants to join the chat or continue on the home page. Once he joins a chatroom, he'll be able to text the other chatroom participants and leave the chatroom whenever he wants.  
++ **Enter Chatroom**  
 
-> **Normal Flow**:    
+**Actor**: Attendee   
+**Description**: The attendee is directed to a chatroom.  
+**Preconditions and Postconditions**: In order to enter a chatroom, the attendee must choose on of the points in the map. A pop-up message containing the chat's main information will appear - the user can then choose whether he wants to join the chat or continue on the home page. Once he joins a chatroom, he'll be able to text the other chatroom participants and leave the chatroom whenever he wants.  
+
+**Normal Flow**:    
   a. The attendee has chosen the discussion topic he wants to join.  
   b. A pop up box appears, displaying the chat's information.   
   c. The attendee decides to join in and is directed to the chosen chatroom.  
@@ -89,14 +94,20 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   c. The attendee decides to not join and is directed to the home page.  
   d. The attendee is able to text, leave the chatroom, save someone's contact.
   
-> **Alternative Flows and Exceptions**: The user is the chatroom creator -> The user can ban and mute other participants, if need be. The user is the chatroom creator -> As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.  
+**Alternative Flows and Exceptions**:  
+  a. The user is the chatroom creator.
+  b. The user can ban or mute other participants, in need. 
+  <br>OR<br/>
+  c. The user is the chatroom creator. 
+  d. As long as there are people still participating in the chatroom, the moderator can't delete the chatroom.    
 
-- **Networking**
-> **Actor**: Attendee  
-> **Description**: The attendee can get a list of users that share interests with him.   
-> **Preconditions and Postconditions**: If the attendee hasn't added any interests to his profile, no suggested similar users will be shown. Once the app has found at least one user sharing at least one interest with the attendee, this user's information and shared interest will be displayed on this page.
++ **Networking**  
 
-> **Normal Flow**:    
+**Actor**: Attendee   
+**Description**: The attendee can get a list of users that share interests with him.   
+**Preconditions and Postconditions**: If the attendee hasn't added any interests to his profile, no suggested similar users will be shown. Once the app has found at least one user sharing at least one interest with the attendee, this user's information and shared interest will be displayed on this page.  
+
+**Normal Flow**:    
   a. The attendee clicks on the 'networking' button.  
   b. A list of users with similar interests is shown. 
   <br>OR<br/>
@@ -104,6 +115,16 @@ TE**CHat** unlocks the constrains of being behind a screen and creates the possi
   b. The attendee doesn't have any matches [no one shares his interests or he has no interests saved].  
   c. A message suggests he add more interests.
 
++ **Create Chatroom**  
+
+**Actor**: Attendee Chatroom Moderator  
+**Description**: The attendee has the option to create a new discussion topic.   
+**Preconditions and Postconditions**: In order to create a new chatroom, the attendee must click the 'create new topic' button and type its name. In the end, the user can text the other chatroom participants, leave the chatroom, save information about other users, mute/ban other participants, delete the chatroom.  
+
+**Normal Flow**:  
+  a. The attendee clicks the button 'create new topic'.
+  b. The attendee types the chatroom's name.
+  c. The attendee is able to text, leave the chatroom, save someone's contact, ban/mute other participants, delete the chatroom.
 
 ### User stories
 
@@ -127,13 +148,13 @@ In the navigation map, we have access to the several chatrooms created. Every us
 
 ### Logical architecture
 
-![Logical Architecture diagram](logicalfinal.png)  
+![Logical Architecture diagram](logicalarchitecture.png)  
 
 The structure of our project is based on the MVC model. In short, the MVC specifies that the application consists of a **Model** that directly manages the data, the **View** is the display of the information, and the **Controller** is where the inputs are accepted and converted into commands.  
 
 
 ### Physical architecture
-![physical architecture](physical.png)
+![physical architecture](physiarchitecture.png)
 
 We chose flutter as our framework to develop our project.  
 As it is easy to integrate with flutter, we chose Firebase for database management and backend server.  
