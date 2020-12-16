@@ -29,7 +29,7 @@ class TypeEmail extends When1WithWorld<String, FlutterWorld> {
   }
 
   @override
-  RegExp get pattern => RegExp(r"User types {string}");
+  RegExp get pattern => RegExp(r"I type {string}");
 }
 
 class TypePassword extends And1WithWorld<String, FlutterWorld> {
@@ -46,7 +46,7 @@ class TypePassword extends And1WithWorld<String, FlutterWorld> {
   }
 
   @override
-  RegExp get pattern => RegExp(r"User types {string}");
+  RegExp get pattern => RegExp(r"I type {string}");
 }
 
 class TapLoginButton extends And1WithWorld<String, FlutterWorld> {
@@ -63,7 +63,7 @@ class TapLoginButton extends And1WithWorld<String, FlutterWorld> {
   }
 
   @override
-  RegExp get pattern => RegExp(r"User taps {string}");
+  RegExp get pattern => RegExp(r"I tap {string}");
 }
 
 class GoToNavigationPageFromLogin extends ThenWithWorld<FlutterWorld> {
@@ -77,5 +77,5 @@ class GoToNavigationPageFromLogin extends ThenWithWorld<FlutterWorld> {
   }
 
   @override
-  RegExp get pattern => RegExp(r"User should be successfully logged");
+  RegExp get pattern => RegExp(r"I should be successfully logged");
 }
