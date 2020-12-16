@@ -47,7 +47,7 @@ for new connections.
 
 ## Elevator Pitch
 
-With the rising of technology in our lifes, texting has become the number one way of communicating. TE**CHat** is a mobile application that lets you chat with other people during online conference's 'virtual coffee breaks'. We combine chatrooms with a 2D map, letting you walk around and choose which theme you want to discuss. Our creation tools also let you create your own themed chatroom! Sharing knowledge, learning new things and interact online have never been so fun!  
+The presence of technology in our lifes has increased exponentially; as a result, mobile communications have become the number one way of contacting people. TE**CHat** is a mobile application that lets you chat with other people during online conference's 'virtual coffee breaks'. We combine chatrooms with a 2D map, letting you walk around and choose which theme you want to discuss. Our creation tools also let you create your own themed chatroom! Sharing knowledge, learning new things and interact online have never been so fun!  
 TE**CHat** unlocks the constrains of being behind a screen and creates the possibility of making new connections, just as naturally as if you were there in person. 
 
 
@@ -158,23 +158,14 @@ The structure of our project is based on the MVC model. In short, the MVC specif
 
 We chose flutter as our framework to develop our project.  
 As it is easy to integrate with flutter, we chose Firebase for database management and backend server.  
-Our physical architecture isn't complex. The users install the application on their smartphones and it communicates with the firebase server via https requests, which is where the database is stored.  
+Our physical architecture isn't complex. The users install the application on their smartphones and it communicates with the firebase server via https requests, which is where the data is stored.  
 
 ### Prototype
-To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
+We approach our project from a bottom up approach, we started by developing a simple Map Interface Application.
+Then as the project moved along the website started to grow in features to accomodate the new user-stories. The ability to join groupchats and send messages was implemented.
+When more data was added to the application's database, the ability to network by connecting the user to other similar-minded attendees was added.
+Lastly, a space to create new groupchats was implemented, to make sure the users could enjoy the app to the fullest. With this came the definition of a chatroom moderator, someone who can mute / expel users when need be.
 
-In this subsection please describe in more detail which, and how, user(s) story(ies) were implemented.
-
----
-
-## Implementation
-Regular product increments are a good practice of product management.
-
-While not necessary, sometimes it might be useful to explain a few aspects of the code that have the greatest potential to confuse software engineers about how it works. Since the code should speak by itself, try to keep this section as short and simple as possible.
-
-Use cross-links to the code repository and only embed real fragments of code when strictly needed, since they tend to become outdated very soon.
-
----
 ## Test
 
 There are several ways of documenting testing activities, and quality assurance in general, being the most common: a strategy, a plan, test case specifications, and test checklists.
@@ -192,16 +183,8 @@ Configuration and change management are key activities to control change to, and
 
 For the purpose of ESOF, we will use a very simple approach, just to manage feature requests, bug fixes, and improvements, using GitHub issues and following the [GitHub flow](https://guides.github.com/introduction/flow/).
 
-
 ---
 
 ## Project management
 
 To manage the progress of this project, we are using [Github Projects](https://github.com/FEUP-ESOF-2020-21/open-cx-t5g4-techgals/projects/1).
-
-
----
-
-## Evolution - contributions to open-cx
-
-Describe your contribution to open-cx (iteration 5), linking to the appropriate pull requests, issues, documentation.
