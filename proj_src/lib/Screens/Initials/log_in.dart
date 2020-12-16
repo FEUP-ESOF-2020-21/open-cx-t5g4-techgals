@@ -158,6 +158,7 @@ class _LogInState extends State<LogIn> {
                     height: 16,
                   ),
                   GestureDetector(
+                    key: Key('loginbtn'),
                     onTap: () {
                       _logInLoad();
                     },

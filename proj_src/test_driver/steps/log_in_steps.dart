@@ -2,51 +2,21 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
 
-class ExpectToLogin extends GivenWithWorld<FlutterWorld> {
-  ExpectToLogin()
+class TapLogin extends When1WithWorld<String, FlutterWorld> {
+  TapLogin()
       : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
 
   @override
-  Future<void> executeStep() async {
-    return null;
+  Future<void> executeStep(String login) async {
+    final loginfinder = find.byValueKey(login);
+    var loginFinderExists =
+        await FlutterDriverUtils.isPresent(world.driver, loginfinder);
+    expectMatch(true, loginFinderExists);
+    await FlutterDriverUtils.tap(world.driver, loginfinder);
   }
 
   @override
-  RegExp get pattern => RegExp(r"I tapped the login button in the homepage");
-}
-
-class TypeEmail extends When1WithWorld<String, FlutterWorld> {
-  TypeEmail()
-      : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
-
-  @override
-  Future<void> executeStep(String email) async {
-    final emailfinder = find.byValueKey(email);
-    var emailFinderExists =
-        await FlutterDriverUtils.isPresent(world.driver, emailfinder);
-    expectMatch(true, emailFinderExists);
-    await FlutterDriverUtils.tap(world.driver, emailfinder);
-  }
-
-  @override
-  RegExp get pattern => RegExp(r"I type {string}");
-}
-
-class TypePassword extends And1WithWorld<String, FlutterWorld> {
-  TypePassword()
-      : super(StepDefinitionConfiguration()..timeout = Duration(seconds: 10));
-
-  @override
-  Future<void> executeStep(String password) async {
-    final passwordfinder = find.byValueKey(password);
-    var passwordFinderExists =
-        await FlutterDriverUtils.isPresent(world.driver, passwordfinder);
-    expectMatch(true, passwordFinderExists);
-    await FlutterDriverUtils.tap(world.driver, passwordfinder);
-  }
-
-  @override
-  RegExp get pattern => RegExp(r"I type {string}");
+  RegExp get pattern => RegExp(r"I tap {string}");
 }
 
 class TapLoginButton extends And1WithWorld<String, FlutterWorld> {

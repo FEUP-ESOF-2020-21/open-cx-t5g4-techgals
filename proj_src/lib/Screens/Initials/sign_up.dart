@@ -132,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                           },
                           controller: emailControl,
                           decoration: inputDeco("email"),
-                          key: Key('email1'),
+                          key: Key('email'),
                         ),
                         TextFormField(
                           validator: (val) {
@@ -143,24 +143,19 @@ class _SignUpState extends State<SignUp> {
                           obscureText: true,
                           controller: passwordControl,
                           decoration: inputDeco("password"),
-                          key: Key('password1'),
+                          key: Key('password'),
                         ),
                       ],
                     ),
                   ),
-                  /*SizedBox(height: 8,),
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text("Forgot Password?"),
-            ),*/
                   SizedBox(
                     height: 30,
                   ),
                   GestureDetector(
+                    key: Key('signupbtn'),
                     onTap: () {
                       _signUpLoad();
-                      _signUpLoad();
+                      //_signUpLoad();
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -179,7 +174,6 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.white,
                           fontSize: 18,
                         ),
-                        key: Key('signup button'),
                       ),
                     ),
                   ),

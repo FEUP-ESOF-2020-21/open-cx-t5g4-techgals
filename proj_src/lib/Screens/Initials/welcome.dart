@@ -7,6 +7,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key('welcomepage'),
       body: Container(
         alignment: Alignment.bottomCenter,
         padding: EdgeInsets.symmetric(horizontal: 24),
@@ -15,62 +16,81 @@ class Welcome extends StatelessWidget {
           children: [
             /*Text("WELCOME"),
             SizedBox(height: 50,),*/
-            Image.asset("assets/images/logoWhite.PNG", height: 85, width: 350,),
-            SizedBox(height: 250,),
+            Image.asset(
+              "assets/images/logoWhite.PNG",
+              height: 85,
+              width: 350,
+            ),
+            SizedBox(
+              height: 250,
+            ),
             GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) { return Authenticate(true); },));
+              key: Key('login'),
+              onTap: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Authenticate(true);
+                  },
+                ));
               },
               child: Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        kPrimaryColor,
-                        kPrimaryLightColor,
-                      ]
-                  ),
+                  gradient: LinearGradient(colors: [
+                    kPrimaryColor,
+                    kPrimaryLightColor,
+                  ]),
                   borderRadius: BorderRadius.circular(25),
                 ),
-                child: Text("LOG IN", style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
+                child: Text(
+                  "LOG IN",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) { return Authenticate(false); },));
+              key: Key('signup'),
+              onTap: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Authenticate(false);
+                  },
+                ));
               },
               child: Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        kPrimaryColor,
-                        kPrimaryLightColor,
-                      ]
-                  ),
+                  gradient: LinearGradient(colors: [
+                    kPrimaryColor,
+                    kPrimaryLightColor,
+                  ]),
                   borderRadius: BorderRadius.circular(25),
                 ),
-                child: Text("SIGN UP", style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
+                child: Text(
+                  "SIGN UP",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 75,)
+            SizedBox(
+              height: 75,
+            )
           ],
         ),
       ),
     );
   }
 }
-
