@@ -44,6 +44,7 @@ dependencies:
   firebase_auth: ^0.18.3
   cloud_firestore: ^0.14.3
   cloud_firestore_mocks: ^0.5.2
+  google_sign_in: ^4.5.3
   shared_preferences: ^0.5.12+4
 
 dev_dependencies:
