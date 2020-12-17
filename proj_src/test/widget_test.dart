@@ -4,17 +4,12 @@
 // utility that Flutter provides. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
-import 'package:dropdown_formfield/dropdown_formfield.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:proj_src/Screens/Profile/screen_profile.dart';
-
-import 'package:proj_src/main.dart';
-import 'package:proj_src/Screens/Chatroom/chatroom.dart';
-import 'package:proj_src/Screens/Menu/screen_menu.dart';
-import 'package:proj_src/Screens/Nav/Components/left_arrow_button.dart';
+import 'package:proj_src/BackEnd/database.dart';
+import 'package:proj_src/Screens/Initials/welcome.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 
 void main() {
   /*testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -33,24 +28,35 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });*/
-  testWidgets('Menu Page', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Screen_Menu()));
-    final menu = find.text("MENU PAGE");
-    expect(menu, findsOneWidget);
-    //expect(find.byType(Scaffold), findsNWidgets(1)); //chatMessages
-    //expect(find.byType(Stack), findsOneWidget); //Next
-    // expect(find.byType(MaterialButton), findsOneWidget); //Date
-    //expect(find.byType(DropDownFormField),
-    //findsNWidgets(2)); //District and Category
+
+  testWidgets('Login in welcome page', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: Welcome()));
+    expect(find.text("LOG IN"), findsNWidgets(1));
   });
 
-  testWidgets('Profile Page', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Profile()));
-    expect(find.byType(Widget), findsNWidgets(3));
-    //expect(find.byType(Scaffold), findsNWidgets(1)); //chatMessages
-    //expect(find.byType(Stack), findsOneWidget); //Next
-    // expect(find.byType(MaterialButton), findsOneWidget); //Date
-    //expect(find.byType(DropDownFormField),
-    //findsNWidgets(2)); //District and Category
+  testWidgets('Signup in welcome page', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: Welcome()));
+    expect(find.text("SIGN UP"), findsNWidgets(1));
   });
+
+/*  testWidgets('shows messages', (WidgetTester tester) async {
+    // Populate the mock database.
+    final firestore = MockFirestoreInstance();
+    await firestore.collection('users').add({
+      'username': 'Oscar',
+      'interests': ['css'],
+      'email': 'oscar@gmail.com'
+    });
+
+    // Render the widget.
+    await tester.pumpWidget(MaterialApp(
+        title: 'Firestore Example', home: DatabaseMethods()));
+    // Let the snapshots stream fire a snapshot.
+    await tester.idle();
+    // Re-render.
+    await tester.pump();
+    // // Verify the output.
+    expect(find.text('Hello world!'), findsOneWidget);
+    expect(find.text('Message 1 of 1'), findsOneWidget);
+  });*/
 }

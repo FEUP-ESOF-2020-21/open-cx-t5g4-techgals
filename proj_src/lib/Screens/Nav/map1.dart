@@ -18,7 +18,6 @@ class Map1 extends StatefulWidget {
 }
 
 class _Map1State extends State<Map1> {
-
   QuerySnapshot searchSnapshot;
   Stream<QuerySnapshot> _groups;
   User _user = FirebaseAuth.instance.currentUser;
@@ -32,6 +31,7 @@ class _Map1State extends State<Map1> {
     super.initState();
     _getInfo();
   }
+
   _getInfo() async {
     await HelperFunctions.getUserNameSharedPreference().then((value) {
       setState(() {
@@ -54,24 +54,22 @@ class _Map1State extends State<Map1> {
     return StreamBuilder(
         stream: _groups,
         builder: (context, snapshot) {
-          return snapshot.hasData ? ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              _auxChatNames.add(snapshot.data.documents[index]['name']);
-              _auxChatNames = _auxChatNames.toSet().toList();
-              return ChatTile(
-                  userName: _userName,
-                  groupId: snapshot.data.documents[index].id,
-                  groupName: snapshot.data.documents[index]['name']
-              );
-            },
-            scrollDirection: Axis.vertical,
-          )
-              :
-          Container();
-        }
-    );
+          return snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    _auxChatNames.add(snapshot.data.documents[index]['name']);
+                    _auxChatNames = _auxChatNames.toSet().toList();
+                    return ChatTile(
+                        userName: _userName,
+                        groupId: snapshot.data.documents[index].id,
+                        groupName: snapshot.data.documents[index]['name']);
+                  },
+                  scrollDirection: Axis.vertical,
+                )
+              : Container();
+        });
   }
 
   @override
@@ -100,10 +98,14 @@ class _Map1State extends State<Map1> {
                   onPressed: () {
                     _popup(context);
                   },
-                  child: Icon(Icons.add, color: Colors.white, size: 30.0,),
-                    backgroundColor: kPrimaryColor,
-                    elevation: 0.0,
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 30.0,
                   ),
+                  backgroundColor: kPrimaryColor,
+                  elevation: 0.0,
+                ),
               ),
             ),
             Padding(
@@ -113,9 +115,21 @@ class _Map1State extends State<Map1> {
                 child: FloatingActionButton(
                   heroTag: null,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) { return NetworkingPage(userName: _userName,);},),);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return NetworkingPage(
+                            userName: _userName,
+                          );
+                        },
+                      ),
+                    );
                   },
-                  child: Icon(Icons.person_add, color: Colors.white, size: 30.0,),
+                  child: Icon(
+                    Icons.person_add,
+                    color: Colors.white,
+                    size: 30.0,
+                  ),
                   backgroundColor: kPrimaryColor,
                   elevation: 0.0,
                 ),
@@ -124,7 +138,7 @@ class _Map1State extends State<Map1> {
           ],
         ),
       ),
-    /* floatingActionButton: FloatingActionButton(
+      /* floatingActionButton: FloatingActionButton(
         onPressed: () {
           _popup(context);
         },
@@ -138,6 +152,7 @@ class _Map1State extends State<Map1> {
 
   void _popup(BuildContext context) {
     Widget cancelButton = FlatButton(
+      key: Key('AddChatroom'),
       child: Text("Cancel"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -148,8 +163,7 @@ class _Map1State extends State<Map1> {
       onPressed: () async {
         if (_auxChatNames.contains(_newChatName)) {
           Navigator.of(context).pop();
-        }
-        else if (_newChatName != null) {
+        } else if (_newChatName != null) {
           await HelperFunctions.getUserNameSharedPreference().then((val) {
             DatabaseMethods(uid: _user.uid).createChatRoom(val, _newChatName);
           });
@@ -165,12 +179,7 @@ class _Map1State extends State<Map1> {
           onChanged: (val) {
             _newChatName = val;
           },
-          style: TextStyle(
-              fontSize: 15.0,
-              height: 2.0,
-              color: Colors.black
-          )
-      ),
+          style: TextStyle(fontSize: 15.0, height: 2.0, color: Colors.black)),
       actions: [
         cancelButton,
         createButton,
