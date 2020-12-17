@@ -167,14 +167,37 @@ When more data was added to the application's database, the ability to network b
 Lastly, a space to create new groupchats was implemented, to make sure the users could enjoy the app to the fullest. With this came the definition of a chatroom moderator, someone who can mute / expel users when need be.
 
 ## Test
+To test our application we have decided to add Unit Tests and Automated Acceptance Tests using gherkin.
 
-There are several ways of documenting testing activities, and quality assurance in general, being the most common: a strategy, a plan, test case specifications, and test checklists.
+Acceptance tests are a formal description of the behavior of a software product, generally expressed as an example or a usage scenario. We implemented them using Gherkin language, with the aid of flutter_gherkin package for Flutter and expressing some of the scenarios.
 
-In this section it is only expected to include the following:
-* test plan describing the list of features to be tested and the testing methods and tools;
-* test case specifications to verify the functionalities, using unit tests and acceptance tests.
+Unit Tests are a way of testing a unit (the smallest piece of code that can be logically isolated in a system) and we implemented them using the flutter_test dependency.
 
-A good practice is to simplify this, avoiding repetitions, and automating the testing actions as much as possible.
+- Acceptance Tests:
+   1. login
+    ```
+    Scenario: Login into app successfully
+    Given I am at the 'welcomepage'
+    When I tap 'login'
+      And I type 'email'
+      And I type 'password'
+      And I tap 'loginbtn'
+    Then I should be successfully logged
+    ```
+   2. signup
+    ```
+    Scenario: Signup into app successfully
+    Given I am at the 'welcomepage'
+    When I tap 'signup'
+      And I type 'username'
+      And I type 'email'
+      And I type 'password'
+      And I tap 'signupbtn'
+    Then I should be successfully signed up
+    ```
+- Unit Tests:
+ 
+ Presence of certain widgets to verify the construction of certain class.
 
 ---
 ## Configuration and change management
